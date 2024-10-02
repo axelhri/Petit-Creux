@@ -1,23 +1,30 @@
 import { NavLink } from "react-router-dom";
-import logo from "../assets/logo.png";
 
 function Navbar() {
   return (
     <nav id="navbar">
-      <span>
-        <img src={logo} alt="" className="logo" />
+
+      <span className="logo-container">
+      <i class="fa-solid fa-utensils"></i>
+      <p className="logo-title">Petit Creux</p>
       </span>
-      <ul>
+
+      <ul className="navlink-list">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">Créer un article</NavLink>
         </li>
         <li>
-          <NavLink to="/about">About</NavLink>
+          <NavLink to="/about">Parcourir</NavLink>
         </li>
         <li>
-          <NavLink to="/newsletter">Newsletter</NavLink>
+          <NavLink to="/newsletter">Nos ustensiles</NavLink>
+        </li>
+        <li>
+          <NavLink to="/newsletter">Nous contacter</NavLink>
         </li>
       </ul>
+
+      <a href="/signin" className="signin-button">Connexion</a>
     </nav>
   );
 }

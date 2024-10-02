@@ -1,5 +1,8 @@
-/* VARIABLES */
-*/ :root {
+/* IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* ============= VARIABLES ============= */
+:root {
   /* color */
   --clr-primary-50: #f0f8fe;
   --clr-primary-100: #deeefb;
@@ -27,23 +30,96 @@
   --clr-nuance-950: #000000;
 
   --clr-black: #000000;
-  --clr-black: #ffffff;
+  --clr-white: #ffffff;
+
+  /* misc */
+  --transition: all 0.1s linear;
 }
 
-/*  */
+/* ============= ALL ============= */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: system-ui;
 }
 
 body {
-  background-image: url(./images/pexels-coppertist-wu-313365563-15757569.jpg);
+  background: url(./images/pexels-coppertist-wu-313365563-15757569.jpg), no-repeat;
+  /* background-position: 0 -20rem; */
 }
 
 .img {
   display: block;
   object-fit: cover;
   max-inline-size: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ============= NAVBAR ============= */
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-inline-start: 2rem;
+}
+
+.fa-utensils {
+  color: var(--clr-white);
+  font-size: 2.5rem;
+}
+
+.logo-title {
+  color: var(--clr-white);
+  font-size: 1.3rem;
+  font-family: "Poppins", sans-serif;
+
+}
+
+.navlink-list {
+  display: flex;
+  gap: 2.5rem;
+  font-size: 1rem;  
+  letter-spacing: 0.02rem;
+}
+
+
+.navlink-list a {
+  color: var(--clr-white);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.signin-button {
+  background-color: var(--clr-primary-600);
+  padding: 1.2rem 3.5rem;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  letter-spacing: 0.05rem;
+  text-decoration: none;
+  color: var(--clr-white);
+}
+
+/* ============= NAVBAR :HOVER ============= */
+
+.navlink-list a:hover {
+color: var(--clr-primary-700);
+}
+
+.signin-button:hover {
+  background-color: var(--clr-primary-500);
 }
