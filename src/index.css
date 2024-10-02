@@ -1,0 +1,49 @@
+/* VARIABLES */
+*/ :root {
+  /* color */
+  --clr-primary-50: #f0f8fe;
+  --clr-primary-100: #deeefb;
+  --clr-primary-200: #c4e2f9;
+  --clr-primary-300: #9bd0f5;
+  --clr-primary-400: #6cb6ee;
+  --clr-primary-500: #4a99e7;
+  --clr-primary-600: #337cdb;
+  --clr-primary-700: #2c68c9;
+  --clr-primary-800: #2955a4;
+  --clr-primary-900: #274981;
+  --clr-primary-950: #1c2e4f;
+
+  /* nuance */
+  --clr-nuance-50: #f6f6f6;
+  --clr-nuance-100: #e7e7e7;
+  --clr-nuance-200: #d1d1d1;
+  --clr-nuance-300: #b0b0b0;
+  --clr-nuance-400: #888888;
+  --clr-nuance-500: #6d6d6d;
+  --clr-nuance-600: #5d5d5d;
+  --clr-nuance-700: #4f4f4f;
+  --clr-nuance-800: #454545;
+  --clr-nuance-900: #3d3d3d;
+  --clr-nuance-950: #000000;
+
+  --clr-black: #000000;
+  --clr-black: #ffffff;
+}
+
+/*  */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(./images/pexels-coppertist-wu-313365563-15757569.jpg);
+}
+
+.img {
+  display: block;
+  object-fit: cover;
+  max-inline-size: 100%;
+}
