@@ -1,24 +1,26 @@
-import { useLoaderData } from "react-router-dom";
-import axios from "axios";
-
-const cocktailSearchUrl =
-  "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
-
-export const loader = async ({ request }) => {
-  const url = new URL(request.url);
-  const searchTerm = url.searchParams.get("search") || "";
-
-  try {
-    const { data } = await axios(`${cocktailSearchUrl}${searchTerm}`);
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 function Home() {
-  const { drinks } = useLoaderData();
-
-  return <main></main>;
+  return (
+    <>
+      {/* <header id="#header">
+        <div className="header-container">
+          <h1 className="header-title">
+            Partagez vos recettes au monde entier !
+          </h1>
+          <div className="header-btn-container">
+            <a href="" className="get-started-btn">
+              je commence<i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section id="create-article-section">
+          <div className="create-article-container">
+            <h2>TITRE</h2>
+          </div>
+        </section>
+      </main> */}
+    </>
+  );
 }
 export default Home;
