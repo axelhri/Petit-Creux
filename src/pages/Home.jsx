@@ -1,7 +1,7 @@
 function Home() {
   return (
     <>
-      <header id="#header">
+      {/* <header id="#header">
         <div className="header-container">
           <h1 className="header-title">
             Partagez vos recettes au monde entier !
@@ -19,7 +19,7 @@ function Home() {
             <h2>TITRE</h2>
           </div>
         </section>
-      </main>
+      </main> */}
     </>
   );
 }

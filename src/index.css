@@ -55,9 +55,9 @@
 
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0 0 0 / 0.3)),
-    url(./images/pexels-beyzaa-yurtkuran-279977530-18617042.jpg) no-repeat;
+    url(./images/pexels-dainiktales-19834446.jpg) no-repeat;
   min-height: 300vh;
-  background-position: -30rem -20rem;
+  background-position: -45rem -8.5rem;
 }
 
 .img {
@@ -76,9 +76,28 @@ a {
 }
 /* ============= NAVBAR ============= */
 
+.nav-container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  inline-size: 100%;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+body.active {
+  overflow: hidden;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 #navbar {
   min-block-size: 6dvh;
-  min-inline-size: 100dvw;
+  max-inline-size: 100%;
 }
 
 .logo-title {
@@ -87,17 +106,10 @@ a {
   font-family: var(--ff-satisfy);
 }
 
-.navlink-container li {
-  margin-block-end: 3rem;
-}
-
-.navlink-container {
-  font-size: 2rem;
-  text-align: center;
-  background-color: var(--clr-white);
-  inline-size: 100%;
-  opacity: 0;
-  display: none;
+.navlink-container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .navlink-content {
@@ -108,19 +120,39 @@ a {
   margin-block-start: 5rem;
 }
 
+.nav-btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-inline: auto;
+}
+
 .navlink-container a {
-  color: var(--clr-nuance-900);
+  color: var(--clr-white);
   font-family: var(--ff-montserrat);
   font-weight: 500;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.link-container {
   position: fixed;
-  z-index: 1;
-  padding: 0.5rem;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  transform: translateY(-150%);
+  font-size: 2rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.399);
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transition: all 0.2s ease-in-out;
+  backdrop-filter: blur(15px);
+}
+
+.link-container.active {
+  transform: translateY(-0%);
 }
 
 .logo {
@@ -128,6 +160,10 @@ a {
   aspect-ratio: 1/1;
   border-radius: 50%;
   padding: 0.1rem;
+}
+
+.not-active {
+  transition: all 0.5s ease-in-out;
 }
 
 .navlink-btn-container {
@@ -138,7 +174,7 @@ a {
   margin-inline: auto;
 }
 
-.navlink-btn-container a {
+.nav-btn-container a {
   color: var(--clr-white);
   letter-spacing: 0.07rem;
   font-family: var(--ff-button);
@@ -151,15 +187,12 @@ a {
 }
 
 .signin {
-  background-color: var(--clr-black);
+  background-color: var(--clr-nuance-950);
   padding: 1.2rem 3.5rem;
   font-size: 1.1rem;
 }
 
 .burger-container {
-  position: fixed;
-  top: 0.8rem;
-  right: 0.8rem;
   width: 30px;
   height: 25px;
   display: flex;
@@ -179,10 +212,13 @@ a {
   background-color: var(--clr-black);
 }
 
+.burger-bar.open {
+  background-color: var(--clr-white);
+}
+
 .open.top-bar {
   transform: rotate(-45deg);
   transform-origin: top right;
-  background-color: var(--clr-black);
 }
 
 .open.middle-bar {
@@ -192,7 +228,6 @@ a {
 .open.bottom-bar {
   transform: rotate(45deg);
   transform-origin: bottom right;
-  background-color: var(--clr-black);
 }
 
 /* ============= NAVBAR EVENTS ============= */
@@ -202,11 +237,6 @@ a {
 .logo.active {
   background-color: var(--clr-primary-500);
   transition: var(--transition-04);
-}
-
-.logo-title.active {
-  color: var(--clr-black);
-  transition: var(--transition-02);
 }
 
 .navlink-container.active {
@@ -232,13 +262,23 @@ a {
   transition: var(--transition-02);
 }
 
-.navbar.scrolled {
+.nav-container.scrolled {
   background-color: var(--clr-white);
-  position: fixed;
+}
+
+.nav-container.active {
+  background-color: transparent;
+}
+
+.navbar {
+  outline: 2px solid red;
 }
 
 .logo-title.scrolled {
   color: var(--clr-black);
+}
+.logo-title.active {
+  color: var(--clr-white);
 }
 
 .logo.scrolled {
