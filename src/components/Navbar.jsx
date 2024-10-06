@@ -1,93 +1,69 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect } from "react";
+import styles from "../Navbar.module.css"; // Import du module CSS
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isTouchingNavbar, setIsTouchingNavbar] = useState(false); // New state to track touch interactions
-  const [isMobile, setIsMobile] = useState(false); // State to track if the screen is mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isTouchingNavbar, setIsTouchingNavbar] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // Check if the screen size is mobile
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= 768); // Define mobile as screen width <= 768px
-    };
-
-    checkIsMobile(); // Initial check
-
-    // Add event listener to update when window is resized
-    window.addEventListener("resize", checkIsMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkIsMobile);
-    };
-  }, []);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 900) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    const handleScroll = () => setScrolled(window.scrollY > 900);
 
+    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Disable or enable scroll based on touch interactions and screen size
   useEffect(() => {
-    if (isMobile && (isOpen || isTouchingNavbar)) {
-      document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-      document.body.style.overflow = ""; // Re-enable scrolling
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow =
+      isMobile && (isOpen || isTouchingNavbar) ? "hidden" : "";
+    return () => (document.body.style.overflow = "");
   }, [isMobile, isOpen, isTouchingNavbar]);
 
+  const handleTouchStart = () => isMobile && setIsTouchingNavbar(true);
+  const handleTouchEnd = () => isMobile && setIsTouchingNavbar(false);
+
   return (
-    <nav
-      onTouchStart={() => isMobile && setIsTouchingNavbar(true)} // Trigger when user touches the screen
-      onTouchEnd={() => isMobile && setIsTouchingNavbar(false)} // Release scroll when touch ends
-    >
+    <nav onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div
-        className={`nav-container ${isOpen ? "active" : "not-active"} ${
-          scrolled ? "scrolled" : ""
-        }`}
+        className={`${styles.navContainer} ${
+          isOpen ? styles.active : styles.notActive
+        } ${scrolled ? styles.scrolled : ""}`}
       >
-        <div className="logo-container">
-          <div>
-            <img
-              src={logo}
-              alt=""
-              className={`logo ${isOpen ? "active" : "not-active"} ${
-                scrolled ? "scrolled" : ""
-              }`}
-            />
-          </div>
+        <div className={styles.logoContainer}>
+          <img
+            src={logo}
+            alt="logo"
+            className={`${styles.logo} ${
+              isOpen ? styles.active : styles.notActive
+            } ${scrolled ? styles.scrolled : ""}`}
+          />
+
           <span
-            className={`logo-title ${isOpen ? "active" : "not-active"} ${
-              scrolled ? "scrolled" : ""
-            }`}
+            className={`${styles.logoTitle} ${
+              isOpen ? styles.active : styles.notActive
+            } ${scrolled ? styles.scrolled : ""}`}
           >
             Petit Creux
           </span>
         </div>
 
-        <div className={`link-container ${isOpen ? "active" : "not-active"}`}>
-          <div className="navlink-container">
+        <div
+          className={`${styles.linkContainer} ${
+            isOpen ? styles.active : styles.notActive
+          }`}
+        >
+          <div className={styles.navlinkContainer}>
             <ul>
               <li>
                 <NavLink to="">Créer un article</NavLink>
@@ -104,32 +80,33 @@ function Navbar() {
             </ul>
           </div>
 
-          <div className="nav-btn-container">
-            <a href="" className="login">
+          <div className={styles.navBtnContainer}>
+            <a href="" className={styles.login}>
               Se connecter
             </a>
-            <a href="" className="signin">
+            <a href="" className={styles.signin}>
               Créer un compte
             </a>
           </div>
         </div>
-
-        <div className="burger-container" onClick={toggleMenu}>
-          <div
-            className={`burger-bar top-bar ${isOpen ? "open" : ""} ${
-              scrolled ? "scrolled" : ""
-            }`}
-          ></div>
-          <div
-            className={`burger-bar middle-bar ${isOpen ? "open" : ""} ${
-              scrolled ? "scrolled" : ""
-            }`}
-          ></div>
-          <div
-            className={`burger-bar bottom-bar ${isOpen ? "open" : ""} ${
-              scrolled ? "scrolled" : ""
-            }`}
-          ></div>
+        <div className={styles.burgerMenu}>
+          <div className={styles.burgerContainer} onClick={toggleMenu}>
+            <div
+              className={`${styles.burgerBar} ${styles.topBar} ${
+                isOpen ? styles.open : ""
+              } ${scrolled ? styles.scrolled : ""}`}
+            ></div>
+            <div
+              className={`${styles.burgerBar} ${styles.middleBar} ${
+                isOpen ? styles.open : ""
+              } ${scrolled ? styles.scrolled : ""}`}
+            ></div>
+            <div
+              className={`${styles.burgerBar} ${styles.bottomBar} ${
+                isOpen ? styles.open : ""
+              } ${scrolled ? styles.scrolled : ""}`}
+            ></div>
+          </div>
         </div>
       </div>
     </nav>
