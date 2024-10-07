@@ -37,15 +37,21 @@
 
 .signin {
   background-color: var(--clr-nuance-950);
-  /* display: none; */
+}
+
+#navbar {
+  block-size: 5vh;
+}
+
+.navContainer {
+  inline-size: 100%;
+  position: fixed;
 }
 
 @media screen and (max-width: 480px) {
   .navContainer {
     display: flex;
     align-items: center;
-    position: fixed;
-    width: 100%;
     justify-content: space-between;
     padding: 0.5rem 1rem;
   }
@@ -54,12 +60,13 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    align-items: center;
   }
 
   .navBtnContainer {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     margin-inline: auto;
   }
 
@@ -68,16 +75,15 @@
     z-index: -1;
     top: 0;
     left: 0;
-    transform: translateY(-150%);
+    transform: translateY(-100%);
     font-size: 2rem;
-    text-align: center;
     background-color: rgba(0, 0, 0, 0.399);
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s ease-in-out;
     backdrop-filter: blur(15px);
     opacity: 0;
   }
@@ -90,10 +96,7 @@
   .navBtnContainer a {
     padding: 1.2rem 3.5rem;
     font-size: 1.1rem;
-  }
-
-  .signin {
-    display: block;
+    text-align: center;
   }
 
   .burgerContainer {
@@ -183,12 +186,12 @@
 
 @media screen and (min-width: 1920px) {
   .navContainer {
-    background-color: rgba(0, 0, 0, 0.399);
-    backdrop-filter: blur(15px);
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    /* backdrop-filter: blur(5px); */
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.482);
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.482); */
   }
 
   .logoContainer {
@@ -199,8 +202,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    inline-size: 100%;
   }
 
   .navlinkContainer ul {
@@ -221,6 +222,15 @@
   }
 
   .navBtnContainer a {
-    padding: 1.5rem 2.5rem;
+    padding: 1.2rem 1rem;
+    inline-size: 12rem;
+    /* border-radius: 10px; */
+    text-align: center;
+  }
+
+  .navBtnContainer {
+    display: flex;
+    /* gap: 1rem; */
+    /* margin-inline-end: 0.5rem; */
   }
 }

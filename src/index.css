@@ -54,15 +54,15 @@
 }
 
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0 0 0 / 0.3)),
-    url(./images/pexels-dainiktales-19834446.jpg) no-repeat -45rem -8.5rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0 0 0 / 0.4)),
+    url(./images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
   min-height: 300vh;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1900px) {
   body {
-    background: linear-gradient(rgba(0, 0, 0, 0.195), rgba(0 0 0 / 0.195)),
-      url(./images/pexels-dainiktales-19834446.jpg) no-repeat 0 -20rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
+      url(./images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0 -18rem;
     min-height: 300vh;
     background-size: 100%;
   }

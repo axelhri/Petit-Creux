@@ -1,14 +1,16 @@
+import styles from "../CSS/Home.module.css";
+
 function Home() {
   return (
     <>
-      {/* <header id="#header">
-        <div className="header-container">
-          <h1 className="header-title">
+      <header id={styles.header}>
+        <div className={styles.headerContainer}>
+          <h1 className={styles.headerTitle}>
             Partagez vos recettes au monde entier !
           </h1>
-          <div className="header-btn-container">
-            <a href="" className="get-started-btn">
-              je commence<i class="fa-solid fa-arrow-right"></i>
+          <div className={styles.headerBtnContainer}>
+            <a href="" className={styles.getStartedBtn}>
+              Je commence<i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
         </div>
@@ -19,7 +21,7 @@ function Home() {
             <h2>TITRE</h2>
           </div>
         </section>
-      </main> */}
+      </main>
     </>
   );
 }

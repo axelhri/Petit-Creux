@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect } from "react";
-import styles from "../Navbar.module.css"; // Import du module CSS
+import styles from "../CSS/Navbar.module.css";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    const handleScroll = () => setScrolled(window.scrollY > 900);
+    const handleScroll = () => setScrolled(window.scrollY > 800);
 
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
@@ -34,7 +34,11 @@ function Navbar() {
   const handleTouchEnd = () => isMobile && setIsTouchingNavbar(false);
 
   return (
-    <nav onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <nav
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      id={styles.navbar}
+    >
       <div
         className={`${styles.navContainer} ${
           isOpen ? styles.active : styles.notActive
