@@ -19,7 +19,7 @@ function Home() {
           </h1>
           <div className={styles.headerBtnContainer}>
             <a href="" className={styles.getStartedBtn}>
-              Je commence<i class="fa-solid fa-arrow-right"></i>
+              Je commence<i className="fa-solid fa-arrow-right"></i>
             </a>
           </div>
         </div>

@@ -54,13 +54,14 @@ function Navbar() {
             } ${scrolled ? styles.scrolled : ""}`}
           />
 
-          <span
+          <a
+            href="/"
             className={`${styles.logoTitle} ${
               isOpen ? styles.active : styles.notActive
             } ${scrolled ? styles.scrolled : ""}`}
           >
             Petit Creux
-          </span>
+          </a>
         </div>
 
         <div

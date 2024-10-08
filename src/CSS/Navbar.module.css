@@ -46,6 +46,7 @@
 .navContainer {
   inline-size: 100%;
   position: fixed;
+  z-index: 1;
 }
 
 @media screen and (max-width: 1200px) {
@@ -72,9 +73,9 @@
 
   .linkContainer {
     position: fixed;
-    z-index: -1;
     top: 0;
     left: 0;
+    z-index: -1;
     transform: translateY(-100%);
     font-size: 2rem;
     background-color: rgba(0, 0, 0, 0.399);

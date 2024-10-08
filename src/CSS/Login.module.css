@@ -39,10 +39,10 @@
 }
 
 .backgroundHome {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
-    url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0 -18rem;
-  min-height: 300vh;
-  background-size: contain;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.144)),
+    url(../images/test.jpg) no-repeat 0 -20rem;
+  min-height: 100vh;
+  background-size: 100%;
 }
 
 #loginMain {
@@ -51,21 +51,23 @@
   display: grid;
   /* outline: 2px solid red; */
   place-items: center;
+  padding: 1rem;
 }
 
 #form {
-  padding: 1rem 1.5rem;
+  padding: 2rem 4rem 4rem 4rem;
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.123);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.712);
   border-radius: 20px;
   outline: 1px solid var(--clr-nuance-300);
 }
 
 .formTitle {
   text-align: center;
-  margin-block-end: 2rem;
+  margin-block-end: 3rem;
+  letter-spacing: 0.03rem;
   color: var(--clr-white);
 }
 
@@ -78,9 +80,28 @@
 
 .formInput {
   padding: 0.5rem 0.8rem;
-  border-radius: 20px;
+  outline: none;
   border: 1px solid var(--clr-nuance-200);
+  border-left: none;
+  border-right: none;
+  border-top: none;
   background: transparent;
+  inline-size: 100%;
+  font-size: 1.2rem;
+  color: var(--clr-white);
+}
+
+.inputBox {
+  position: relative;
+}
+
+.inputBox i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  color: white;
+  font-size: 1.2rem;
 }
 
 .formInput::placeholder {
@@ -93,14 +114,17 @@
   background-color: var(--clr-primary-500);
   border: 1px solid var(--clr-primary-500);
   border-radius: 20px;
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: 500;
   color: var(--clr-white);
   font-family: var(--ff-button);
-  letter-spacing: 0.07rem;
-  margin-block: 2rem 1rem;
+  letter-spacing: 0.1rem;
+  margin-block: 3rem 1rem;
+  text-shadow: #00000079 0 1px 1px;
+  transition: var(--transition-02);
+  cursor: pointer;
 }
 
 .submitBtn:hover {
@@ -111,4 +135,13 @@
 .formAlt {
   color: var(--clr-white);
   font-size: 1rem;
+}
+
+.formAlt a {
+  color: var(--clr-primary-300);
+  transition: var(--transition-02);
+}
+
+.formAlt a:hover {
+  color: var(--clr-primary-600);
 }
