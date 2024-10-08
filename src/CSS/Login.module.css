@@ -1,0 +1,114 @@
+:root {
+  /* primary color */
+  --clr-primary-50: #f0f8fe;
+  --clr-primary-100: #deeefb;
+  --clr-primary-200: #c4e2f9;
+  --clr-primary-300: #9bd0f5;
+  --clr-primary-400: #6cb6ee;
+  --clr-primary-500: #4a99e7;
+  --clr-primary-600: #337cdb;
+  --clr-primary-700: #2c68c9;
+  --clr-primary-800: #2955a4;
+  --clr-primary-900: #274981;
+  --clr-primary-950: #1c2e4f;
+
+  /* nuance */
+  --clr-nuance-50: #f6f6f6;
+  --clr-nuance-100: #e7e7e7;
+  --clr-nuance-200: #d1d1d1;
+  --clr-nuance-300: #b0b0b0;
+  --clr-nuance-400: #888888;
+  --clr-nuance-500: #6d6d6d;
+  --clr-nuance-600: #5d5d5d;
+  --clr-nuance-700: #4f4f4f;
+  --clr-nuance-800: #454545;
+  --clr-nuance-900: #3d3d3d;
+  --clr-nuance-950: #000000;
+
+  --clr-black: #000000;
+  --clr-white: #ffffff;
+
+  /* font family */
+  --ff-button: "Outfit";
+  --ff-satisfy: "Satisfy";
+  --ff-montserrat: "Montserrat";
+
+  /* misc */
+  --transition-02: all 0.2s ease-in-out;
+  --transition-04: all 0.4s ease-in-out;
+}
+
+.backgroundHome {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
+    url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0 -18rem;
+  min-height: 300vh;
+  background-size: contain;
+}
+
+#loginMain {
+  min-block-size: 80vh;
+  background-color: transparent;
+  display: grid;
+  /* outline: 2px solid red; */
+  place-items: center;
+}
+
+#form {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.123);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  outline: 1px solid var(--clr-nuance-300);
+}
+
+.formTitle {
+  text-align: center;
+  margin-block-end: 2rem;
+  color: var(--clr-white);
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  /* outline: 2px solid red; */
+  gap: 1.5rem;
+}
+
+.formInput {
+  padding: 0.5rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid var(--clr-nuance-200);
+  background: transparent;
+}
+
+.formInput::placeholder {
+  font-size: 1rem;
+  letter-spacing: 0.03rem;
+  color: var(--clr-white);
+}
+
+.submitBtn {
+  background-color: var(--clr-primary-500);
+  border: 1px solid var(--clr-primary-500);
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr-white);
+  font-family: var(--ff-button);
+  letter-spacing: 0.07rem;
+  margin-block: 2rem 1rem;
+}
+
+.submitBtn:hover {
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+.formAlt {
+  color: var(--clr-white);
+  font-size: 1rem;
+}

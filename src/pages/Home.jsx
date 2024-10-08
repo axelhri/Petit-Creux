@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import styles from "../CSS/Home.module.css";
 
 function Home() {
+  useEffect(() => {
+    document.body.className = styles.backgroundHome;
+
+    return () => {
+      document.body.className = "";
+    };
+  }, []);
+
   return (
     <>
       <header id={styles.header}>
@@ -15,7 +24,7 @@ function Home() {
           </div>
         </div>
       </header>
-      <main>
+      <main id={styles.homeMain}>
         <section id="create-article-section">
           <div className="create-article-container">
             <h2>TITRE</h2>

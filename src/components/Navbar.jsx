@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect } from "react";
 import styles from "../CSS/Navbar.module.css";
+// import Login from "../pages/Login.jsx";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +86,7 @@ function Navbar() {
           </div>
 
           <div className={styles.navBtnContainer}>
-            <a href="" className={styles.login}>
+            <a href="login" className={styles.login}>
               Se connecter
             </a>
             <a href="" className={styles.signin}>

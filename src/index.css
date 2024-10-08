@@ -53,53 +53,6 @@
   font-family: system-ui;
 }
 
-body {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.4)),
-    url(./images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
-  min-height: 300vh;
-}
-
-@media screen and (min-width: 500px) {
-  body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.4)),
-      url(./images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -40rem -24rem;
-    min-height: 300vh;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
-      url(./images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -25rem -20rem;
-    min-height: 300vh;
-  }
-}
-
-@media screen and (min-width: 1500px) {
-  body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
-      url(./images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -15rem -20rem;
-    min-height: 300vh;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
-      url(./images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0rem -20rem;
-    min-height: 300vh;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
-      url(./images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0 -18rem;
-    min-height: 300vh;
-    background-size: contain;
-  }
-}
-
 .img {
   display: block;
   object-fit: cover;
