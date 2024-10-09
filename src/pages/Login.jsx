@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import de useNavigate
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // Import du contexte
 import styles from "../CSS/login.module.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const { email, password } = formData;
-
+  const { setIsAuthenticated } = useContext(AuthContext); // Accéder au setter de l'authentification
   const navigate = useNavigate();
 
   const onChange = (e) =>
@@ -22,6 +23,7 @@ const Login = () => {
       console.log("Login successful", res.data);
 
       localStorage.setItem("token", res.data.token);
+      setIsAuthenticated(true); // Mettre à jour l'état d'authentification
 
       navigate("/");
     } catch (error) {
@@ -72,7 +74,7 @@ const Login = () => {
           connexion
         </button>
         <span className={styles.formAlt}>
-          Vous n'avez pas de compte ? <a href="register">Créer un compte</a>
+          Vous n'avez pas de compte ? <a href="/register">Créer un compte</a>
         </span>
       </form>
     </main>
