@@ -90,7 +90,7 @@ function Navbar() {
             <a href="login" className={styles.login}>
               Se connecter
             </a>
-            <a href="" className={styles.signin}>
+            <a href="register" className={styles.signin}>
               Créer un compte
             </a>
           </div>

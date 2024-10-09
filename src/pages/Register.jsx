@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import de useNavigate
 import styles from "../CSS/login.module.css";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const { email, password } = formData;
+const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const navigate = useNavigate();
+
+  const { name, email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,21 +21,19 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "http://localhost:5000/api/v1/auth/register",
         formData
       );
-      console.log("Login successful", res.data);
-
-      localStorage.setItem("token", res.data.token);
-
+      console.log("User registered", res.data);
+      // Redirection ou autre traitement après succès
       navigate("/");
-    } catch (error) {
-      console.error("Login error", error.response.data);
+    } catch (err) {
+      console.error(err.response.data);
     }
   };
 
   useEffect(() => {
-    document.body.className = styles.backgroundHome;
+    document.body.className = styles.backgroundHomeRegister;
 
     return () => {
       document.body.className = "";
@@ -42,6 +45,19 @@ const Login = () => {
       <form onSubmit={onSubmit} id={styles.form}>
         <h1 className={styles.formTitle}>Se connecter</h1>
         <div className={styles.inputContainer}>
+          <div className={styles.inputBox}>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              className={styles.formInput}
+              onChange={onChange}
+              placeholder="Name"
+              required
+            />
+            <i className="fa-regular fa-user"></i>
+          </div>
+
           <div className={styles.inputBox}>
             <input
               type="email"
@@ -72,11 +88,11 @@ const Login = () => {
           connexion
         </button>
         <span className={styles.formAlt}>
-          Vous n'avez pas de compte ? <a href="register">Créer un compte</a>
+          Vous n'avez pas de compte ? <a href="">Créer un compte</a>
         </span>
       </form>
     </main>
   );
 };
 
-export default Login;
+export default Register;

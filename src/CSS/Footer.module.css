@@ -1,0 +1,119 @@
+:root {
+  /* primary color */
+  --clr-primary-50: #f0f8fe;
+  --clr-primary-100: #deeefb;
+  --clr-primary-200: #c4e2f9;
+  --clr-primary-300: #9bd0f5;
+  --clr-primary-400: #6cb6ee;
+  --clr-primary-500: #4a99e7;
+  --clr-primary-600: #337cdb;
+  --clr-primary-700: #2c68c9;
+  --clr-primary-800: #2955a4;
+  --clr-primary-900: #274981;
+  --clr-primary-950: #1c2e4f;
+
+  /* nuance */
+  --clr-nuance-50: #f6f6f6;
+  --clr-nuance-100: #e7e7e7;
+  --clr-nuance-200: #d1d1d1;
+  --clr-nuance-300: #b0b0b0;
+  --clr-nuance-400: #888888;
+  --clr-nuance-500: #6d6d6d;
+  --clr-nuance-600: #5d5d5d;
+  --clr-nuance-700: #4f4f4f;
+  --clr-nuance-800: #454545;
+  --clr-nuance-900: #3d3d3d;
+  --clr-nuance-950: #000000;
+
+  --clr-black: #000000;
+  --clr-white: #ffffff;
+
+  /* font family */
+  --ff-button: "Outfit";
+  --ff-satisfy: "Satisfy";
+  --ff-montserrat: "Montserrat";
+
+  /* misc */
+  --transition-02: all 0.2s ease-in-out;
+  --transition-04: all 0.4s ease-in-out;
+}
+
+/*  */
+
+footer {
+  background-color: #111;
+}
+.footerContainer {
+  width: 100%;
+  padding: 1rem;
+}
+.socialIcons {
+  display: flex;
+  justify-content: center;
+}
+
+.socialIcons a {
+  text-decoration: none;
+  padding: 0.7rem;
+  background-color: white;
+  margin: 0.8rem;
+  border-radius: 50%;
+  border: 2px solid var(--clr-white);
+  transition: var(--transition-02);
+}
+
+.socialIcons a i {
+  font-size: 2rem;
+  transition: var(--transition-02);
+  color: black;
+}
+
+.socialIcons a:hover {
+  background-color: transparent;
+}
+
+.socialIcons a:hover i {
+  background-color: transparent;
+  color: var(--clr-white);
+}
+
+.footerNav {
+  margin: 2rem 0;
+}
+
+.footerNav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.footerNav ul li a {
+  color: var(--clr-nuance-300);
+  margin: 1.1rem;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-family: var(--ff-montserrat);
+  transition: var(--transition-02);
+}
+
+.footerNav ul li a:hover {
+  color: var(--clr-nuance-100);
+}
+
+.footerBottom {
+  background-color: #000;
+  padding: 1.2rem;
+  text-align: center;
+  font-family: var(--ff-montserrat);
+}
+.footerBottom p {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0px 5px;
+}
+
+.designer {
+  color: var(--clr-nuance-300);
+}

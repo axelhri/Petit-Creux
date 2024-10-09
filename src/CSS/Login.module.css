@@ -39,17 +39,23 @@
 }
 
 .backgroundHome {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.144)),
-    url(../images/test.jpg) no-repeat 0 -20rem;
+  background: url("../images/boreal.jpg") no-repeat;
   min-height: 100vh;
-  background-size: 100%;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+}
+
+.backgroundHomeRegister {
+  background: url("../images/nature.jpg") no-repeat;
+  min-height: 100vh;
+  background-size: cover;
+  backdrop-filter: blur(20px);
 }
 
 #loginMain {
-  min-block-size: 80vh;
+  min-block-size: 95vh;
   background-color: transparent;
   display: grid;
-  /* outline: 2px solid red; */
   place-items: center;
   padding: 1rem;
 }
@@ -74,7 +80,6 @@
 .inputContainer {
   display: flex;
   flex-direction: column;
-  /* outline: 2px solid red; */
   gap: 1.5rem;
 }
 
@@ -112,24 +117,23 @@
 
 .submitBtn {
   background-color: var(--clr-primary-500);
-  border: 1px solid var(--clr-primary-500);
   border-radius: 20px;
+  border: none;
   padding: 0.5rem 1rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--clr-white);
   font-family: var(--ff-button);
   letter-spacing: 0.1rem;
   margin-block: 3rem 1rem;
-  text-shadow: #00000079 0 1px 1px;
+  color: var(--clr-white);
   transition: var(--transition-02);
   cursor: pointer;
 }
 
 .submitBtn:hover {
-  background-color: transparent;
-  border: 1px solid white;
+  background-color: #fff;
+  color: var(--clr-primary-500);
 }
 
 .formAlt {

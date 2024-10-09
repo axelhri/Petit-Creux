@@ -3,7 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SharedLayout from "./layouts/SharedLayout.jsx";
 import { Home, ErrorPage } from "./pages";
 import SingleError from "./components/SingleError.jsx";
-import Login from "./pages/Login.jsx"; // Import du composant Login
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,13 @@ const router = createBrowserRouter([
         errorElement: <SingleError />,
       },
       {
-        path: "login", // Route pour la page de login
+        path: "login",
         element: <Login />,
+        errorElement: <SingleError />,
+      },
+      {
+        path: "register",
+        element: <Register />,
         errorElement: <SingleError />,
       },
     ],
