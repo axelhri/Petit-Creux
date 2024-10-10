@@ -11,7 +11,6 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
-
   const { name, email, password } = formData;
 
   const onChange = (e) =>
@@ -20,12 +19,20 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Envoie de la requête au backend pour enregistrer l'utilisateur
       const res = await axios.post(
         "http://localhost:5000/api/v1/auth/register",
         formData
       );
       console.log("User registered", res.data);
-      // Redirection ou autre traitement après succès
+
+      // Si le back-end retourne un token, on peut l'utiliser ici
+      const token = res.data.token;
+
+      // Stocker le token dans le localStorage pour rester connecté
+      localStorage.setItem("token", token);
+
+      // Redirection vers la page d'accueil ou une autre page sécurisée
       navigate("/");
     } catch (err) {
       console.error(err.response.data);
@@ -43,7 +50,7 @@ const Register = () => {
   return (
     <main id={styles.loginMain}>
       <form onSubmit={onSubmit} id={styles.form}>
-        <h1 className={styles.formTitle}>Se connecter</h1>
+        <h1 className={styles.formTitle}>Créer un compte</h1>
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
             <input
@@ -52,7 +59,7 @@ const Register = () => {
               value={name}
               className={styles.formInput}
               onChange={onChange}
-              placeholder="Name"
+              placeholder="Nom"
               required
             />
             <i className="fa-regular fa-user"></i>
@@ -77,7 +84,7 @@ const Register = () => {
               value={password}
               className={styles.formInput}
               onChange={onChange}
-              placeholder="Password"
+              placeholder="Mot de passe"
               required
             />
             <i className="fa-solid fa-lock"></i>
@@ -85,10 +92,10 @@ const Register = () => {
         </div>
 
         <button type="submit" className={styles.submitBtn}>
-          connexion
+          Créer un compte
         </button>
         <span className={styles.formAlt}>
-          Vous n'avez pas de compte ? <a href="">Créer un compte</a>
+          Vous avez déjà un compte ? <a href="/login">Se connecter</a>
         </span>
       </form>
     </main>

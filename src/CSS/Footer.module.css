@@ -116,4 +116,5 @@ footer {
 
 .designer {
   color: var(--clr-nuance-300);
+  text-transform: capitalize;
 }

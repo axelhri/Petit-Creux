@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect } from "react";
 import styles from "../CSS/Navbar.module.css";
-// import Login from "../pages/Login.jsx";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +9,27 @@ function Navbar() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isTouchingNavbar, setIsTouchingNavbar] = useState(false);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Etat d'authentification
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Vérifier si un token est présent dans le localStorage
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true); // L'utilisateur est connecté
+    } else {
+      setIsAuthenticated(false); // L'utilisateur n'est pas connecté
+    }
+  }, []);
+
   const toggleMenu = () => setIsOpen((prev) => !prev);
+
+  const handleLogout = () => {
+    // Supprimer le token lors de la déconnexion
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    navigate("/login"); // Redirection vers la page de connexion après déconnexion
+  };
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -87,12 +106,28 @@ function Navbar() {
           </div>
 
           <div className={styles.navBtnContainer}>
-            <a href="login" className={styles.login}>
-              Se connecter
-            </a>
-            <a href="register" className={styles.signin}>
-              Créer un compte
-            </a>
+            {/* Vérification de l'authentification */}
+            {isAuthenticated ? (
+              <>
+                {/* L'utilisateur est connecté, afficher "Voir mon profil" et "Déconnexion" */}
+                <a href="/profile" className={styles.login}>
+                  Voir mon profil
+                </a>
+                <button onClick={handleLogout} className={styles.signout}>
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <>
+                {/* L'utilisateur n'est pas connecté, afficher "Se connecter" et "Créer un compte" */}
+                <a href="/login" className={styles.login}>
+                  Se connecter
+                </a>
+                <a href="/register" className={styles.signin}>
+                  Créer un compte
+                </a>
+              </>
+            )}
           </div>
         </div>
         <div className={styles.burgerMenu}>

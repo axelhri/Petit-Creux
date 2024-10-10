@@ -33,7 +33,7 @@ function Footer() {
       <div className={styles.footerBottom}>
         <p>
           Copyright &copy;2024, Designed by
-          <span className={styles.designer}> Axel</span>
+          <span className={styles.designer}> Houairi Axel</span>
         </p>
       </div>
     </footer>
