@@ -187,12 +187,9 @@
 
 @media screen and (min-width: 1200px) {
   .navContainer {
-    /* background-color: rgba(0, 0, 0, 0.5); */
-    /* backdrop-filter: blur(5px); */
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
-    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.482); */
   }
 
   .logoContainer {
@@ -233,6 +230,41 @@
     display: flex;
     /* gap: 1rem; */
     /* margin-inline-end: 0.5rem; */
+  }
+
+  /*  */
+
+  .scrolled {
+    transition: var(--transition-02);
+  }
+
+  .navContainer.scrolled {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.482);
+  }
+
+  .logo.scrolled {
+    background-color: var(--clr-primary-500);
+  }
+
+  /* -------- active -------- */
+
+  .logo.active {
+    background-color: var(--clr-primary-500);
+    transition: var(--transition-04);
+  }
+
+  .logoTitle.active {
+    color: var(--clr-white);
+  }
+
+  .navContainer.active {
+    background-color: transparent;
+  }
+
+  .notActive {
+    transition: all 0.5s ease-in-out;
   }
 }
 

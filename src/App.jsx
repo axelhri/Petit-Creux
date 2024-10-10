@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import SharedLayout from "./layouts/SharedLayout.jsx";
 import { Home, ErrorPage } from "./pages";
 import SingleError from "./components/SingleError.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import { AuthProvider } from "./context/AuthContext"; // Import du AuthProvider
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;

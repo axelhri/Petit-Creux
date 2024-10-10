@@ -1,6 +1,8 @@
+import React, { useState, useEffect, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
-import React, { useState, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext"; // Import du contexte
 import styles from "../CSS/Navbar.module.css";
 
 function Navbar() {
@@ -8,19 +10,6 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isTouchingNavbar, setIsTouchingNavbar] = useState(false);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Etat d'authentification
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Vérifier si un token est présent dans le localStorage
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true); // L'utilisateur est connecté
-    } else {
-      setIsAuthenticated(false); // L'utilisateur n'est pas connecté
-    }
-  }, []);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
@@ -33,7 +22,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    const handleScroll = () => setScrolled(window.scrollY > 800);
+    const handleScroll = () => setScrolled(window.scrollY > 1);
 
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
@@ -52,6 +41,12 @@ function Navbar() {
 
   const handleTouchStart = () => isMobile && setIsTouchingNavbar(true);
   const handleTouchEnd = () => isMobile && setIsTouchingNavbar(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    navigate("/");
+  };
 
   return (
     <nav
@@ -72,7 +67,6 @@ function Navbar() {
               isOpen ? styles.active : styles.notActive
             } ${scrolled ? styles.scrolled : ""}`}
           />
-
           <a
             href="/"
             className={`${styles.logoTitle} ${
@@ -88,7 +82,11 @@ function Navbar() {
             isOpen ? styles.active : styles.notActive
           }`}
         >
-          <div className={styles.navlinkContainer}>
+          <div
+            className={`${styles.navlinkContainer}  ${
+              scrolled ? styles.scrolled : ""
+            }`}
+          >
             <ul>
               <li>
                 <NavLink to="">Créer un article</NavLink>
@@ -106,30 +104,15 @@ function Navbar() {
           </div>
 
           <div className={styles.navBtnContainer}>
-            {/* Vérification de l'authentification */}
-            {isAuthenticated ? (
-              <>
-                {/* L'utilisateur est connecté, afficher "Voir mon profil" et "Déconnexion" */}
-                <a href="/profile" className={styles.login}>
-                  Voir mon profil
-                </a>
-                <button onClick={handleLogout} className={styles.signout}>
-                  Déconnexion
-                </button>
-              </>
-            ) : (
-              <>
-                {/* L'utilisateur n'est pas connecté, afficher "Se connecter" et "Créer un compte" */}
-                <a href="/login" className={styles.login}>
-                  Se connecter
-                </a>
-                <a href="/register" className={styles.signin}>
-                  Créer un compte
-                </a>
-              </>
-            )}
+            <a href="login" className={styles.login}>
+              Se connecter
+            </a>
+            <a href="register" className={styles.signin}>
+              Créer un compte
+            </a>
           </div>
         </div>
+
         <div className={styles.burgerMenu}>
           <div className={styles.burgerContainer} onClick={toggleMenu}>
             <div
