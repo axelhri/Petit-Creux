@@ -70,6 +70,12 @@
   outline: 1px solid var(--clr-nuance-300);
 }
 
+@media screen and (min-width: 1000px) {
+  #form {
+    inline-size: 30rem;
+  }
+}
+
 .formTitle {
   text-align: center;
   margin-block-end: 3rem;
@@ -148,4 +154,50 @@
 
 .formAlt a:hover {
   color: var(--clr-primary-600);
+}
+
+.userImage {
+  inline-size: 5rem;
+  aspect-ratio: 1/1;
+}
+
+.uploadImage {
+  cursor: pointer;
+  position: relative;
+  margin-inline: auto;
+  overflow: hidden;
+  display: flex;
+  border-radius: 50%;
+  border: 5px solid var(--clr-white);
+  background-color: var(--clr-white);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.274);
+  transition: var(--transition-02);
+}
+
+.uploadImage:hover {
+  box-shadow: 0 5px 25px rgba(255, 255, 255, 0.403);
+}
+
+input[type="file"] {
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  transform: scale(5);
+  opacity: 0;
+}
+
+.uploadImage i {
+  color: var(--clr-nuance-900);
+  font-size: 1.7rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(100%, -10%);
+  transition: var(--transition-02);
+}
+
+.uploadImage:hover i {
+  color: var(--clr-primary-500);
+  transform: translate(100%, -40%);
 }

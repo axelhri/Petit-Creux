@@ -1,23 +1,44 @@
-import React, { useState, useEffect, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext"; // Import du contexte
+import axios from "axios"; // Import Axios
 import styles from "../CSS/Navbar.module.css";
 
 function Navbar() {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // Utilisation du contexte
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isTouchingNavbar, setIsTouchingNavbar] = useState(false);
-
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const [profileImage, setProfileImage] = useState(null); // State for storing profile image
+  const [userId, setUserId] = useState(null); // State for user ID
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Supprimer le token lors de la déconnexion
     localStorage.removeItem("token");
-    setIsAuthenticated(false);
+    setIsAuthenticated(false); // Mise à jour de l'état d'authentification
     navigate("/login"); // Redirection vers la page de connexion après déconnexion
+  };
+
+  // Fetch the user profile data including the profile image
+  const fetchUserProfile = async (id) => {
+    try {
+      const token = localStorage.getItem("token"); // Assume token is stored in localStorage
+      if (token) {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/auth/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // Assuming the image URL is located in response.data.user.imageUrl
+        setProfileImage(response.data.user.imageUrl);
+      }
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
   };
 
   useEffect(() => {
@@ -27,33 +48,22 @@ function Navbar() {
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
+    // If the user is authenticated, fetch the profile data
+    if (isAuthenticated) {
+      // Get user ID after authentication
+      const storedUserId = "6708d93b7833177886ba9ecf"; // Replace this with dynamic ID fetching logic
+      setUserId(storedUserId);
+      fetchUserProfile(storedUserId);
+    }
+
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow =
-      isMobile && (isOpen || isTouchingNavbar) ? "hidden" : "";
-    return () => (document.body.style.overflow = "");
-  }, [isMobile, isOpen, isTouchingNavbar]);
-
-  const handleTouchStart = () => isMobile && setIsTouchingNavbar(true);
-  const handleTouchEnd = () => isMobile && setIsTouchingNavbar(false);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuthenticated(false);
-    navigate("/");
-  };
+  }, [isAuthenticated]);
 
   return (
-    <nav
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      id={styles.navbar}
-    >
+    <nav id={styles.navbar}>
       <div
         className={`${styles.navContainer} ${
           isOpen ? styles.active : styles.notActive
@@ -82,11 +92,7 @@ function Navbar() {
             isOpen ? styles.active : styles.notActive
           }`}
         >
-          <div
-            className={`${styles.navlinkContainer}  ${
-              scrolled ? styles.scrolled : ""
-            }`}
-          >
+          <div className={styles.navlinkContainer}>
             <ul>
               <li>
                 <NavLink to="">Créer un article</NavLink>
@@ -104,17 +110,41 @@ function Navbar() {
           </div>
 
           <div className={styles.navBtnContainer}>
-            <a href="login" className={styles.login}>
-              Se connecter
-            </a>
-            <a href="register" className={styles.signin}>
-              Créer un compte
-            </a>
+            {isAuthenticated ? (
+              <>
+                <div className={styles.profileSection}>
+                  <a href="/profile" className={styles.login}>
+                    {profileImage && (
+                      <img
+                        src={profileImage}
+                        alt="profile"
+                        className={styles.profileImage}
+                      />
+                    )}
+                    Voir mon profil
+                  </a>
+                </div>
+                <button onClick={handleLogout} className={styles.signout}>
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className={styles.login}>
+                  Se connecter
+                </a>
+                <a href="/register" className={styles.signin}>
+                  Créer un compte
+                </a>
+              </>
+            )}
           </div>
         </div>
-
         <div className={styles.burgerMenu}>
-          <div className={styles.burgerContainer} onClick={toggleMenu}>
+          <div
+            className={styles.burgerContainer}
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
             <div
               className={`${styles.burgerBar} ${styles.topBar} ${
                 isOpen ? styles.open : ""
