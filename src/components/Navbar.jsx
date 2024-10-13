@@ -48,12 +48,16 @@ function Navbar() {
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
-    // If the user is authenticated, fetch the profile data
     if (isAuthenticated) {
-      // Get user ID after authentication
-      const storedUserId = "6708d93b7833177886ba9ecf"; // Replace this with dynamic ID fetching logic
-      setUserId(storedUserId);
-      fetchUserProfile(storedUserId);
+      // Supposons que le token JWT soit stocké dans localStorage ou sessionStorage
+      const token = localStorage.getItem("token"); // ou sessionStorage
+      if (token) {
+        // Décoder le JWT pour obtenir l'ID utilisateur
+        const decodedToken = JSON.parse(atob(token.split(".")[1])); // Attention : ceci est une méthode simplifiée
+        const storedUserId = decodedToken.userId; // Remplacez 'userId' par le bon nom de champ de l'ID dans votre JWT
+        setUserId(storedUserId);
+        fetchUserProfile(storedUserId);
+      }
     }
 
     return () => {
@@ -113,7 +117,8 @@ function Navbar() {
             {isAuthenticated ? (
               <>
                 <div className={styles.profileSection}>
-                  <a href="/profile" className={styles.login}>
+                  <a href="/profile" className={styles.showProfile}>
+                    Mon profil
                     {profileImage && (
                       <img
                         src={profileImage}
@@ -121,12 +126,11 @@ function Navbar() {
                         className={styles.profileImage}
                       />
                     )}
-                    Voir mon profil
                   </a>
                 </div>
-                <button onClick={handleLogout} className={styles.signout}>
+                {/* <button onClick={handleLogout} className={styles.signout}>
                   Déconnexion
-                </button>
+                </button> */}
               </>
             ) : (
               <>
