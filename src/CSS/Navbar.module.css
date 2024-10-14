@@ -147,6 +147,28 @@
     transform-origin: bottom right;
   }
 
+  .showProfile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition-02);
+    position: relative;
+  }
+
+  .profileSection a {
+    font-size: 2rem;
+    background-color: var(--clr-primary-500);
+    border-radius: 10px;
+  }
+
+  .profileImage {
+    block-size: 5.2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    transition: var(--transition-02);
+    border: 2px solid var(--clr-white);
+  }
+
   /* ============= NAVBAR EVENTS ============= */
 
   /* -------- scrolled -------- */
@@ -195,6 +217,13 @@
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.482);
+  }
+
+  .logo {
+    background-color: var(--clr-primary-500);
   }
 
   .logoContainer {
@@ -227,30 +256,42 @@
   .navBtnContainer a {
     padding: 1.2rem 1rem;
     inline-size: 12rem;
-    /* border-radius: 10px; */
     text-align: center;
   }
 
   .navBtnContainer {
     display: flex;
-    /* gap: 1rem; */
-    /* margin-inline-end: 0.5rem; */
   }
 
-  /*  */
-
-  .scrolled {
+  .showProfile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     transition: var(--transition-02);
+    position: relative;
   }
 
-  .navContainer.scrolled {
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.482);
+  .profileSection a {
+    font-size: 1.1rem;
   }
 
-  .logo.scrolled {
-    background-color: var(--clr-primary-500);
+  .profileImage {
+    block-size: 3.2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    transition: var(--transition-02);
+    border: 2px solid var(--clr-white);
+  }
+
+  .showProfile:hover {
+    color: var(--clr-primary-500);
+  }
+
+  .showProfile:hover .profileImage {
+    border: 2px solid var(--clr-primary-500);
   }
 
   /* -------- active -------- */
@@ -277,29 +318,4 @@
   .linkContainer {
     inline-size: 64%;
   }
-}
-
-.showProfile {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: var(--clr-primary-500);
-  /* border-bottom-left-radius: 30px; */
-  transition: var(--transition-02);
-  position: relative;
-}
-
-.showProfile:hover {
-  background-color: var(--clr-primary-600);
-}
-
-.profileImage {
-  block-size: 3.2rem;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  position: absolute;
-  right: 1.5rem;
-  top: 0.38rem;
-  transition: var(--transition-02);
-  border: 2px solid var(--clr-white);
 }

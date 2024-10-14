@@ -95,7 +95,8 @@ const Register = () => {
               name="image"
               id="image"
               accept="image/*"
-              onChange={onImageChange} // Gérer la sélection de l'image
+              onChange={onImageChange}
+              required
             />
           </div>
           <div className={styles.inputBox}>
@@ -105,7 +106,7 @@ const Register = () => {
               value={name}
               className={styles.formInput}
               onChange={onChange}
-              placeholder="Nom"
+              placeholder="Pseudo"
               required
             />
             <i className="fa-regular fa-user"></i>

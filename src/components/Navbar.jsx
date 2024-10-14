@@ -118,7 +118,7 @@ function Navbar() {
               <>
                 <div className={styles.profileSection}>
                   <a href="/profile" className={styles.showProfile}>
-                    Mon profil
+                    Mes recettes{" "}
                     {profileImage && (
                       <img
                         src={profileImage}
