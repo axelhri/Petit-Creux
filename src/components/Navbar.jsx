@@ -16,6 +16,7 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setIsAuthenticated(false); // Mise à jour de l'état d'authentification
     navigate("/login"); // Redirection vers la page de connexion après déconnexion
   };
@@ -128,9 +129,9 @@ function Navbar() {
                     )}
                   </a>
                 </div>
-                {/* <button onClick={handleLogout} className={styles.signout}>
+                <button onClick={handleLogout} className={styles.signout}>
                   Déconnexion
-                </button> */}
+                </button>
               </>
             ) : (
               <>

@@ -1,5 +1,3 @@
-// pages/Login.js
-
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -24,10 +22,16 @@ const Login = () => {
       );
       console.log("Login successful", res.data);
 
-      localStorage.setItem("token", res.data.token);
+      // Récupérer le token et l'ID de l'utilisateur
+      const { token, user } = res.data;
+
+      // Stocker le token et l'ID utilisateur dans le localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", user.userId); // Stocker l'ID de l'utilisateur
+
       setIsAuthenticated(true); // Mettre à jour l'état d'authentification
 
-      navigate("/");
+      navigate("/"); // Rediriger vers la page d'accueil ou une autre page
     } catch (error) {
       console.error("Login error", error.response.data);
     }
