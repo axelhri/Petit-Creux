@@ -57,7 +57,231 @@
   --transition-04: all 0.4s ease-in-out;
 }
 
+#mainShare {
+  min-block-size: 90vh;
+}
+
+.backgroundHomeShare {
+  /* background-color: var(--clr-secondary-100); */
+}
+
 #shareForm {
-  min-block-size: 100vh;
-  margin-block-start: 20rem;
+  margin-block-start: 5rem;
+  /* border: 2px solid var(--clr-secondary-500); */
+  max-inline-size: 90vw;
+  margin-inline: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  /* background-color: var(--clr-white); */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  font-family: var(--ff-montserrat);
+}
+
+.titleBox {
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  margin-block-end: 1rem;
+}
+
+.shareTitle {
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--clr-primary-500);
+  border-radius: 10px;
+  inline-size: 20rem;
+  text-align: center;
+}
+
+.shareTitle::placeholder {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.imgDescBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-block-end: 1rem;
+}
+
+.shareImg {
+  /* background-color: var(--clr-primary-500); */
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 2px dashed rgba(0, 0, 0, 0.384);
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+  font-weight: 500;
+}
+
+.shareImg i {
+  font-size: 5rem;
+  color: var(--clr-nuance-900);
+}
+
+.shareImg input {
+  position: absolute;
+  top: 5rem;
+  left: 30rem;
+  transform: scale(11);
+  opacity: 0;
+}
+
+.shareDesc textarea {
+  block-size: 100%;
+  border: 2px solid var(--clr-primary-500);
+  border-radius: 10px;
+  aspect-ratio: 1/1;
+  padding: 0.2rem;
+}
+
+.shareDesc textarea::placeholder {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.cornerImg {
+  position: absolute;
+  inline-size: 15rem;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+}
+
+.eatersBox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.eatersBox label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.eatersControl {
+  display: flex;
+  border: 2px solid var(--clr-primary-500);
+  border-radius: 10px;
+}
+
+.eatersBox input {
+  font-size: 1.1rem;
+  inline-size: 2.5rem;
+  text-align: center;
+  color: var(--clr-secondary-500);
+  font-weight: 500;
+  border: none;
+}
+
+.eatersBox button {
+  background: none;
+  font-size: 2rem;
+  color: var(--clr-black);
+  padding-inline: 0.5rem;
+}
+
+.eatersBtnLeft {
+  border: none;
+  border-right: 2px solid var(--clr-primary-500);
+}
+
+.eatersBtnRight {
+  border: none;
+  border-left: 2px solid var(--clr-primary-500);
+  margin-inline-start: 0.2rem;
+}
+
+.numberContainer {
+  display: flex;
+  align-items: center;
+}
+
+.eatersText {
+  display: inline-block;
+  width: 75px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.formIngredients {
+  margin-block-start: 1rem;
+}
+
+.ingredientsTitle {
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.ingredientsContainer {
+  display: flex;
+  border: 2px solid var(--clr-primary-500);
+  border-radius: 10px;
+  margin-block: 1rem;
+}
+
+.ingredientsContainer input {
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  font-weight: 500;
+}
+
+.ingredientsName {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.ingredientsContainer input[type="number"] {
+  inline-size: 5rem;
+  border-left: 2px solid var(--clr-primary-500);
+  border-right: 2px solid var(--clr-primary-500);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.ingredientsContainer select {
+  border: none;
+  background: none;
+  font-weight: 500;
+  inline-size: 100%;
+}
+
+.moreIngredients {
+  background: var(--clr-primary-500);
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-block-end: 2rem;
+  color: var(--clr-white);
+  font-size: 1rem;
+  font-family: var(--ff-button);
+}
+
+.shareSubmit {
+  background: rgb(14, 187, 14);
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-family: var(--ff-button);
+  font-size: 1rem;
+  color: var(--clr-white);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.imagePreviewContainer {
+  position: absolute;
+}
+
+.imagePreview {
+  max-inline-size: 100%;
 }

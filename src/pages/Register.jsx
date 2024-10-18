@@ -10,8 +10,8 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const [image, setImage] = useState(null); // État pour l'image sélectionnée
-  const [previewImage, setPreviewImage] = useState(defaultImg); // Pour prévisualiser l'image
+  const [image, setImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(defaultImg);
 
   const navigate = useNavigate();
   const { name, email, password } = formData;
