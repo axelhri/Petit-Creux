@@ -1,7 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../CSS/Home.module.css";
+import { AuthContext } from "../context/AuthContext"; // Import du contexte
 
 function Home() {
+  const { isAuthenticated } = useContext(AuthContext); // Utilisation du contexte
+  const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
+
   useEffect(() => {
     document.body.className = styles.backgroundHome;
 
@@ -9,6 +14,15 @@ function Home() {
       document.body.className = "";
     };
   }, []);
+
+  const handleGetStartedClick = (e) => {
+    e.preventDefault();
+    if (isAuthenticated) {
+      navigate("/share"); // Si l'utilisateur est connecté, redirige vers la page de création d'article
+    } else {
+      navigate("/login"); // Sinon, redirige vers la page de connexion
+    }
+  };
 
   return (
     <>
@@ -18,7 +32,11 @@ function Home() {
             Partagez vos recettes au monde entier !
           </h1>
           <div className={styles.headerBtnContainer}>
-            <a href="/register" className={styles.getStartedBtn}>
+            <a
+              href="#"
+              onClick={handleGetStartedClick}
+              className={styles.getStartedBtn}
+            >
               Je commence<i className="fa-solid fa-arrow-right"></i>
               <div className={styles.btnBgw}></div>
               <div className={styles.btnBg}></div>
@@ -42,4 +60,5 @@ function Home() {
     </>
   );
 }
+
 export default Home;

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../CSS/Share.module.css";
-import cornerImg from "../images/form-corner.jpg";
 
 const CreateRecipeForm = () => {
   const [title, setTitle] = useState("");
@@ -12,7 +11,7 @@ const CreateRecipeForm = () => {
     { name: "", quantity: 0, unit: "grammes" },
   ]);
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null); // New state for image preview
+  const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
 
   const ingredientUnits = [
@@ -23,6 +22,14 @@ const CreateRecipeForm = () => {
     "milligrammes",
     "millilitres",
     "centilitres",
+    "cuillères à café",
+    "tasse",
+    "pincée",
+    "pièce",
+  ];
+
+  const nonDecimalUnits = [
+    "cuillères à soupe",
     "cuillères à café",
     "tasse",
     "pincée",
@@ -76,21 +83,27 @@ const CreateRecipeForm = () => {
 
   const updateIngredient = (index, field, value) => {
     const updatedIngredients = [...ingredients];
+
+    if (field === "quantity") {
+      // Check if the selected unit requires a whole number
+      const currentUnit = updatedIngredients[index].unit;
+      if (nonDecimalUnits.includes(currentUnit)) {
+        value = Math.floor(value); // Round down to the nearest whole number
+      }
+    }
+
     updatedIngredients[index][field] = value;
     setIngredients(updatedIngredients);
   };
 
-  // Handle image file selection and preview
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-
-    // Generate a preview URL for the image
     if (file) {
       const previewUrl = URL.createObjectURL(file);
-      setImagePreview(previewUrl); // Update the image preview state
+      setImagePreview(previewUrl);
     } else {
-      setImagePreview(null); // Clear the preview if no file is selected
+      setImagePreview(null);
     }
   };
 
@@ -104,23 +117,16 @@ const CreateRecipeForm = () => {
   return (
     <main id={styles.mainShare}>
       <form onSubmit={handleSubmit} id={styles.shareForm}>
-        <img src={cornerImg} alt="" className={styles.cornerImg} />
-        <div className={styles.titleBox}>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            maxLength={50}
-            placeholder="Nom de recette"
-            className={styles.shareTitle}
-          />
-        </div>
-
+        <h1>Partagez vos recettes !</h1>
+        <div className={styles.shareFormLine}></div>
         <div className={styles.imgDescBox}>
-          <div className={styles.shareImg}>
+          <div
+            className={`${styles.shareImg} ${
+              imagePreview ? styles.imageSelected : ""
+            }`}
+          >
             <i className="fa-solid fa-cloud-arrow-up"></i>
-            Insérer une image
+            <p>Insérer une image</p>
             {imagePreview && (
               <div className={styles.imagePreviewContainer}>
                 <img
@@ -134,6 +140,17 @@ const CreateRecipeForm = () => {
           </div>
 
           <div className={styles.shareDesc}>
+            <div className={styles.titleBox}>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                maxLength={50}
+                placeholder="Nom de recette"
+                className={styles.shareTitle}
+              />
+            </div>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -176,7 +193,7 @@ const CreateRecipeForm = () => {
         </div>
 
         <div className={styles.formIngredients}>
-          <label className={styles.ingredientsTitle}>Ingrédients :</label>
+          <label className={styles.ingredientsTitle}>Ingrédients :</label>{" "}
           {ingredients.map((ingredient, index) => (
             <div key={index} className={styles.ingredientsContainer}>
               <input
@@ -191,13 +208,27 @@ const CreateRecipeForm = () => {
               />
               <input
                 type="number"
-                placeholder="Quantité"
                 value={ingredient.quantity}
+                onClick={(e) => {
+                  if (e.target.value === "0") {
+                    updateIngredient(index, "quantity", "");
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value === "") {
+                    updateIngredient(index, "quantity", 0);
+                  }
+                }}
                 onChange={(e) =>
-                  updateIngredient(index, "quantity", Number(e.target.value))
+                  updateIngredient(
+                    index,
+                    "quantity",
+                    parseFloat(e.target.value)
+                  )
                 }
                 required
                 min={0}
+                step="any"
               />
               <select
                 value={ingredient.unit}
@@ -214,7 +245,6 @@ const CreateRecipeForm = () => {
               </select>
             </div>
           ))}
-
           <button
             type="button"
             onClick={addIngredient}

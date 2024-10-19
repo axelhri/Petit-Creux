@@ -8,7 +8,6 @@ import styles from "../CSS/Navbar.module.css";
 function Navbar() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // Utilisation du contexte
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [profileImage, setProfileImage] = useState(null); // State for storing profile image
   const [userId, setUserId] = useState(null); // State for user ID
@@ -44,18 +43,14 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    const handleScroll = () => setScrolled(window.scrollY > 1);
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll);
 
     if (isAuthenticated) {
-      // Supposons que le token JWT soit stocké dans localStorage ou sessionStorage
-      const token = localStorage.getItem("token"); // ou sessionStorage
+      const token = localStorage.getItem("token");
       if (token) {
-        // Décoder le JWT pour obtenir l'ID utilisateur
-        const decodedToken = JSON.parse(atob(token.split(".")[1])); // Attention : ceci est une méthode simplifiée
-        const storedUserId = decodedToken.userId; // Remplacez 'userId' par le bon nom de champ de l'ID dans votre JWT
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        const storedUserId = decodedToken.userId;
         setUserId(storedUserId);
         fetchUserProfile(storedUserId);
       }
@@ -63,16 +58,38 @@ function Navbar() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
     };
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    // Add or remove no-scroll class on body when menu is opened/closed
+    if (isOpen) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+
+    return () => {
+      // Clean up when the component unmounts
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [isOpen]);
+
+  const handleCreateArticleClick = (e) => {
+    e.preventDefault();
+    if (isAuthenticated) {
+      navigate("/share"); // Si l'utilisateur est connecté, redirige vers la page de création d'article
+    } else {
+      navigate("/login"); // Sinon, redirige vers la page de connexion
+    }
+  };
 
   return (
     <nav id={styles.navbar}>
       <div
         className={`${styles.navContainer} ${
           isOpen ? styles.active : styles.notActive
-        } ${scrolled ? styles.scrolled : ""}`}
+        }`}
       >
         <div className={styles.logoContainer}>
           <img
@@ -80,13 +97,13 @@ function Navbar() {
             alt="logo"
             className={`${styles.logo} ${
               isOpen ? styles.active : styles.notActive
-            } ${scrolled ? styles.scrolled : ""}`}
+            }`}
           />
           <a
             href="/"
             className={`${styles.logoTitle} ${
               isOpen ? styles.active : styles.notActive
-            } ${scrolled ? styles.scrolled : ""}`}
+            }`}
           >
             Petit Creux
           </a>
@@ -100,7 +117,9 @@ function Navbar() {
           <div className={styles.navlinkContainer}>
             <ul>
               <li>
-                <NavLink to="">Créer un article</NavLink>
+                <a href="#" onClick={handleCreateArticleClick}>
+                  Créer un article
+                </a>
               </li>
               <li>
                 <NavLink to="">Parcourir</NavLink>
@@ -130,7 +149,7 @@ function Navbar() {
                   </a>
                 </div>
                 <button onClick={handleLogout} className={styles.signout}>
-                  Déconnexion
+                  <i className="fa-solid fa-power-off"></i>
                 </button>
               </>
             ) : (
@@ -153,17 +172,17 @@ function Navbar() {
             <div
               className={`${styles.burgerBar} ${styles.topBar} ${
                 isOpen ? styles.open : ""
-              } ${scrolled ? styles.scrolled : ""}`}
+              }`}
             ></div>
             <div
               className={`${styles.burgerBar} ${styles.middleBar} ${
                 isOpen ? styles.open : ""
-              } ${scrolled ? styles.scrolled : ""}`}
+              }`}
             ></div>
             <div
               className={`${styles.burgerBar} ${styles.bottomBar} ${
                 isOpen ? styles.open : ""
-              } ${scrolled ? styles.scrolled : ""}`}
+              }`}
             ></div>
           </div>
         </div>

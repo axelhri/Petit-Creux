@@ -6,6 +6,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import Share from "./pages/ShareRecipe.jsx";
+import SingleRecipe from "./pages/SingleRecipe.jsx";
 import { AuthProvider } from "./context/AuthContext"; // Import du AuthProvider
 
 const router = createBrowserRouter([
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
       {
         path: "share",
         element: <Share />,
+        errorElement: <SingleError />,
+      },
+      {
+        path: "recipes/:id",
+        element: <SingleRecipe />,
         errorElement: <SingleError />,
       },
     ],

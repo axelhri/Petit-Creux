@@ -54,6 +54,24 @@
   z-index: 1;
 }
 
+.signout {
+  inline-size: 4rem;
+  font-size: 1.5rem;
+  background-color: rgba(255, 0, 0, 0.61);
+  border: none;
+  color: var(--clr-white);
+  transition: var(--transition-02);
+  cursor: pointer;
+}
+
+.signout:hover {
+  inline-size: 4rem;
+  font-size: 1.5rem;
+  background-color: rgb(255, 0, 0);
+  border: none;
+  color: var(--clr-white);
+}
+
 @media screen and (max-width: 1200px) {
   .navContainer {
     display: flex;
@@ -175,6 +193,14 @@
     border: 2px solid var(--clr-white);
   }
 
+  .signout {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-inline: auto;
+    inline-size: 100%;
+    font-size: 2.5rem;
+  }
+
   /* ============= NAVBAR EVENTS ============= */
 
   /* -------- active -------- */
@@ -199,7 +225,7 @@
 
 /* ============= DESKTOP RESPONSIVE ============= */
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1199px) {
   .navContainer {
     display: flex;
     justify-content: space-between;
@@ -305,4 +331,8 @@
   .linkContainer {
     inline-size: 64%;
   }
+}
+
+.noScroll {
+  overflow: hidden;
 }

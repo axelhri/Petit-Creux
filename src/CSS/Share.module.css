@@ -62,66 +62,104 @@
 }
 
 .backgroundHomeShare {
-  /* background-color: var(--clr-secondary-100); */
+  background: rgb(243, 243, 243);
 }
 
 #shareForm {
-  margin-block-start: 5rem;
-  /* border: 2px solid var(--clr-secondary-500); */
+  margin-block: 2.5rem;
   max-inline-size: 90vw;
   margin-inline: auto;
   padding: 1rem;
   border-radius: 10px;
-  /* background-color: var(--clr-white); */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   font-family: var(--ff-montserrat);
+  background: var(--clr-white);
+}
+
+#shareForm input::placeholder {
+  font-size: 1.1rem;
+  color: var(--clr-nuance-700);
+  font-weight: 500;
+  font-family: var(--ff-button);
+}
+
+#shareForm textarea::placeholder {
+  font-size: 1.1rem;
+  color: var(--clr-nuance-700);
+  font-family: var(--ff-button);
+  font-weight: 500;
 }
 
 .titleBox {
-  margin-inline: auto;
-  display: flex;
-  justify-content: center;
   margin-block-end: 1rem;
 }
 
 .shareTitle {
-  padding: 0.5rem;
+  padding: 0.2rem;
   font-size: 1.1rem;
-  border: 2px solid var(--clr-primary-500);
-  border-radius: 10px;
-  inline-size: 20rem;
-  text-align: center;
+  border: 2px solid var(--clr-nuance-700);
+  border-radius: 5px;
+  inline-size: 100%;
+  color: var(--clr-nuance-700);
 }
 
-.shareTitle::placeholder {
-  font-size: 1.1rem;
-  font-weight: 500;
+#shareForm h1 {
   text-align: center;
+  font-weight: 500;
+}
+
+.shareFormLine {
+  background-color: var(--clr-primary-500);
+  block-size: 5px;
+  inline-size: 20rem;
+  margin-block-end: 2rem;
+  margin-inline: auto;
+  border-radius: 50px;
 }
 
 .imgDescBox {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
-  margin-block-end: 1rem;
+  margin-block-end: 2rem;
 }
 
 .shareImg {
-  /* background-color: var(--clr-primary-500); */
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
-  border: 2px dashed rgba(0, 0, 0, 0.384);
-  aspect-ratio: 1/1;
-  display: grid;
-  place-items: center;
+  border-radius: 10px;
+  border: 2px dashed var(--clr-nuance-500);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   font-weight: 500;
+}
+
+.imageSelected {
+  border: none;
+}
+
+.shareImg p {
+  font-size: 1.2rem;
+  color: var(--clr-primary-500);
+}
+
+@keyframes cloudScale {
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .shareImg i {
   font-size: 5rem;
-  color: var(--clr-nuance-900);
+  color: var(--clr-primary-500);
+  animation: cloudScale 2s linear infinite;
 }
 
 .shareImg input {
@@ -132,25 +170,18 @@
   opacity: 0;
 }
 
-.shareDesc textarea {
-  block-size: 100%;
-  border: 2px solid var(--clr-primary-500);
-  border-radius: 10px;
-  aspect-ratio: 1/1;
-  padding: 0.2rem;
-}
-
-.shareDesc textarea::placeholder {
+.shareDesc {
+  inline-size: 100%;
   font-size: 1.1rem;
-  font-weight: 500;
+  color: var(--clr-nuance-700);
 }
 
-.cornerImg {
-  position: absolute;
-  inline-size: 15rem;
-  z-index: -1;
-  bottom: 0;
-  right: 0;
+.shareDesc textarea {
+  border: 2px solid var(--clr-nuance-700);
+  inline-size: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  padding: 0.2rem;
 }
 
 .eatersBox {
@@ -167,7 +198,7 @@
 
 .eatersControl {
   display: flex;
-  border: 2px solid var(--clr-primary-500);
+  border: 2px solid var(--clr-nuance-700);
   border-radius: 10px;
 }
 
@@ -175,7 +206,7 @@
   font-size: 1.1rem;
   inline-size: 2.5rem;
   text-align: center;
-  color: var(--clr-secondary-500);
+  color: var(--clr-primary-500);
   font-weight: 500;
   border: none;
 }
@@ -185,17 +216,28 @@
   font-size: 2rem;
   color: var(--clr-black);
   padding-inline: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-02);
+}
+
+.eatersBox button:hover {
+  background: var(--clr-primary-500);
+  color: var(--clr-white);
 }
 
 .eatersBtnLeft {
   border: none;
-  border-right: 2px solid var(--clr-primary-500);
+  border-right: 2px solid var(--clr-nuance-700);
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
 }
 
 .eatersBtnRight {
   border: none;
-  border-left: 2px solid var(--clr-primary-500);
+  border-left: 2px solid var(--clr-nuance-700);
   margin-inline-start: 0.2rem;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 
 .numberContainer {
@@ -222,7 +264,7 @@
 
 .ingredientsContainer {
   display: flex;
-  border: 2px solid var(--clr-primary-500);
+  border: 2px solid var(--clr-nuance-700);
   border-radius: 10px;
   margin-block: 1rem;
 }
@@ -240,11 +282,11 @@
 }
 
 .ingredientsContainer input[type="number"] {
-  inline-size: 5rem;
-  border-left: 2px solid var(--clr-primary-500);
-  border-right: 2px solid var(--clr-primary-500);
-  font-size: 1.1rem;
+  inline-size: 3rem;
+  border-left: 2px solid var(--clr-nuance-700);
+  border-right: 2px solid var(--clr-nuance-700);
   text-align: center;
+  color: var(--clr-primary-500);
 }
 
 .ingredientsContainer select {
@@ -252,6 +294,8 @@
   background: none;
   font-weight: 500;
   inline-size: 100%;
+  font-size: 1rem;
+  font-family: var(--ff-button);
 }
 
 .moreIngredients {
@@ -280,8 +324,92 @@
 
 .imagePreviewContainer {
   position: absolute;
+  width: 100%; /* Container will take full width of parent */
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .imagePreview {
-  max-inline-size: 100%;
+  max-width: 100%;
+  max-height: 100%; /* Ensures it never exceeds container size */
+  object-fit: contain;
+}
+
+@media screen and (min-width: 1200px) {
+  #shareForm {
+    max-inline-size: 60vw;
+    margin-block: 5rem;
+  }
+
+  .ingredientsContainer input[type="number"] {
+    inline-size: 6rem;
+  }
+
+  .imgDescBox {
+    margin-block-end: 2rem;
+    block-size: 20rem;
+  }
+
+  .shareImg input {
+    top: 10rem;
+    left: 50rem;
+    transform: scale(20);
+  }
+
+  .shareDesc textarea {
+    border: 2px solid var(--clr-nuance-700);
+    inline-size: 100%;
+    block-size: 50%;
+    border-radius: 5px;
+    padding: 0.2rem;
+  }
+
+  .shareImg {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px dashed var(--clr-nuance-500);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+    block-size: 63%;
+  }
+
+  .ingredientsName {
+    inline-size: 170%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .imgDescBox {
+    margin-block-end: 2rem;
+    block-size: 22rem;
+  }
+
+  .shareDesc textarea {
+    border: 2px solid var(--clr-nuance-700);
+    inline-size: 100%;
+    block-size: 50%;
+    border-radius: 5px;
+    padding: 0.2rem;
+  }
+
+  .shareImg {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px dashed var(--clr-nuance-500);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+    block-size: 59%;
+  }
 }
