@@ -80,3 +80,7 @@ a {
   text-decoration: none;
   color: var(--clr-white);
 }
+
+input {
+  outline: none;
+}

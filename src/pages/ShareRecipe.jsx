@@ -117,30 +117,33 @@ const CreateRecipeForm = () => {
   return (
     <main id={styles.mainShare}>
       <form onSubmit={handleSubmit} id={styles.shareForm}>
-        <h1>Partagez vos recettes !</h1>
-        <div className={styles.shareFormLine}></div>
-        <div className={styles.imgDescBox}>
-          <div
-            className={`${styles.shareImg} ${
-              imagePreview ? styles.imageSelected : ""
-            }`}
-          >
-            <i className="fa-solid fa-cloud-arrow-up"></i>
-            <p>Insérer une image</p>
-            {imagePreview && (
-              <div className={styles.imagePreviewContainer}>
-                <img
-                  src={imagePreview}
-                  alt="Prévisualisation de l'image"
-                  className={styles.imagePreview}
-                />
-              </div>
-            )}
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-          </div>
+        <h1>Partagez vos recettes</h1>
+        <div className={styles.formContainer}>
+          <div className={styles.shareFormTopContainer}>
+            <div
+              className={`${styles.postImgContainer} ${
+                imagePreview ? styles.noBorder : ""
+              }`}
+            >
+              <i className="fa-solid fa-cloud-arrow-up"></i>
+              <p>Insérer une image</p>
+              {imagePreview && (
+                <div className={styles.imagePreviewContainer}>
+                  <img
+                    src={imagePreview}
+                    alt="Prévisualisation de l'image"
+                    className={styles.imagePreview}
+                  />
+                </div>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </div>
 
-          <div className={styles.shareDesc}>
-            <div className={styles.titleBox}>
+            <div className={styles.titleDescContainer}>
               <input
                 type="text"
                 value={title}
@@ -148,115 +151,113 @@ const CreateRecipeForm = () => {
                 required
                 maxLength={50}
                 placeholder="Nom de recette"
-                className={styles.shareTitle}
+              />
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                placeholder="Description"
               />
             </div>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              placeholder="Description"
-            />
           </div>
-        </div>
 
-        <div className={styles.eatersBox}>
-          <div className={styles.eatersControl}>
-            <button
-              type="button"
-              onClick={() => setEaters(eaters > 1 ? eaters - 1 : 1)}
-              className={styles.eatersBtnLeft}
-            >
-              -
-            </button>
-            <div className={styles.numberContainer}>
-              <input
-                type="number"
-                value={eaters}
-                onChange={(e) => setEaters(Number(e.target.value))}
-                required
-                min={1}
-                className={styles.eatersInput}
-              />
-              <span className={styles.eatersText}>
-                {eaters > 1 ? "personnes" : "personne"}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setEaters(eaters + 1)}
-              className={styles.eatersBtnRight}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        <div className={styles.formIngredients}>
-          <label className={styles.ingredientsTitle}>Ingrédients :</label>{" "}
-          {ingredients.map((ingredient, index) => (
-            <div key={index} className={styles.ingredientsContainer}>
-              <input
-                type="text"
-                placeholder="Nom de l'ingrédient"
-                className={styles.ingredientsName}
-                value={ingredient.name}
-                onChange={(e) =>
-                  updateIngredient(index, "name", e.target.value)
-                }
-                required
-              />
-              <input
-                type="number"
-                value={ingredient.quantity}
-                onClick={(e) => {
-                  if (e.target.value === "0") {
-                    updateIngredient(index, "quantity", "");
-                  }
-                }}
-                onBlur={(e) => {
-                  if (e.target.value === "") {
-                    updateIngredient(index, "quantity", 0);
-                  }
-                }}
-                onChange={(e) =>
-                  updateIngredient(
-                    index,
-                    "quantity",
-                    parseFloat(e.target.value)
-                  )
-                }
-                required
-                min={0}
-                step="any"
-              />
-              <select
-                value={ingredient.unit}
-                onChange={(e) =>
-                  updateIngredient(index, "unit", e.target.value)
-                }
-                required
+          <div className={styles.eatersBox}>
+            <div className={styles.eatersControl}>
+              <button
+                onClick={() => setEaters(eaters > 1 ? eaters - 1 : 1)}
+                className={styles.eatersBtnLeft}
               >
-                {ingredientUnits.map((unit) => (
-                  <option key={unit} value={unit}>
-                    {unit}
-                  </option>
-                ))}
-              </select>
+                -
+              </button>
+              <div className={styles.numberContainer}>
+                <input
+                  type="number"
+                  value={eaters}
+                  onChange={(e) => setEaters(Number(e.target.value))}
+                  required
+                  min={1}
+                  className={styles.eatersInput}
+                />
+                <span className={styles.eatersText}>
+                  {eaters > 1 ? "personnes" : "personne"}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setEaters(eaters + 1)}
+                className={styles.eatersBtnRight}
+              >
+                +
+              </button>
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={addIngredient}
-            className={styles.moreIngredients}
-          >
-            Ajouter un ingrédient
+          </div>
+
+          <div className={styles.formIngredients}>
+            <label className={styles.ingredientsTitle}>Ingrédients :</label>{" "}
+            {ingredients.map((ingredient, index) => (
+              <div key={index} className={styles.ingredientsContainer}>
+                <input
+                  type="text"
+                  placeholder="Nom de l'ingrédient"
+                  className={styles.ingredientsName}
+                  value={ingredient.name}
+                  onChange={(e) =>
+                    updateIngredient(index, "name", e.target.value)
+                  }
+                  required
+                />
+                <input
+                  type="number"
+                  value={ingredient.quantity}
+                  onClick={(e) => {
+                    if (e.target.value === "0") {
+                      updateIngredient(index, "quantity", "");
+                    }
+                  }}
+                  onBlur={(e) => {
+                    if (e.target.value === "") {
+                      updateIngredient(index, "quantity", 0);
+                    }
+                  }}
+                  onChange={(e) =>
+                    updateIngredient(
+                      index,
+                      "quantity",
+                      parseFloat(e.target.value)
+                    )
+                  }
+                  required
+                  min={0}
+                  step="any"
+                />
+                <select
+                  value={ingredient.unit}
+                  onChange={(e) =>
+                    updateIngredient(index, "unit", e.target.value)
+                  }
+                  required
+                >
+                  {ingredientUnits.map((unit) => (
+                    <option key={unit} value={unit}>
+                      {unit}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addIngredient}
+              className={styles.moreIngredients}
+            >
+              Ajouter un ingrédient
+            </button>
+          </div>
+
+          <button type="submit" className={styles.shareSubmit}>
+            <i className="fa-regular fa-circle-check"></i>Créer la recette
           </button>
         </div>
-
-        <button type="submit" className={styles.shareSubmit}>
-          <i className="fa-regular fa-circle-check"></i>Créer la recette
-        </button>
       </form>
     </main>
   );

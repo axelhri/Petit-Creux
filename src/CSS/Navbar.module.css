@@ -72,7 +72,7 @@
   color: var(--clr-white);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1190px) {
   .navContainer {
     display: flex;
     align-items: center;
