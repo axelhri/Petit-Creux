@@ -110,8 +110,8 @@
 }
 
 .shareFormLine {
-  background-color: var(--clr-primary-500);
-  block-size: 5px;
+  background-color: var(--clr-black);
+  block-size: 2px;
   inline-size: 20rem;
   margin-block-end: 2rem;
   margin-inline: auto;
