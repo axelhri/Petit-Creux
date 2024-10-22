@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../CSS/Share.module.css";
@@ -13,6 +13,8 @@ const CreateRecipeForm = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
+
+  const ingredientsContainerRef = useRef(null);
 
   const ingredientUnits = [
     "grammes",
@@ -81,14 +83,20 @@ const CreateRecipeForm = () => {
     ]);
   };
 
+  const removeIngredient = (index) => {
+    if (ingredients.length > 1) {
+      const updatedIngredients = ingredients.filter((_, i) => i !== index);
+      setIngredients(updatedIngredients);
+    }
+  };
+
   const updateIngredient = (index, field, value) => {
     const updatedIngredients = [...ingredients];
 
     if (field === "quantity") {
-      // Check if the selected unit requires a whole number
       const currentUnit = updatedIngredients[index].unit;
       if (nonDecimalUnits.includes(currentUnit)) {
-        value = Math.floor(value); // Round down to the nearest whole number
+        value = Math.floor(value);
       }
     }
 
@@ -113,6 +121,13 @@ const CreateRecipeForm = () => {
       document.body.className = "";
     };
   }, []);
+
+  useEffect(() => {
+    if (ingredientsContainerRef.current) {
+      ingredientsContainerRef.current.scrollTop =
+        ingredientsContainerRef.current.scrollHeight;
+    }
+  }, [ingredients]);
 
   return (
     <main id={styles.mainShare}>
@@ -194,57 +209,79 @@ const CreateRecipeForm = () => {
 
           <div className={styles.formIngredients}>
             <label className={styles.ingredientsTitle}>Ingrédients :</label>{" "}
-            {ingredients.map((ingredient, index) => (
-              <div key={index} className={styles.ingredientsContainer}>
-                <input
-                  type="text"
-                  placeholder="Nom de l'ingrédient"
-                  className={styles.ingredientsName}
-                  value={ingredient.name}
-                  onChange={(e) =>
-                    updateIngredient(index, "name", e.target.value)
-                  }
-                  required
-                />
-                <input
-                  type="number"
-                  value={ingredient.quantity}
-                  onClick={(e) => {
-                    if (e.target.value === "0") {
-                      updateIngredient(index, "quantity", "");
-                    }
-                  }}
-                  onBlur={(e) => {
-                    if (e.target.value === "") {
-                      updateIngredient(index, "quantity", 0);
-                    }
-                  }}
-                  onChange={(e) =>
-                    updateIngredient(
-                      index,
-                      "quantity",
-                      parseFloat(e.target.value)
-                    )
-                  }
-                  required
-                  min={0}
-                  step="any"
-                />
-                <select
-                  value={ingredient.unit}
-                  onChange={(e) =>
-                    updateIngredient(index, "unit", e.target.value)
-                  }
-                  required
+            <div
+              className={styles.testf}
+              ref={ingredientsContainerRef}
+              style={{ overflowY: "hidden", height: "auto" }}
+            >
+              {ingredients.map((ingredient, index) => (
+                <div
+                  key={index}
+                  className={`${styles.ingredientsContainer} ${
+                    index === ingredients.length - 2 ? styles.highlight : ""
+                  }`}
                 >
-                  {ingredientUnits.map((unit) => (
-                    <option key={unit} value={unit}>
-                      {unit}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
+                  <input
+                    type="text"
+                    placeholder="Nom de l'ingrédient"
+                    className={styles.ingredientsName}
+                    value={ingredient.name}
+                    onChange={(e) =>
+                      updateIngredient(index, "name", e.target.value)
+                    }
+                    required
+                  />
+                  <input
+                    type="number"
+                    className={`${
+                      index === ingredients.length - 2 ? styles.highlight : ""
+                    }`}
+                    value={ingredient.quantity}
+                    onClick={(e) => {
+                      if (e.target.value === "0") {
+                        updateIngredient(index, "quantity", "");
+                      }
+                    }}
+                    onBlur={(e) => {
+                      if (e.target.value === "") {
+                        updateIngredient(index, "quantity", 0);
+                      }
+                    }}
+                    onChange={(e) =>
+                      updateIngredient(
+                        index,
+                        "quantity",
+                        parseFloat(e.target.value)
+                      )
+                    }
+                    required
+                    min={0}
+                    step="any"
+                  />
+                  <select
+                    value={ingredient.unit}
+                    onChange={(e) =>
+                      updateIngredient(index, "unit", e.target.value)
+                    }
+                    required
+                  >
+                    {ingredientUnits.map((unit) => (
+                      <option key={unit} value={unit}>
+                        {unit}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => removeIngredient(index)} // Appel de la fonction de suppression
+                    className={styles.removeIngredientBtn}
+                    disabled={ingredients.length <= 1} // Désactiver le bouton si un seul ingrédient
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              ))}
+            </div>
             <button
               type="button"
               onClick={addIngredient}
