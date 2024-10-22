@@ -75,8 +75,9 @@
 
 @media screen and (min-width: 1920px) {
   .backgroundHome {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0 -18rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
+      url(../images/pexels-anthonyshkraba-production-8902124.jpg) fixed
+        no-repeat 0 -18rem;
     background-size: cover;
   }
 }

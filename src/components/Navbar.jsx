@@ -12,6 +12,7 @@ function Navbar() {
   const [profileImage, setProfileImage] = useState(null); // State for storing profile image
   const [userId, setUserId] = useState(null); // State for user ID
   const navigate = useNavigate();
+  const location = useLocation(); // Hook to get the current route
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -83,13 +84,6 @@ function Navbar() {
       navigate("/login"); // Sinon, redirige vers la page de connexion
     }
   };
-
-  const logoBackgroundColor =
-    location.pathname === "/"
-      ? "var(--clr-primary-500)"
-      : location.pathname === "/share"
-      ? "orange"
-      : "var(--clr-secondary-500)";
 
   return (
     <nav id={styles.navbar}>
