@@ -57,25 +57,10 @@
   --transition-04: all 0.4s ease-in-out;
 }
 
-@media screen and (max-width: 500px) {
-  .backgroundHomeShare {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
-      url(../images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
-  }
-}
-
-@media screen and (min-width: 500px) {
-  .backgroundHomeShare {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -40rem -24rem;
-  }
-}
-
-/* share form */
-
 #mainShare {
   min-block-size: 95vh;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -100,15 +85,20 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   font-family: var(--ff-montserrat);
-  background: rgb(255, 247, 237);
-}
-
-input {
   background: var(--clr-white);
 }
 
-textarea {
+#shareForm input {
   background: var(--clr-white);
+  font-family: var(--ff-montserrat);
+  font-weight: 500;
+}
+
+#shareForm textarea {
+  background: var(--clr-white);
+  font-size: 1rem;
+  font-family: var(--ff-montserrat);
+  font-weight: 500;
 }
 
 #shareForm button {
@@ -144,8 +134,7 @@ textarea {
   border-top-right-radius: 10px;
   font-family: var(--ff-button);
   letter-spacing: 0.07rem;
-  /* box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3) inset; */
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .shareFormTopContainer {
@@ -167,7 +156,8 @@ textarea {
   margin-block-end: 0.5rem;
   padding: 0.3rem;
   border-radius: 5px;
-  border: 1px solid var(--clr-black);
+  border: 2px solid var(--clr-black);
+  font-size: 1rem;
 }
 
 .titleDescContainer textarea {
@@ -175,13 +165,13 @@ textarea {
   padding: 0.3rem;
   block-size: 100%;
   border-radius: 5px;
-  border: 1px solid var(--clr-black);
+  border: 2px solid var(--clr-black);
   outline: none;
 }
 
 @keyframes cloudScale {
   50% {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
@@ -190,8 +180,9 @@ textarea {
 
 .postImgContainer i {
   font-size: 5rem;
-  color: var(--clr-secondary-400);
+  color: var(--clr-nuance-900);
   animation: cloudScale 2s linear infinite;
+  transition: var(--transition-02);
 }
 
 .postImgContainer {
@@ -206,6 +197,14 @@ textarea {
   overflow: hidden;
   padding: 1rem;
   border-radius: 10px;
+  color: var(--clr-nuance-950);
+  font-weight: 500;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.postImgContainer:hover i {
+  color: var(--clr-secondary-500);
 }
 
 .noBorder {
@@ -218,12 +217,6 @@ textarea {
   left: 30rem;
   transform: scale(20);
   opacity: 0;
-}
-
-.postImgContainer {
-  font-size: 1.2rem;
-  color: var(--clr-secondary-400);
-  font-weight: 500;
 }
 
 .eatersBox {
@@ -259,6 +252,12 @@ textarea {
   font-size: 2rem;
   color: var(--clr-black);
   padding-inline: 0.5rem;
+}
+
+.eatersBox button:hover {
+  background: var(--clr-secondary-500);
+
+  color: var(--clr-white);
 }
 
 .eatersBtnLeft {
@@ -318,12 +317,6 @@ textarea {
   border: 2px solid var(--clr-nuance-700);
   border-radius: 10px;
   margin-block: 1rem;
-  position: relative;
-}
-
-.testf {
-  overflow-y: scroll;
-  max-block-size: 8rem;
 }
 
 .ingredientsContainer input {
@@ -331,15 +324,6 @@ textarea {
   font-size: 1rem;
   padding: 0.5rem;
   font-weight: 500;
-}
-
-.ingredientsContainer.highlight {
-  border: 2px solid rgb(0, 230, 0);
-}
-
-.ingredientsContainer input[type="number"].highlight {
-  border-right: 2px solid rgb(0, 230, 0);
-  border-left: 2px solid rgb(0, 230, 0);
 }
 
 .ingredientsName {
@@ -360,14 +344,14 @@ textarea {
   border: none;
   background: none;
   font-weight: 500;
-  inline-size: 80%;
+  inline-size: 100%;
   font-size: 1rem;
   font-family: var(--ff-button);
   background: var(--clr-white);
 }
 
 .moreIngredients {
-  background: var(--clr-secondary-400);
+  background: var(--clr-secondary-500);
   border: none;
   border-radius: 10px;
   padding: 0.5rem 1rem;
@@ -375,7 +359,11 @@ textarea {
   color: var(--clr-white);
   font-size: 1rem;
   font-family: var(--ff-button);
-  display: block;
+  transition: var(--transition-02);
+}
+
+.moreIngredients:hover {
+  background: var(--clr-secondary-700);
 }
 
 .removeIngredientBtn {
@@ -384,7 +372,12 @@ textarea {
   border-bottom-right-radius: 7px;
   border: none;
   border-left: 2px solid var(--clr-nuance-900);
-  padding: 0.5rem;
+  font-size: 1rem;
+  padding: 0.3rem;
+}
+
+.removeIngredientBtn:hover {
+  background: rgb(179, 21, 21);
 }
 
 .removeIngredientBtn i {
@@ -408,7 +401,7 @@ textarea {
 }
 
 .shareSubmit {
-  background: var(--clr-secondary-950);
+  background: var(--clr-nuance-950);
   border: none;
   border-radius: 10px;
   padding: 0.5rem 1rem;
@@ -420,7 +413,7 @@ textarea {
   align-items: center;
 }
 
-.shareSubmit i {
+.shareSubmit:hover i {
   color: rgb(22, 236, 22);
 }
 
@@ -432,6 +425,10 @@ textarea {
   max-width: 100%;
   max-height: 100%;
   border-radius: 5px;
+}
+
+.shareCarousel {
+  display: none;
 }
 
 @media screen and (min-width: 800px) {
@@ -450,12 +447,25 @@ textarea {
   }
 
   .backgroundHomeShare {
-    /* background: rgb(61, 27, 13); */
     background: linear-gradient(
-      0deg,
-      rgba(61, 27, 13, 1) 0%,
-      rgb(156, 97, 41) 100%
+      45deg,
+      var(--clr-nuance-950),
+      var(--clr-nuance-800)
     );
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+  }
+
+  @keyframes color {
+    0% {
+      background-position: 0 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0 50%;
+    }
   }
 
   .titleDescContainer input {
@@ -511,29 +521,30 @@ textarea {
     position: absolute;
     background-image: conic-gradient(
       from var(--angle),
-      var(--clr-secondary-800),
-      var(--clr-secondary-600),
       var(--clr-secondary-500),
       var(--clr-secondary-950),
+      var(--clr-secondary-600),
+      var(--clr-secondary-500),
       var(--clr-secondary-900),
       var(--clr-secondary-400)
     );
-    inline-size: 98.5%;
+    inline-size: 99%;
     block-size: 99%;
     border-radius: 15px;
-    animation: 15s spin linear infinite;
+    animation: 8s spin linear infinite;
   }
 
   .shareCarousel::before {
-    filter: blur(1.5rem);
     opacity: 0.5;
   }
 
   @keyframes spin {
     from {
+      filter: blur(0.3rem);
       --angle: 0deg;
     }
     to {
+      filter: blur(0rem);
       --angle: 360deg;
     }
   }
@@ -543,13 +554,13 @@ textarea {
       filter: blur(0rem);
     }
     to {
-      filter: blur(0.5rem);
+      filter: blur(0.3rem);
     }
   }
 
   @keyframes removeBlur {
     from {
-      filter: blur(0.5rem);
+      filter: blur(0.3rem);
     }
     to {
       filter: blur(0rem);
@@ -561,7 +572,7 @@ textarea {
   }
 
   .carouselImage.show {
-    animation: removeBlur 0.7s linear;
+    animation: removeBlur 1s linear;
   }
 
   .shareCarousel h1 {
@@ -583,10 +594,20 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(27, 27, 27);
+    background: linear-gradient(
+      -45deg,
+      var(--clr-nuance-500),
+      var(--clr-nuance-950)
+    );
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     border-radius: 10px;
     gap: 0.5rem;
+  }
+
+  .ingredientsName {
+    inline-size: 150%;
   }
 }
 
