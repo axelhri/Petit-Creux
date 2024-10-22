@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext"; // Import du contexte
@@ -12,6 +12,7 @@ function Navbar() {
   const [profileImage, setProfileImage] = useState(null); // State for storing profile image
   const [userId, setUserId] = useState(null); // State for user ID
   const navigate = useNavigate();
+  const location = useLocation(); // Hook to get the current route
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -84,6 +85,14 @@ function Navbar() {
     }
   };
 
+  // Determine the background color of the logo based on the current page
+  const logoBackgroundColor =
+    location.pathname === "/"
+      ? "var(--clr-primary-500)"
+      : location.pathname === "/share"
+      ? "orange"
+      : "var(--clr-secondary-500)";
+
   return (
     <nav id={styles.navbar}>
       <div
@@ -95,9 +104,10 @@ function Navbar() {
           <img
             src={logo}
             alt="logo"
-            className={`${styles.logo} ${
-              isOpen ? styles.active : styles.notActive
-            }`}
+            className={`${styles.logo} 
+             
+             ${isOpen ? styles.active : styles.notActive}`}
+            style={{ backgroundColor: logoBackgroundColor }} // Dynamically set background color
           />
           <a
             href="/"

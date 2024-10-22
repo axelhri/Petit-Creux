@@ -64,9 +64,18 @@
   justify-content: center;
 }
 
-.backgroundHomeShare {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-    url(../images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
+@media screen and (max-width: 500px) {
+  .backgroundHomeShare {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
+      url(../images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .backgroundHomeShare {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
+      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -40rem -24rem;
+  }
 }
 
 #shareForm {
@@ -76,15 +85,15 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   font-family: var(--ff-montserrat);
-  background: rgb(255, 247, 237);
+  background: var(--clr-white);
 }
 
 input {
-  background: rgb(255, 247, 237);
+  background: var(--clr-white);
 }
 
 textarea {
-  background: rgb(255, 247, 237);
+  background: var(--clr-white);
 }
 
 #shareForm button {
@@ -110,7 +119,7 @@ textarea {
   font-weight: 500;
 }
 
-#shareForm h1 {
+#shareForm h2 {
   text-align: center;
   font-weight: 500;
   background: var(--clr-secondary-500);
@@ -120,8 +129,7 @@ textarea {
   border-top-right-radius: 10px;
   font-family: var(--ff-button);
   letter-spacing: 0.07rem;
-  /* box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3) inset; */
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .shareFormTopContainer {
@@ -206,6 +214,7 @@ textarea {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-content: space-between;
 }
 
 .eatersBox label {
@@ -263,8 +272,23 @@ textarea {
   font-weight: 500;
 }
 
+.categoriesSelect {
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 2px solid var(--clr-nuance-700);
+  font-family: var(--ff-button);
+  padding: 0.4rem;
+}
+
 .formIngredients {
   margin-block-start: 1rem;
+  block-size: 13rem;
+}
+
+.ingredientScroll {
+  block-size: 8rem;
+  overflow: scroll;
+  position: relative;
 }
 
 .ingredientsTitle {
@@ -294,7 +318,6 @@ textarea {
 }
 
 .ingredientsContainer input[type="number"] {
-  /* inline-size: 3rem; */
   border-left: 2px solid var(--clr-nuance-700);
   border-right: 2px solid var(--clr-nuance-700);
   text-align: center;
@@ -309,6 +332,7 @@ textarea {
   inline-size: 100%;
   font-size: 1rem;
   font-family: var(--ff-button);
+  background: var(--clr-white);
 }
 
 .moreIngredients {
@@ -320,6 +344,35 @@ textarea {
   color: var(--clr-white);
   font-size: 1rem;
   font-family: var(--ff-button);
+}
+
+.removeIngredientBtn {
+  background: rgb(255, 30, 30);
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border: none;
+  border-left: 2px solid var(--clr-nuance-900);
+  padding: 0.5rem;
+}
+
+.removeIngredientBtn i {
+  color: var(--clr-white);
+}
+
+.scrollVisible {
+  overflow-y: auto;
+}
+
+.ingredientScroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ingredientScroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.ingredientScroll::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
 .shareSubmit {
@@ -349,9 +402,13 @@ textarea {
   border-radius: 5px;
 }
 
+.shareCarousel {
+  display: none;
+}
+
 @media screen and (min-width: 800px) {
   #shareForm {
-    max-inline-size: 70%;
+    max-inline-size: 90%;
   }
 
   .postImgContainer {
@@ -361,12 +418,154 @@ textarea {
 
 @media screen and (min-width: 1200px) {
   #shareForm {
-    max-inline-size: 50%;
+    max-inline-size: 100%;
+  }
+
+  .backgroundHomeShare {
+    /* background: rgb(61, 27, 13); */
+    background: linear-gradient(
+      0deg,
+      rgba(61, 27, 13, 1) 0%,
+      rgb(156, 97, 41) 100%
+    );
+  }
+
+  .titleDescContainer input {
+    background: var(--clr-white);
+  }
+
+  .titleDescContainer textarea {
+    background: var(--clr-white);
+  }
+
+  .ingredientsContainer input {
+    background: var(--clr-white);
+  }
+
+  .eatersBox input {
+    background: var(--clr-white);
+  }
+
+  .eatersBox {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .shareCarousel {
+    display: block;
+    border-radius: 10px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+  }
+
+  .shareCarousel img {
+    max-block-size: 40rem;
+    border-radius: 10px;
+    z-index: 10;
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .shareCarousel::after,
+  .shareCarousel::before {
+    --angle: 0deg;
+    content: "";
+    display: block;
+    position: absolute;
+    background-image: conic-gradient(
+      from var(--angle),
+      var(--clr-secondary-800),
+      var(--clr-secondary-600),
+      var(--clr-secondary-500),
+      var(--clr-secondary-950),
+      var(--clr-secondary-900),
+      var(--clr-secondary-400)
+    );
+    inline-size: 98.5%;
+    block-size: 99%;
+    border-radius: 15px;
+    animation: 15s spin linear infinite;
+  }
+
+  .shareCarousel::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+
+  @keyframes spin {
+    from {
+      --angle: 0deg;
+    }
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  @keyframes addBlur {
+    from {
+      filter: blur(0rem);
+    }
+    to {
+      filter: blur(0.5rem);
+    }
+  }
+
+  @keyframes removeBlur {
+    from {
+      filter: blur(0.5rem);
+    }
+    to {
+      filter: blur(0rem);
+    }
+  }
+
+  .carouselImage {
+    animation: addBlur 0.5s linear;
+  }
+
+  .carouselImage.show {
+    animation: removeBlur 0.7s linear;
+  }
+
+  .shareCarousel h1 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    font-size: 2rem;
+    color: var(--clr-white);
+    text-align: center;
+    text-shadow: #00000079 0 10px 10px;
+    letter-spacing: 0.07rem;
+    inline-size: 90%;
+    line-height: 1.5;
+  }
+
+  .shareSectionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(27, 27, 27);
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border-radius: 10px;
+    gap: 0.5rem;
   }
 }
 
 @media screen and (min-width: 1600px) {
-  #shareForm {
-    max-inline-size: 40%;
+  .ingredientScroll {
+    block-size: 8.5rem;
+    overflow: scroll;
+    position: relative;
   }
 }
