@@ -73,17 +73,21 @@
 #singleRecipeMain {
   max-inline-size: 90vw;
   margin-inline: auto;
-  min-block-size: 92vh;
+  min-block-size: 95vh;
 }
 
 .singleRecipeTopSection {
-  margin-block-start: 1.5rem;
 }
 
 .userCategoryBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-block-start: 1.5rem;
+  background: var(--clr-third-600);
+  border-radius: 20px;
+  padding-inline: 1rem;
+  padding-block-end: 1rem;
 }
 
 .userImgBox {
@@ -95,12 +99,17 @@
 .userCategoryBox p {
   font-family: var(--ff-button);
   font-size: 1.3rem;
+  color: white;
 }
 
 .userImgBox img {
-  width: 70px;
+  width: 50px;
   border-radius: 50%;
-  border: 2px solid var(--clr-third-950);
+  border: 1px solid var(--clr-nuance-100);
+}
+
+.imgDateBox {
+  position: relative;
 }
 
 .imgDateBox img {
@@ -110,6 +119,19 @@
   max-inline-size: 100%;
   object-fit: cover;
   border-radius: 5px;
+}
+
+.imgDateBox::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: var(--clr-third-500);
+  inline-size: 25%;
+  block-size: 25%;
+  top: -1.2rem;
+  left: -1.2rem;
+  z-index: -1;
+  border-radius: 50%;
 }
 
 .imgDescBox {
@@ -143,6 +165,8 @@ span {
   margin-block-start: 0.5rem;
   font-size: 0.9rem;
   line-height: 1.5;
+  border-left: 2px solid black;
+  padding-inline-start: 0.5rem;
 }
 
 .singleRecipeIng {

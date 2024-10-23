@@ -92,7 +92,7 @@ function SingleRecipe() {
               ) : (
                 <p>Utilisateur introuvable</p>
               )}
-              <p>catégorie : {recipeData.recipe.categories}</p>
+              <p>Catégorie : {recipeData.recipe.categories}</p>
             </div>
             <div className={styles.imgDescBox}>
               <div className={styles.imgDateBox}>
