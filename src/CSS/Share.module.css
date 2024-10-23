@@ -59,33 +59,24 @@
 
 #mainShare {
   min-block-size: 95vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-@media screen and (max-width: 500px) {
-  .backgroundHomeShare {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
-  }
+.backgroundHomeShare {
+  background: white;
 }
 
-@media screen and (min-width: 500px) {
-  .backgroundHomeShare {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -40rem -24rem;
-  }
+.shareSectionContainer {
+  margin-block-start: 2rem;
 }
 
 #shareForm {
   max-inline-size: 90%;
   margin-inline: auto;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   font-family: var(--ff-montserrat);
   background: var(--clr-white);
+  overflow: hidden;
 }
 
 #shareForm input {
@@ -113,7 +104,7 @@
 #shareForm input::placeholder {
   font-size: 1.1rem;
   color: var(--clr-nuance-700);
-  font-weight: 500;
+  font-weight: 400;
   font-family: var(--ff-button);
 }
 
@@ -121,20 +112,20 @@
   font-size: 1.1rem;
   color: var(--clr-nuance-700);
   font-family: var(--ff-button);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 #shareForm h2 {
   text-align: center;
   font-weight: 500;
-  background: var(--clr-secondary-500);
-  color: var(--clr-white);
+  color: var(--clr-nuance-950);
   padding: 0.5rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: var(--ff-button);
   letter-spacing: 0.07rem;
   font-size: 1.8rem;
+  text-decoration: underline;
 }
 
 .shareFormTopContainer {
@@ -155,8 +146,8 @@
   inline-size: 100%;
   margin-block-end: 0.5rem;
   padding: 0.3rem;
+  border: 1px solid var(--clr-nuance-950);
   border-radius: 5px;
-  border: 2px solid var(--clr-black);
   font-size: 1rem;
 }
 
@@ -165,24 +156,17 @@
   padding: 0.3rem;
   block-size: 100%;
   border-radius: 5px;
-  border: 2px solid var(--clr-black);
+  border: 1px solid var(--clr-black);
   outline: none;
 }
 
 @keyframes cloudScale {
-  50% {
-    transform: scale(1.1);
+  30% {
+    opacity: 0.7;
   }
   100% {
-    transform: scale(1);
+    opacity: 1;
   }
-}
-
-.postImgContainer i {
-  font-size: 5rem;
-  color: var(--clr-nuance-900);
-  animation: cloudScale 2s linear infinite;
-  transition: var(--transition-02);
 }
 
 .postImgContainer {
@@ -193,18 +177,31 @@
   justify-content: space-around;
   align-items: center;
   block-size: 10rem;
-  border: 2px dashed var(--clr-nuance-800);
+  border: 1px dashed var(--clr-nuance-800);
   overflow: hidden;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 5px;
   color: var(--clr-nuance-950);
   font-weight: 500;
   font-size: 1.2rem;
   cursor: pointer;
 }
 
+.postImgContainer i {
+  font-size: 5rem;
+  color: var(--clr-nuance-950);
+  animation: cloudScale 1s linear infinite;
+  transition: var(--transition-02);
+}
+
 .postImgContainer:hover i {
   color: var(--clr-secondary-500);
+  transform: translateY(-10%);
+}
+
+.postImgContainer p {
+  text-align: center;
+  font-family: var(--ff-button);
 }
 
 .noBorder {
@@ -256,7 +253,6 @@
 
 .eatersBox button:hover {
   background: var(--clr-secondary-500);
-
   color: var(--clr-white);
 }
 
@@ -292,16 +288,18 @@
   border: none;
   border-bottom: 2px solid var(--clr-nuance-700);
   font-family: var(--ff-button);
+  outline: none;
   padding: 0.4rem;
 }
 
 .formIngredients {
   margin-block-start: 1rem;
+  margin-block-end: 4rem;
   block-size: 13rem;
 }
 
 .ingredientScroll {
-  block-size: 8rem;
+  block-size: 12rem;
   overflow: scroll;
   position: relative;
 }
@@ -314,13 +312,15 @@
 
 .ingredientsContainer {
   display: flex;
-  border: 2px solid var(--clr-nuance-700);
+  /* border: 2px solid var(--clr-nuance-700); */
   border-radius: 10px;
   margin-block: 1rem;
 }
 
 .ingredientsContainer input {
   border: none;
+  border-bottom: 2px solid var(--clr-nuance-700);
+  border-radius: 0;
   font-size: 1rem;
   padding: 0.5rem;
   font-weight: 500;
@@ -333,8 +333,9 @@
 }
 
 .ingredientsContainer input[type="number"] {
-  border-left: 2px solid var(--clr-nuance-700);
-  border-right: 2px solid var(--clr-nuance-700);
+  /* border-left: 2px solid var(--clr-nuance-700);
+  border-right: 2px solid var(--clr-nuance-700); */
+  border: none;
   text-align: center;
   inline-size: 25%;
   color: var(--clr-secondary-800);
@@ -342,9 +343,10 @@
 
 .ingredientsContainer select {
   border: none;
+  outline: none;
   background: none;
   font-weight: 500;
-  inline-size: 100%;
+  inline-size: 90%;
   font-size: 1rem;
   font-family: var(--ff-button);
   background: var(--clr-white);
@@ -371,7 +373,7 @@
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   border: none;
-  border-left: 2px solid var(--clr-nuance-900);
+  /* border-left: 2px solid var(--clr-nuance-900); */
   font-size: 1rem;
   padding: 0.3rem;
 }
@@ -431,6 +433,12 @@
   display: none;
 }
 
+.formCircle,
+.formCircle2,
+.formCircle3 {
+  display: none;
+}
+
 @media screen and (min-width: 800px) {
   #shareForm {
     max-inline-size: 90%;
@@ -439,11 +447,25 @@
   .postImgContainer {
     block-size: 15rem;
   }
+
+  .postImgContainer p {
+    max-inline-size: 70%;
+  }
 }
 
 @media screen and (min-width: 1200px) {
+  #mainShare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   #shareForm {
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
     max-inline-size: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 
   .backgroundHomeShare {
@@ -484,11 +506,30 @@
     background: var(--clr-white);
   }
 
+  #shareForm h2 {
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    background: var(--clr-secondary-500);
+    color: var(--clr-white);
+  }
+
   .eatersBox {
     display: flex;
     gap: 3rem;
     align-items: center;
     justify-content: flex-start;
+  }
+
+  .formIngredients {
+    margin-block-start: 1rem;
+    block-size: 13rem;
+    margin-block-end: 0rem;
+  }
+
+  .ingredientScroll {
+    block-size: 8rem;
+    overflow: scroll;
+    position: relative;
   }
 
   .shareCarousel {
@@ -544,7 +585,7 @@
       --angle: 0deg;
     }
     to {
-      filter: blur(0rem);
+      filter: blur(0.3rem);
       --angle: 360deg;
     }
   }
@@ -608,6 +649,47 @@
 
   .ingredientsName {
     inline-size: 150%;
+  }
+
+  .formImg {
+    position: absolute;
+    z-index: 50;
+    bottom: 0;
+    block-size: 8rem;
+    right: 2rem;
+  }
+
+  .formCircle {
+    display: block;
+    block-size: 10rem;
+    aspect-ratio: 1/1;
+    background: var(--clr-secondary-600);
+    border-radius: 50%;
+    position: absolute;
+    bottom: -4rem;
+    right: -4rem;
+  }
+
+  .formCircle2 {
+    display: block;
+    block-size: 1.5rem;
+    aspect-ratio: 1/1;
+    background: var(--clr-secondary-500);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 2rem;
+    right: 7rem;
+  }
+
+  .formCircle3 {
+    display: block;
+    block-size: 1rem;
+    aspect-ratio: 1/1;
+    background: var(--clr-secondary-800);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5rem;
+    right: 10rem;
   }
 }
 

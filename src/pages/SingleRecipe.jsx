@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import styles from "../CSS/SingleRecipe.module.css";
 
 const singleRecipesUrl = "http://localhost:5000/api/v1/recipes/";
 const userUrl = "http://localhost:5000/api/v1/auth/";
@@ -75,55 +76,79 @@ function SingleRecipe() {
   };
 
   return (
-    <main>
+    <>
       {recipeData ? (
-        <>
-          <div>
-            {userData ? (
-              <div>
-                <img
-                  src={userData.user.imageUrl}
-                  alt={`${recipeData.recipe.createdBy.name}'s profile`}
-                  style={{ width: "50px", borderRadius: "50%" }} // Adjust size and make it circular
-                />
-                <p>{userData.user.name}</p>
+        <main id={styles.singleRecipeMain}>
+          <section className={styles.singleRecipeTopSection}>
+            <div className={styles.userCategoryBox}>
+              {userData ? (
+                <div className={styles.userImgBox}>
+                  <img
+                    src={userData.user.imageUrl}
+                    alt={`${recipeData.recipe.createdBy.name}'s profile`}
+                  />
+                  <p>{userData.user.name}</p>
+                </div>
+              ) : (
+                <p>Utilisateur introuvable</p>
+              )}
+              <p>catégorie : {recipeData.recipe.categories}</p>
+            </div>
+            <div className={styles.imgDescBox}>
+              <div className={styles.imgDateBox}>
+                {recipeData.recipe.imageUrl && (
+                  <img
+                    src={recipeData.recipe.imageUrl}
+                    alt={recipeData.recipe.title}
+                  />
+                )}
+                <div className={styles.createdAtRecipe}>
+                  <p>créer le</p>{" "}
+                  <span>
+                    {new Date(recipeData.recipe.createdAt).toLocaleDateString(
+                      "fr-FR"
+                    )}
+                  </span>
+                </div>
               </div>
+              <div className={styles.titleDescBox}>
+                <h1>{recipeData.recipe.title}</h1>
+                <p>{recipeData.recipe.description}</p>
+              </div>
+            </div>
+          </section>
+          <div className={styles.singleRecipeIng}>
+            <p>
+              <i className="fa-solid fa-plate-wheat"></i> ingredients
+            </p>
+            <div className={styles.sectionLine}></div>
+          </div>
+          <section className={styles.singleRecipeBottomSection}>
+            <div className={styles.eatersBox}>
+              <button onClick={handleDecreaseEaters}>-</button>
+              <div className={styles.persNumber}>
+                <p>{eaters}</p> <span>personne</span>
+              </div>
+              <button onClick={handleIncreaseEaters}>+</button>
+            </div>
+            {adjustedIngredients.length > 0 ? (
+              <ul className={styles.ingredientList}>
+                {adjustedIngredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {formatQuantity(ingredient.quantity)} {ingredient.unit}{" "}
+                    {ingredient.name}
+                  </li>
+                ))}
+              </ul>
             ) : (
-              <p>Utilisateur introuvable</p>
+              <p>Aucun ingrédient trouvé.</p>
             )}
-            <span>{recipeData.recipe.createdBy.name}</span>
-          </div>
-          <h1>{recipeData.recipe.title}</h1>
-          {recipeData.recipe.imageUrl && (
-            <img
-              src={recipeData.recipe.imageUrl}
-              alt={recipeData.recipe.title}
-            />
-          )}
-          <p>{recipeData.recipe.description}</p>
-          <div>
-            <p>Nombre de mangeurs : {eaters}</p>
-            <button onClick={handleDecreaseEaters}>-</button>
-            <button onClick={handleIncreaseEaters}>+</button>
-          </div>
-          <h2>Ingrédients :</h2>
-          {adjustedIngredients.length > 0 ? (
-            <ul>
-              {adjustedIngredients.map((ingredient, index) => (
-                <li key={index}>
-                  {formatQuantity(ingredient.quantity)} {ingredient.unit}{" "}
-                  {ingredient.name}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Aucun ingrédient trouvé.</p>
-          )}
-        </>
+          </section>
+        </main>
       ) : (
         <p>Recette introuvable.</p>
       )}
-    </main>
+    </>
   );
 }
 

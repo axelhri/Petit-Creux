@@ -25,6 +25,8 @@ const Login = () => {
       // Récupérer le token et l'ID de l'utilisateur
       const { token, user } = res.data;
 
+      console.log(token);
+
       // Stocker le token et l'ID utilisateur dans le localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("userId", user.userId); // Stocker l'ID de l'utilisateur

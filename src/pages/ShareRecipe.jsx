@@ -5,6 +5,7 @@ import styles from "../CSS/Share.module.css";
 import Carousel1 from "../images/shareImg.jpg";
 import Carousel2 from "../images/shareImg2.jpg";
 import Carousel3 from "../images/shareImg3.jpg";
+import formImg from "../images/cutting-board-575367_1280.png";
 
 const CreateRecipeForm = () => {
   const [title, setTitle] = useState("");
@@ -89,9 +90,11 @@ const CreateRecipeForm = () => {
           },
         }
       );
+      const recipeId = response.data.recipe._id;
 
       alert("Recette créée avec succès !");
-      navigate("/recipes");
+      // Rediriger vers la page de la recette avec l'ID
+      navigate(`/recipes/${recipeId}`);
     } catch (error) {
       console.error("Erreur lors de la création de la recette :", error);
       alert("Erreur lors de la création de la recette. Veuillez réessayer.");
@@ -174,8 +177,8 @@ const CreateRecipeForm = () => {
                     imagePreview ? styles.noBorder : ""
                   }`}
                 >
-                  <i className="fa-solid fa-cloud-arrow-up"></i>
-                  <p>Insérer une image</p>
+                  <i className="fa-solid fa-file-arrow-up"></i>
+                  <p>Insérer une image (Max 5mb)</p>
                   {imagePreview && (
                     <div className={styles.imagePreviewContainer}>
                       <img
@@ -341,6 +344,9 @@ const CreateRecipeForm = () => {
                 <i className="fa-regular fa-circle-check"></i>Créer la recette
               </button>
             </div>
+            <div className={styles.formCircle}></div>
+            <div className={styles.formCircle2}></div>
+            <div className={styles.formCircle3}></div>
           </form>
         </section>
       </div>
