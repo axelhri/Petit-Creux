@@ -4,14 +4,17 @@ import axios from "axios";
 import styles from "../CSS/Profile.module.css"; // Assurez-vous de créer un fichier CSS spécifique pour cette page
 import test from "../images/pexels-marceloverfe-16743489.jpg";
 
+const recipesUrl = "http://localhost:5000/api/v1/recipes/"; // URL de l'API des recettes
+
 function Profile() {
   const { isAuthenticated } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
+  const [userRecipes, setUserRecipes] = useState([]); // Pour stocker les recettes de l'utilisateur
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Récupérer l'ID de l'utilisateur depuis le token
-  const fetchUserProfile = async () => {
+  const fetchUserProfileAndRecipes = async () => {
     try {
       const token = localStorage.getItem("token");
       if (token) {
@@ -28,17 +31,30 @@ function Profile() {
           }
         );
         setUserData(response.data.user);
+
+        // Récupérer les recettes de l'utilisateur
+        const recipesResponse = await axios.get(
+          `${recipesUrl}?createdBy=${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUserRecipes(recipesResponse.data.recipes); // Assurez-vous que le backend retourne les recettes sous `recipes`
         setLoading(false);
       }
     } catch (error) {
-      setError("Erreur lors de la récupération des informations utilisateur");
+      setError(
+        "Erreur lors de la récupération des informations utilisateur ou des recettes."
+      );
       setLoading(false);
     }
   };
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchUserProfile();
+      fetchUserProfileAndRecipes();
     }
   }, [isAuthenticated]);
 
@@ -58,7 +74,7 @@ function Profile() {
     <main id={styles.profileMain}>
       <section className={styles.profileTopSection}>
         <div className={styles.settings}>
-          <i class="fa-solid fa-gear"></i>
+          <i className="fa-solid fa-gear"></i>
         </div>
         <div className={styles.profileDesc}>
           <img
@@ -70,21 +86,36 @@ function Profile() {
         </div>
       </section>
       <h2 className={styles.sharedRecipesTitle}>
-        Recettes partagé par {userData.name} :
+        Recettes partagées par {userData.name} :
       </h2>
       <section className={styles.profileBottomSection}>
-        <article>
-          <a href="">
-            <img src={test} alt="" />
-            <div className={styles.articleDesc}>
-              <span className={styles.articleRecipeName}>
-                Paella a l'ancienne
-              </span>
-              <div className={styles.articleDate}>Date de création :</div>
-              <button className={styles.articleBtn}>Voir plus</button>
-            </div>
-          </a>
-        </article>
+        {userRecipes.length > 0 ? (
+          userRecipes.map((recipe) => (
+            <article key={recipe._id}>
+              <a href={`/recipes/${recipe._id}`}>
+                <div className={styles.articleImgContainer}>
+                  <img src={recipe.imageUrl || test} alt={recipe.title} />
+                </div>
+                <div className={styles.articleDesc}>
+                  <span className={styles.articleRecipeName}>
+                    {recipe.title}
+                  </span>
+                  <div className={styles.recipeDesc}>
+                    <p>{recipe.description}</p>
+                  </div>
+                  <div className={styles.articleDate}>
+                    {new Date(recipe.createdAt).toLocaleDateString("fr-FR")}
+                  </div>
+                  <div className={styles.articleBtnContainer}>
+                    <button className={styles.articleBtn}>Voir plus</button>
+                  </div>
+                </div>
+              </a>
+            </article>
+          ))
+        ) : (
+          <p>Aucune recette trouvée.</p>
+        )}
       </section>
     </main>
   );

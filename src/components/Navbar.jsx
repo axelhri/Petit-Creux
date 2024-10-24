@@ -92,7 +92,6 @@ function Navbar() {
       : location.pathname === "/share"
       ? "orange"
       : "var(--clr-secondary-500)";
-
   return (
     <nav id={styles.navbar}>
       <div

@@ -209,6 +209,7 @@ const CreateRecipeForm = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                     placeholder="Description"
+                    maxLength={260}
                   />
                 </div>
               </div>
