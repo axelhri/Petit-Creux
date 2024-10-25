@@ -86,8 +86,7 @@
 }
 
 #singleRecipeMain button:hover {
-  background-color: var(--clr-third-700);
-  color: var(--clr-white);
+  color: var(--clr-third-700);
 }
 
 .userCategoryBox {
@@ -145,7 +144,7 @@
   display: block;
   position: absolute;
   background: linear-gradient(
-    90deg,
+    45deg,
     var(--clr-third-950),
     var(--clr-third-500),
     var(--clr-third-700),

@@ -89,7 +89,9 @@ function SingleRecipe() {
                     src={userData.user.imageUrl}
                     alt={`${recipeData.recipe.createdBy.name}'s profile`}
                   />
-                  <p>{userData.user.name}</p>
+                  <a href={`/profile/${recipeData.recipe.createdBy}`}>
+                    <p>{userData.user.name}</p>
+                  </a>
                 </div>
               ) : (
                 <p>Utilisateur introuvable</p>

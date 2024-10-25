@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import styles from "../CSS/Profile.module.css"; // Assurez-vous de créer un fichier CSS spécifique pour cette page
-import test from "../images/pexels-marceloverfe-16743489.jpg";
+import chef from "../images/icons8-chef-96.png";
 
 const recipesUrl = "http://localhost:5000/api/v1/recipes/"; // URL de l'API des recettes
 
@@ -74,37 +74,39 @@ function Profile() {
     <main id={styles.profileMain}>
       <section className={styles.profileTopSection}>
         <div className={styles.settings}>
-          <i className="fa-solid fa-gear"></i>
-        </div>
-        <div className={styles.profileDesc}>
-          <img
-            src={userData.imageUrl}
-            alt="Profile"
-            className={styles.profileImage}
-          />
-          <h1 className={styles.username}>{userData.name}</h1>
+          <i className="fa-solid fa-gear"></i>{" "}
+          <div className={styles.profileDesc}>
+            <img
+              src={userData.imageUrl}
+              alt="Profile"
+              className={styles.profileImage}
+            />
+          </div>
         </div>
       </section>
-      <h2 className={styles.sharedRecipesTitle}>
-        Recettes partagées par {userData.name} :
-      </h2>
+      <div className={styles.userNameBox}>
+        <h1 className={styles.username}>{userData.name}</h1>
+        <h2 className={styles.sharedRecipesTitle}>
+          Recettes partagées par {userData.name} :
+        </h2>
+      </div>
       <section className={styles.profileBottomSection}>
         {userRecipes.length > 0 ? (
           userRecipes.map((recipe) => (
             <article key={recipe._id}>
               <a href={`/recipes/${recipe._id}`}>
                 <div className={styles.articleImgContainer}>
-                  <img src={recipe.imageUrl || test} alt={recipe.title} />
+                  <img src={recipe.imageUrl} alt={recipe.title} />
                 </div>
                 <div className={styles.articleDesc}>
-                  <span className={styles.articleRecipeName}>
-                    {recipe.title}
-                  </span>
+                  <div className={styles.nameCategoryBox}>
+                    <span className={styles.articleRecipeName}>
+                      {recipe.title}
+                    </span>
+                    <p>{recipe.categories}</p>
+                  </div>
                   <div className={styles.recipeDesc}>
                     <p>{recipe.description}</p>
-                  </div>
-                  <div className={styles.articleDate}>
-                    {new Date(recipe.createdAt).toLocaleDateString("fr-FR")}
                   </div>
                   <div className={styles.articleBtnContainer}>
                     <button className={styles.articleBtn}>Voir plus</button>
