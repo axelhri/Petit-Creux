@@ -46,13 +46,14 @@
 }
 
 #navbar {
-  block-size: 6.5vh;
+  block-size: 6vh;
 }
 
 .navContainer {
   inline-size: 100%;
   position: fixed;
   z-index: 1;
+  block-size: 6vh;
 }
 
 .signout {

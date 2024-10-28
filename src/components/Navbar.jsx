@@ -131,7 +131,7 @@ function Navbar() {
                 </a>
               </li>
               <li>
-                <NavLink to="">Parcourir</NavLink>
+                <NavLink to="browse">Parcourir</NavLink>
               </li>
               <li>
                 <NavLink to="">Nos ustensiles</NavLink>

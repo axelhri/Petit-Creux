@@ -2,9 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import styles from "../CSS/Profile.module.css"; // Assurez-vous de créer un fichier CSS spécifique pour cette page
-import chef from "../images/icons8-chef-96.png";
 
-const recipesUrl = "http://localhost:5000/api/v1/recipes/"; // URL de l'API des recettes
+const recipesUrl = "http://localhost:5000/api/v1/recipes"; // URL de l'API des recettes
 
 function Profile() {
   const { isAuthenticated } = useContext(AuthContext);
