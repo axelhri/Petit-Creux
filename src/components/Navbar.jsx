@@ -146,7 +146,7 @@ function Navbar() {
             {isAuthenticated ? (
               <>
                 <div className={styles.profileSection}>
-                  <a href="/profile/:id" className={styles.showProfile}>
+                  <a href={`/profile/${userId}`} className={styles.showProfile}>
                     Mes recettes{" "}
                     {profileImage && (
                       <img

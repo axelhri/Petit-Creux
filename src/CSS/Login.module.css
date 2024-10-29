@@ -159,6 +159,7 @@
 .userImage {
   inline-size: 5rem;
   aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .uploadImage {

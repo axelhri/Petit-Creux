@@ -66,6 +66,10 @@
 
 /*  */
 
+#profileMain {
+  min-block-size: 95vh;
+}
+
 .settings {
   text-align: end;
   font-size: 2rem;
@@ -86,6 +90,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 
 .userNameBox {
@@ -212,6 +217,27 @@ article a {
   border-bottom-right-radius: 50px;
   padding: 0.3rem 1rem;
   color: var(--clr-white);
+}
+
+.noRecipesBox {
+  inline-size: 50%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.noRecipesBox p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.noRecipesBox a {
+  text-align: center;
+  background-color: var(--clr-primary-500);
+  font-family: var(--ff-button);
+  border-radius: 5px;
+  padding: 0.2rem 1rem;
 }
 
 @media screen and (min-width: 800px) {

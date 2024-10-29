@@ -118,6 +118,7 @@
   width: 50px;
   border-radius: 50%;
   border: 2px solid var(--clr-third-200);
+  object-fit: cover;
 }
 
 .imgDateBox img {
