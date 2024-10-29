@@ -90,8 +90,8 @@ function Navbar() {
     location.pathname === "/"
       ? "var(--clr-primary-500)"
       : location.pathname === "/share"
-      ? "orange"
-      : "var(--clr-secondary-500)";
+      ? "var(--clr-secondary-500)"
+      : "var(--clr-primary-500)";
   return (
     <nav id={styles.navbar}>
       <div

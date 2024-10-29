@@ -237,7 +237,15 @@ article a {
   background-color: var(--clr-primary-500);
   font-family: var(--ff-button);
   border-radius: 5px;
-  padding: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
+  max-inline-size: 80%;
+  transition: var(--transition-02);
+  margin-inline: auto;
+  border: 2px solid var(--clr-primary-500);
+}
+
+.noRecipesBox a:hover {
+  transform: scale(1.03);
 }
 
 @media screen and (min-width: 800px) {

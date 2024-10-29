@@ -188,8 +188,8 @@
     aspect-ratio: 1/1;
     border-radius: 50%;
     transition: var(--transition-02);
-    border: 2px solid var(--clr-white);
     object-fit: cover;
+    border: 2px solid var(--clr-white);
   }
 
   .signout {

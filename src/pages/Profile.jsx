@@ -106,7 +106,7 @@ function Profile() {
       {userRecipes.length === 0 && (
         <div className={styles.noRecipesBox}>
           <p>Vous n'avez pas encore de recette</p>
-          <a href="">Partager vos idées dès maintenant</a>
+          <a href="/share">Création de recette</a>
         </div>
       )}
     </main>
