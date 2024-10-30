@@ -72,12 +72,139 @@
 
 .settings {
   text-align: end;
-  font-size: 2rem;
   padding: 0.5rem;
   background-color: var(--clr-third-500);
   block-size: 10rem;
   position: relative;
   color: white;
+}
+
+.settingsBox button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--clr-white);
+  cursor: pointer;
+}
+
+.settingsBox button i {
+  animation: settingsSpin linear 15s infinite;
+}
+
+@keyframes settingsSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.settingsMenu {
+  background: white;
+  position: absolute;
+  top: 3.5rem;
+  right: 0.5rem;
+  z-index: 1;
+  border-radius: 7px;
+  block-size: 0rem;
+  transition: block-size 0.3s ease-out;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.settingsMenu.open {
+  block-size: 4rem;
+}
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  align-items: flex-start;
+}
+
+.settingsList li {
+  inline-size: 100%;
+  text-align: start;
+  border-radius: 5px;
+  padding: 0 0.5rem;
+}
+
+.settingsList li:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.modifyAccount button {
+  font-family: var(--ff-button);
+  color: var(--clr-nuance-900);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.deleteAccount button {
+  color: rgb(196, 0, 0);
+  font-size: 0.9rem;
+  border: none;
+  background: none;
+  font-weight: 500;
+}
+
+.deleteBox {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  background: var(--clr-white);
+  inline-size: 60%;
+}
+
+.deleteBoxContent {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deleteBox button {
+  background: red;
+  border: none;
+  color: var(--clr-white);
+  padding: 0.3rem;
+  font-family: var(--ff-button);
+  font-size: 1rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  block-size: 2.5rem;
+  cursor: pointer;
+  transition: var(--transition-02);
+}
+
+.deleteBox button:hover {
+  background: rgb(192, 1, 1);
+}
+
+.deleteBox p {
+  inline-size: 100%;
+  font-size: 1.1rem;
+  font-family: var(--ff-button);
+  text-align: center;
+}
+
+.deleteBox i {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  transition: var(--transition-02);
 }
 
 .profileImage {
@@ -91,6 +218,31 @@
   transform: translate(-50%, -50%);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   object-fit: cover;
+}
+
+.fo {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modifyProfileContainer {
+  box-shadow: 0 5px 15px black;
+  background: var(--clr-white);
+  padding: 0.5rem;
+  border-radius: 7px;
+  outline: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .userNameBox {
@@ -265,12 +417,11 @@ article a {
 
 @media screen and (min-width: 1200px) {
   .articleImgContainer img {
-    block-size: 15rem;
+    block-size: 12rem;
   }
 
   .articleDesc {
     gap: 1rem;
-    block-size: max-content;
   }
 
   .profileBottomSection {
@@ -280,6 +431,27 @@ article a {
     inline-size: 90%;
     margin-inline: auto;
     gap: 2rem;
+  }
+
+  .settingsMenu {
+    inline-size: 15rem;
+  }
+
+  .settingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    align-items: flex-start;
+    font-size: 1rem;
+  }
+
+  .deleteAccount button {
+    font-size: 1rem;
+  }
+
+  .deleteBox {
+    inline-size: 50%;
   }
 }
 
@@ -299,5 +471,9 @@ article a {
 
   .articleImgContainer {
     block-size: 55%;
+  }
+
+  .deleteBox {
+    inline-size: 30%;
   }
 }

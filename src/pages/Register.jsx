@@ -58,10 +58,11 @@ const Register = () => {
       console.log("User registered", res.data);
 
       // Si le back-end retourne un token, on peut l'utiliser ici
-      const token = res.data.token;
+      const { token, user } = res.data;
 
       // Stocker le token dans le localStorage pour rester connecté
       localStorage.setItem("token", token);
+      localStorage.setItem("userId", user._id);
 
       // Redirection vers la page d'accueil ou une autre page sécurisée
       navigate("/");
