@@ -85,7 +85,7 @@
   cursor: pointer;
 }
 
-#singleRecipeMain button:hover {
+#singleRecipeMain button:hover :not(.deleteRecipeButton) {
   color: var(--clr-third-700);
 }
 
@@ -302,6 +302,11 @@ span {
   border: none;
   border-radius: 7px;
   padding: 0.3rem 1rem;
+  transition: var(--transition-02);
+}
+
+.deleteRecipeButton:hover {
+  background: rgb(176, 0, 0);
 }
 
 .deleteRecipe {
