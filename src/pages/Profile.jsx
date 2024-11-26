@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "../CSS/Profile.module.css";
@@ -13,10 +13,20 @@ function Profile() {
   const [error, setError] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showDeleteBox, setShowDeleteBox] = useState(false);
-  const [showUpdateForm, setShowUpdateForm] = useState(false); // État pour afficher le formulaire
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState(""); // New password state
   const [profileImage, setProfileImage] = useState(null);
+  const [profilePreview, setProfilePreview] = useState(null);
+
+  const [editableFields, setEditableFields] = useState({
+    name: false,
+    email: false,
+    password: false, // New editable field for password
+  });
+  const nameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -31,14 +41,33 @@ function Profile() {
     setShowDeleteBox(false);
   };
 
+  const toggleEditField = (field) => {
+    setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
+    setTimeout(() => {
+      if (field === "name" && nameInputRef.current) {
+        nameInputRef.current.focus();
+        nameInputRef.current.select();
+      }
+      if (field === "email" && emailInputRef.current) {
+        emailInputRef.current.focus();
+        emailInputRef.current.select();
+      }
+      if (field === "password" && passwordInputRef.current) {
+        // Handle password focus
+        passwordInputRef.current.focus();
+      }
+    }, 0);
+  };
+
   const fetchUserProfileAndRecipes = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/v1/auth/${userId}`
       );
       setUserData(response.data.user);
-      setName(response.data.user.name); // Initialiser l'état avec les données récupérées
-      setEmail(response.data.user.email); // Initialiser l'état avec les données récupérées
+      setName(response.data.user.name);
+      setEmail(response.data.user.email);
+      setProfilePreview(response.data.user.imageUrl);
 
       const recipesResponse = await axios.get(`${recipesUrl}${userId}`);
       setUserRecipes(recipesResponse.data.recipes);
@@ -68,6 +97,10 @@ function Profile() {
     formData.append("email", email);
     if (profileImage) {
       formData.append("image", profileImage);
+    }
+    if (password) {
+      // Add password to form data if it exists
+      formData.append("password", password);
     }
 
     try {
@@ -99,6 +132,22 @@ function Profile() {
     } catch (error) {
       setError("Erreur lors de la suppression du compte.");
     }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(file);
+      setProfilePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const closeUpdateForm = () => {
+    setShowUpdateForm(false);
+    setEditableFields({ name: false, email: false, password: false });
+    setProfileImage(null);
+    setProfilePreview(userData.imageUrl);
+    setPassword(""); // Reset password field
   };
 
   if (loading) {
@@ -151,44 +200,94 @@ function Profile() {
           </div>
         </div>
 
-        {/* Formulaire de mise à jour de profil */}
         {showUpdateForm && (
-          <form
-            id={styles.form}
-            className={styles.fo}
-            onSubmit={handleUpdateProfile}
-          >
+          <form className={styles.formUpdate} onSubmit={handleUpdateProfile}>
             <div className={styles.modifyProfileContainer}>
+              <button
+                type="button"
+                className={styles.closeFormButton}
+                onClick={closeUpdateForm}
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+              <span className={styles.editFormTitle}>Modifier le profil</span>
               <div className={styles.formGroup}>
-                <input
-                  type="file"
-                  id="image"
-                  accept="image/*"
-                  onChange={(e) => setProfileImage(e.target.files[0])}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-                <i class="fa-solid fa-pencil"></i>
-              </div>
-              <div className={styles.formGroup}>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <i class="fa-solid fa-pencil"></i>
+                <div className={styles.userImgContainer}>
+                  <img
+                    src={profilePreview}
+                    alt="Aperçu de la nouvelle image de profil"
+                    className={styles.profileImagePreview}
+                  />
+                  <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                </div>
               </div>
 
-              <button type="submit">Mettre à jour le profil</button>
+              <div className={styles.editContainer}>
+                <div className={styles.formGroup}>
+                  <p>Nom :</p>
+
+                  <input
+                    style={{ fontSize: "1rem", fontWeight: "300" }}
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    readOnly={!editableFields.name}
+                    ref={nameInputRef}
+                    className={`${styles.borderlessInput} ${
+                      editableFields.name ? styles.editableInput : ""
+                    }`}
+                    required
+                  />
+
+                  <i
+                    className="fa-solid fa-pen"
+                    onClick={() => toggleEditField("name")}
+                  ></i>
+                </div>
+                <div className={styles.formGroup}>
+                  <p>Email :</p>
+
+                  <input
+                    style={{ fontSize: "1rem", fontWeight: "300" }}
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    readOnly={!editableFields.email}
+                    ref={emailInputRef}
+                    className={`${styles.borderlessInput} ${
+                      editableFields.email ? styles.editableInput : ""
+                    }`}
+                    required
+                  />
+
+                  <i
+                    className="fa-solid fa-pen"
+                    onClick={() => toggleEditField("email")}
+                  ></i>
+                </div>
+              </div>
+
+              <div className={styles.formGroup && styles.passwordBox}>
+                <p>Changer de mot de passe</p>
+                <input
+                  style={{ fontSize: "1rem", fontWeight: "300" }}
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <button type="submit" className={styles.updateProfile}>
+                Mettre à jour le profil
+              </button>
             </div>
           </form>
         )}
@@ -198,7 +297,8 @@ function Profile() {
             <i className="fa-solid fa-xmark" onClick={handleCloseDeleteBox}></i>
             <div className={styles.deleteBoxContent}>
               <p>
-                Êtes-vous sûr de vouloir supprimer définitivement votre compte ?
+                Êtes-vous sûr de vouloir supprimer votre compte ? Cette action
+                est irréversible.
               </p>
               <button onClick={handleDeleteAccount}>
                 Supprimer<i className="fa-solid fa-triangle-exclamation"></i>

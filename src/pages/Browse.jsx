@@ -4,7 +4,6 @@ import styles from "../CSS/Browse.module.css";
 import img1 from "../images/browseimg1.jpg";
 import img2 from "../images/browseimg2.jpg";
 
-// URL to access all recipes
 const recipesUrl = "http://localhost:5000/api/v1/recipes/all";
 const userUrl = "http://localhost:5000/api/v1/auth/";
 
@@ -18,7 +17,6 @@ function Browse() {
   const [selectedCategory, setSelectedCategory] = useState(""); // State for selected category
   const [userProfiles, setUserProfiles] = useState({}); // Store creator profiles
 
-  // Function to fetch all recipes
   const fetchAllRecipes = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -98,17 +96,64 @@ function Browse() {
     setFilteredRecipes(filtered);
   };
 
-  // Fetch recipes when the component mounts
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    filterRecipes(e.target.value, selectedCategory);
+  };
+
+  // Handle category selection change
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    filterRecipes(searchTerm, e.target.value);
+  };
+
+  // Function to filter recipes based on search term and category
+  const filterRecipes = (term, category) => {
+    const filtered = allRecipes.filter((recipe) => {
+      const matchesSearch = recipe.title
+        .toLowerCase()
+        .includes(term.toLowerCase());
+      const matchesCategory = category
+        ? recipe.categories && recipe.categories.includes(category)
+        : true;
+      return matchesSearch && matchesCategory;
+    });
+    setFilteredRecipes(filtered);
+  };
+
   useEffect(() => {
     fetchAllRecipes();
   }, []);
 
-  // Render loading state
+  // Update filtered recipes whenever searchTerm or selectedCategory changes
+  useEffect(() => {
+    let filtered = allRecipes;
+
+    // Filter by search term
+    if (searchTerm.trim() !== "") {
+      const lowercasedTerm = searchTerm.toLowerCase();
+      filtered = filtered.filter((recipe) =>
+        recipe.title.toLowerCase().includes(lowercasedTerm)
+      );
+    }
+
+    // Filter by category
+    if (selectedCategory !== "") {
+      filtered = filtered.filter((recipe) =>
+        Array.isArray(recipe.categories)
+          ? recipe.categories.includes(selectedCategory)
+          : recipe.categories === selectedCategory
+      );
+    }
+
+    setFilteredRecipes(filtered);
+  }, [searchTerm, selectedCategory, allRecipes]);
+
   if (loading) {
     return <div>Chargement...</div>;
   }
 
-  // Render error state
   if (error) {
     return <div>{error}</div>;
   }
