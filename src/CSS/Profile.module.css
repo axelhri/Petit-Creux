@@ -327,6 +327,7 @@ article a {
   font-family: var(--ff-button);
   letter-spacing: 0.07rem;
   border: 1px solid var(--clr-white);
+  cursor: pointer;
 }
 
 .articleRecipeName {

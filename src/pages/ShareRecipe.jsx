@@ -5,7 +5,6 @@ import styles from "../CSS/Share.module.css";
 import Carousel1 from "../images/shareImg.jpg";
 import Carousel2 from "../images/shareImg2.jpg";
 import Carousel3 from "../images/shareImg3.jpg";
-import formImg from "../images/cutting-board-575367_1280.png";
 
 const CreateRecipeForm = () => {
   const [title, setTitle] = useState("");

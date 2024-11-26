@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../CSS/SingleRecipe.module.css";
 
@@ -12,6 +12,7 @@ function SingleRecipe() {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [eaters, setEaters] = useState(0); // Initialize to 0 and set it later
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,10 +40,6 @@ function SingleRecipe() {
         setUserData(userResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-        if (error.response) {
-          console.error("Server responded with:", error.response.status);
-          console.error("Response data:", error.response.data);
-        }
       } finally {
         setLoading(false);
       }
@@ -57,6 +54,22 @@ function SingleRecipe() {
 
   const handleDecreaseEaters = () => {
     setEaters((prevEaters) => Math.max(prevEaters - 1, 1)); // Minimum of 1 eater
+  };
+
+  // Handle recipe deletion
+  const handleDeleteRecipe = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios.delete(`${singleRecipesUrl}${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      navigate("/"); // Redirect to home or another page after deletion
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -76,6 +89,9 @@ function SingleRecipe() {
       ? quantity.toString()
       : quantity.toFixed(2).replace(/\.?0+$/, ""); // Remove trailing zeros and decimal point if necessary
   };
+
+  // Check if the current user is the creator of the recipe
+  const currentUserId = localStorage.getItem("userId");
 
   return (
     <>
@@ -104,10 +120,12 @@ function SingleRecipe() {
               <div className={styles.imgDescBox}>
                 <div className={styles.imgDateBox}>
                   {recipeData.recipe.imageUrl && (
-                    <img
-                      src={recipeData.recipe.imageUrl}
-                      alt={recipeData.recipe.title}
-                    />
+                    <div className={styles.recipeImgBox}>
+                      <img
+                        src={recipeData.recipe.imageUrl}
+                        alt={recipeData.recipe.title}
+                      />
+                    </div>
                   )}
                   <div className={styles.createdAtRecipe}>
                     <p>créer le</p>{" "}
@@ -135,7 +153,7 @@ function SingleRecipe() {
                 <button onClick={handleDecreaseEaters}>-</button>
                 <div className={styles.persNumber}>
                   <p>{eaters}</p>
-                  <span>{eaters > 1 ? "personnes" : "personne"}</span>{" "}
+                  <span>{eaters > 1 ? "personnes" : "personne"}</span>
                 </div>
                 <button onClick={handleIncreaseEaters}>+</button>
               </div>
@@ -158,6 +176,18 @@ function SingleRecipe() {
               )}
             </section>
           </div>
+
+          {/* Afficher le bouton de suppression uniquement si l'utilisateur est le créateur */}
+          {currentUserId === recipeData.recipe.createdBy && (
+            <div className={styles.deleteRecipe}>
+              <button
+                className={styles.deleteRecipeButton}
+                onClick={handleDeleteRecipe}
+              >
+                Supprimer la recette
+              </button>
+            </div>
+          )}
         </main>
       ) : (
         <p>Recette introuvable.</p>
