@@ -71,7 +71,7 @@ const Login = () => {
               value={password}
               className={styles.formInput}
               onChange={onChange}
-              placeholder="Password"
+              placeholder="Mot de passe"
               required
             />
             <i className="fa-solid fa-lock"></i>

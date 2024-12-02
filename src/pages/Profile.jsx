@@ -16,8 +16,25 @@ function Profile() {
   const [showUpdateForm, setShowUpdateForm] = useState(false); // État pour afficher le formulaire
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
+  const [previewImage, setPreviewImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreviewImage(URL.createObjectURL(file)); // Génère une URL locale pour prévisualiser l'image
+      setProfileImage(file); // Met à jour l'image à envoyer au backend
+    }
+  };
+
+  useEffect(() => {
+    // Si une image de profil existe déjà, utilisez-la pour l'aperçu initial
+    if (userData && userData.imageUrl) {
+      setPreviewImage(userData.imageUrl);
+    }
+  }, [userData]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -66,6 +83,7 @@ function Profile() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
+    formData.append("password", password);
     if (profileImage) {
       formData.append("image", profileImage);
     }
@@ -155,40 +173,74 @@ function Profile() {
         {showUpdateForm && (
           <form
             id={styles.form}
-            className={styles.fo}
+            className={styles.updateProfilForm}
             onSubmit={handleUpdateProfile}
           >
             <div className={styles.modifyProfileContainer}>
-              <div className={styles.formGroup}>
+              <button
+                type="button"
+                className={styles.closeFormButton}
+                onClick={() => setShowUpdateForm(false)}
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+              <h1>Modifier le profil</h1>
+              <div className={styles.udpateProfilImage}>
+                <img
+                  src={previewImage}
+                  alt="Aperçu de l'image de profil"
+                  className={styles.profilePreviewImage}
+                />
+                <i className="fa-solid fa-camera"></i>
                 <input
                   type="file"
                   id="image"
                   accept="image/*"
-                  onChange={(e) => setProfileImage(e.target.files[0])}
+                  onChange={handleImageChange}
                 />
               </div>
               <div className={styles.formGroup}>
+                <label htmlFor="name">Nom :</label>
                 <input
                   type="text"
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  onFocus={(e) => (e.target.value = "")}
                   required
                 />
-                <i class="fa-solid fa-pencil"></i>
+                <i class="fa-solid fa-pen"></i>
               </div>
               <div className={styles.formGroup}>
+                <label htmlFor="name">Email :</label>
+
                 <input
                   type="email"
                   id="email"
+                  onFocus={(e) => (e.target.value = "")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <i class="fa-solid fa-pencil"></i>
+                <i class="fa-solid fa-pen"></i>
               </div>
 
-              <button type="submit">Mettre à jour le profil</button>
+              <div className={styles.formGroup}>
+                <label htmlFor="password">Mot de passe :</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <i class="fa-solid fa-pen"></i>
+              </div>
+              <div className={styles.updateProfilButton}>
+                <button type="submit" onClick={() => setShowUpdateForm(false)}>
+                  Mettre à jour le profil
+                </button>
+              </div>
             </div>
           </form>
         )}

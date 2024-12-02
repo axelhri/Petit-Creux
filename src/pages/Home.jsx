@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../CSS/Home.module.css";
 import { AuthContext } from "../context/AuthContext"; // Import du contexte
+import Share from "./HomeModules/HomeShare";
 
 function Home() {
   const { isAuthenticated } = useContext(AuthContext); // Utilisation du contexte
@@ -51,11 +52,7 @@ function Home() {
         </div>
       </header>
       <main id="homeMain">
-        <section id="create-article-section">
-          <div className="create-article-container">
-            <h2>TITRE</h2>
-          </div>
-        </section>
+        <Share />
       </main>
     </>
   );

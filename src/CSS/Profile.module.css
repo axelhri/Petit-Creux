@@ -58,6 +58,8 @@
   --ff-button: "Outfit";
   --ff-satisfy: "Satisfy";
   --ff-montserrat: "Montserrat";
+  --ff-poppins: "Poppins", sans-serif;
+  --ff-karla: "Karla", sans-serif;
 
   /* misc */
   --transition-02: all 0.2s ease-in-out;
@@ -74,7 +76,7 @@
   text-align: end;
   padding: 0.5rem;
   background-color: var(--clr-third-500);
-  block-size: 10rem;
+  block-size: 20vh;
   position: relative;
   color: white;
 }
@@ -204,7 +206,10 @@
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.2rem;
-  transition: var(--transition-02);
+}
+
+.deleteBox i:hover {
+  color: red;
 }
 
 .profileImage {
@@ -220,29 +225,139 @@
   object-fit: cover;
 }
 
-.fo {
+.updateProfilForm {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  inline-size: 20rem;
+  z-index: 90;
+}
+
+.updateProfilForm h1 {
+  text-align: center;
+  margin-block-end: 2rem;
+  font-family: var(--ff-poppins);
+  letter-spacing: 0.03rem;
+  color: var(--clr-nuance-950);
 }
 
 .modifyProfileContainer {
-  box-shadow: 0 5px 15px black;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   background: var(--clr-white);
   padding: 0.5rem;
-  border-radius: 7px;
-  outline: 2px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  border-radius: 5px;
+  padding-block: 1rem;
+  position: relative;
+}
+
+.closeFormButton {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.closeFormButton:hover {
+  color: red;
+}
+
+.modifyProfileContainer > * + * {
+  margin-block-start: 0.5rem;
+}
+
+.udpateProfilImage {
+  height: 100px;
+  width: 100px;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-block-end: 2rem;
+  outline: 3px solid var(--clr-primary-700);
+}
+
+.udpateProfilImage input[type="file"] {
+  position: absolute;
+  top: 1rem;
+  left: 15rem;
+  transform: scale(8);
+  opacity: 0;
+}
+
+.updateProfilForm img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.udpateProfilImage i {
+  color: var(--clr-primary-500);
+  font-size: 1.7rem;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition-02);
+}
+
+.udpateProfilImage:hover i {
+  color: var(--clr-primary-800);
+  top: 75%;
 }
 
 .formGroup {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  inline-size: 100%;
+  justify-content: flex-start;
+}
+
+.formGroup input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.2rem;
+  font-family: var(--ff-karla);
+}
+
+.formGroup label {
+  inline-size: 7rem;
+  padding: 0.2rem;
+  text-align: end;
+  font-family: var(--ff-button);
+}
+
+.formGroup i {
+  color: var(--clr-nuance-800);
+}
+
+.updateProfilButton {
+  margin-block-start: 2rem;
+  text-align: center;
+}
+
+.updateProfilButton button {
+  font-family: var(--ff-button);
+  font-size: 1.2rem;
+  padding: 0.3rem 1rem;
+  border: none;
+  background: var(--clr-primary-600);
+  color: var(--clr-white);
+  font-weight: 500;
+  letter-spacing: 0.03rem;
+  border-radius: 7px;
+  transition: var(--transition-02);
+  cursor: pointer;
+}
+
+.updateProfilButton button:hover {
+  background: var(--clr-primary-800);
 }
 
 .userNameBox {

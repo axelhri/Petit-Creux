@@ -107,7 +107,7 @@ const Register = () => {
               value={name}
               className={styles.formInput}
               onChange={onChange}
-              placeholder="Pseudo"
+              placeholder="Nom"
               required
             />
             <i className="fa-regular fa-user"></i>

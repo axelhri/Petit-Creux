@@ -80,7 +80,7 @@
 
 .skew {
   padding-block: 1rem;
-  background: var(--clr-third-600);
+  background: var(--clr-third-700);
 }
 
 .searchBox h1 {
@@ -188,6 +188,7 @@
   aspect-ratio: 1/1;
   border-radius: 50%;
   outline: 1px solid white;
+  object-fit: cover;
 }
 
 .cardCategory {

@@ -313,7 +313,6 @@
 
 .ingredientsContainer {
   display: flex;
-  /* border: 2px solid var(--clr-nuance-700); */
   border-radius: 10px;
   margin-block: 1rem;
 }
@@ -334,8 +333,6 @@
 }
 
 .ingredientsContainer input[type="number"] {
-  /* border-left: 2px solid var(--clr-nuance-700);
-  border-right: 2px solid var(--clr-nuance-700); */
   border: none;
   text-align: center;
   inline-size: 25%;
@@ -366,7 +363,7 @@
 }
 
 .moreIngredients:hover {
-  background: var(--clr-secondary-700);
+  background: var(--clr-secondary-600);
 }
 
 .removeIngredientBtn {
@@ -374,7 +371,6 @@
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   border: none;
-  /* border-left: 2px solid var(--clr-nuance-900); */
   font-size: 1rem;
   padding: 0.3rem;
 }

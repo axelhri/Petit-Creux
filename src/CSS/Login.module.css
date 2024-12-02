@@ -42,18 +42,18 @@
   background: url("../images/boreal.jpg") no-repeat;
   min-height: 100vh;
   background-size: cover;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) brightness(0.8);
 }
 
 .backgroundHomeRegister {
   background: url("../images/nature.jpg") no-repeat;
   min-height: 100vh;
   background-size: cover;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) brightness(0.8);
 }
 
 #loginMain {
-  min-block-size: 95vh;
+  min-block-size: 94vh;
   background-color: transparent;
   display: grid;
   place-items: center;
@@ -145,6 +145,7 @@
 .formAlt {
   color: var(--clr-white);
   font-size: 1rem;
+  margin-inline: auto;
 }
 
 .formAlt a {
@@ -153,7 +154,8 @@
 }
 
 .formAlt a:hover {
-  color: var(--clr-primary-600);
+  color: var(--clr-white);
+  text-decoration: underline;
 }
 
 .userImage {
