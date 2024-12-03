@@ -249,8 +249,8 @@
   }
 
   .recipesSection {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1rem;
     margin-block-start: 5rem;
   }
 
@@ -294,7 +294,7 @@
 
 @media screen and (min-width: 1600px) {
   .recipesSection {
-    inline-size: 70%;
+    inline-size: 80%;
   }
 
   .skew {

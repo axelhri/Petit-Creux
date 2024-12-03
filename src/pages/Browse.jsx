@@ -128,7 +128,7 @@ function Browse() {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
             </div>
             <select
               value={selectedCategory}

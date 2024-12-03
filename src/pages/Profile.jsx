@@ -102,6 +102,7 @@ function Profile() {
           ? URL.createObjectURL(profileImage)
           : prev.imageUrl,
       }));
+      setShowUpdateForm(false); // Close the form on success
       setError(null);
     } catch (error) {
       setError("Erreur lors de la mise à jour du profil.");
@@ -209,7 +210,7 @@ function Profile() {
                   onFocus={(e) => (e.target.value = "")}
                   required
                 />
-                <i class="fa-solid fa-pen"></i>
+                <i className="fa-solid fa-pen"></i>
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="name">Email :</label>
@@ -222,7 +223,7 @@ function Profile() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <i class="fa-solid fa-pen"></i>
+                <i className="fa-solid fa-pen"></i>
               </div>
 
               <div className={styles.formGroup}>
@@ -234,12 +235,10 @@ function Profile() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <i class="fa-solid fa-pen"></i>
+                <i className="fa-solid fa-pen"></i>
               </div>
               <div className={styles.updateProfilButton}>
-                <button type="submit" onClick={() => setShowUpdateForm(false)}>
-                  Mettre à jour le profil
-                </button>
+                <button type="submit">Mettre à jour le profil</button>
               </div>
             </div>
           </form>
