@@ -328,6 +328,16 @@ span {
     margin-block-start: 0rem;
     margin-inline-start: 1rem;
   }
+
+  .titleDescBox p {
+    margin-block-start: 0.5rem;
+    font-size: max-content;
+    line-height: 1.5;
+    border-left: 1px solid rgba(0, 0, 0, 0.7);
+    padding-inline-start: 0.5rem;
+    margin-inline-start: 1rem;
+    word-break: break-all;
+  }
 }
 
 @media screen and (min-width: 800px) {

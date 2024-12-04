@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../CSS/Home.module.css";
 import { AuthContext } from "../context/AuthContext"; // Import du contexte
 import HomeShare from "./HomeModules/HomeShare";
+import HomeBrowse from "./HomeModules/HomeBrowse";
 
 function Home() {
   const { isAuthenticated } = useContext(AuthContext); // Utilisation du contexte
@@ -53,6 +54,7 @@ function Home() {
       </header>
       <main id="homeMain">
         <HomeShare />
+        <HomeBrowse />
       </main>
     </>
   );

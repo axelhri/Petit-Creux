@@ -1,5 +1,4 @@
 import styles from "../../CSS/HomeModules/HomeShare.module.css";
-
 import img1 from "../../images/shareImg.jpg";
 import img2 from "../../images/homeShare.jpg";
 import { useNavigate } from "react-router-dom";

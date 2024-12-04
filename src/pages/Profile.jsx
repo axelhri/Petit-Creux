@@ -15,6 +15,7 @@ function Profile() {
   const [showDeleteBox, setShowDeleteBox] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false); // État pour afficher le formulaire
   const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profileImage, setProfileImage] = useState(null);
@@ -55,6 +56,7 @@ function Profile() {
       );
       setUserData(response.data.user);
       setName(response.data.user.name); // Initialiser l'état avec les données récupérées
+      setBio(response.data.user.bio); // Initialiser l'état avec les données récupérées
       setEmail(response.data.user.email); // Initialiser l'état avec les données récupérées
 
       const recipesResponse = await axios.get(`${recipesUrl}${userId}`);
@@ -83,6 +85,7 @@ function Profile() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
+    formData.append("bio", bio);
     formData.append("password", password);
     if (profileImage) {
       formData.append("image", profileImage);
@@ -200,6 +203,20 @@ function Profile() {
                   onChange={handleImageChange}
                 />
               </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="bio">bio :</label>
+                <input
+                  type="text"
+                  id="bio"
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  onFocus={(e) => (e.target.value = "")}
+                  required
+                />
+                <i className="fa-solid fa-pen"></i>
+              </div>
+
               <div className={styles.formGroup}>
                 <label htmlFor="name">Nom :</label>
                 <input
@@ -262,6 +279,7 @@ function Profile() {
         <h1 className={styles.username}>
           {userData ? userData.name : "Visiteur"}
         </h1>
+        <p>{userData.bio}</p>
         <h2 className={styles.sharedRecipesTitle}>
           {userRecipes.length >= 0
             ? `Recette partagée par ${

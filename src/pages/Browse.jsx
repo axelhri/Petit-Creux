@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import styles from "../CSS/Browse.module.css";
 import img1 from "../images/browseimg1.jpg";
 import img2 from "../images/browseimg2.jpg";
 
-// URL to access all recipes
 const recipesUrl = "http://localhost:5000/api/v1/recipes/all";
 const userUrl = "http://localhost:5000/api/v1/auth/";
 
 function Browse() {
-  const [allRecipes, setAllRecipes] = useState([]); // State for storing recipes
-  const [filteredRecipes, setFilteredRecipes] = useState([]); // State for filtered recipes
-  const [categories, setCategories] = useState([]); // State for available categories
-  const [loading, setLoading] = useState(true); // State for loading status
-  const [error, setError] = useState(null); // State for error messages
-  const [searchTerm, setSearchTerm] = useState(""); // State for search bar input
-  const [selectedCategory, setSelectedCategory] = useState(""); // State for selected category
-  const [userProfiles, setUserProfiles] = useState({}); // Store creator profiles
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialSearchTerm = queryParams.get("search") || "";
 
-  // Function to fetch all recipes
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [userProfiles, setUserProfiles] = useState({});
+
   const fetchAllRecipes = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -29,29 +32,26 @@ function Browse() {
       });
       const recipes = response.data.recipes;
       setAllRecipes(recipes);
-      setFilteredRecipes(recipes); // Initialize filtered recipes with all recipes
+      setFilteredRecipes(recipes);
 
-      // Extract unique categories
       const uniqueCategories = [
         ...new Set(recipes.flatMap((recipe) => recipe.categories || [])),
       ];
       setCategories(uniqueCategories);
 
-      // Fetch user profiles for the creators
       const userIds = [...new Set(recipes.map((recipe) => recipe.createdBy))];
       const userResponses = await Promise.all(
-        userIds.map(
-          (id) =>
-            axios
-              .get(`${userUrl}${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-              })
-              .catch((err) => null) // Ignore errors for unavailable users
+        userIds.map((id) =>
+          axios
+            .get(`${userUrl}${id}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
+            .catch(() => null)
         )
       );
       const profiles = userResponses.reduce((acc, res) => {
         if (res && res.data) {
-          acc[res.data.user._id] = res.data.user; // Map user ID to user data
+          acc[res.data.user._id] = res.data.user;
         }
         return acc;
       }, {});
@@ -72,19 +72,18 @@ function Browse() {
     }
   };
 
-  // Handle search input change
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    filterRecipes(e.target.value, selectedCategory);
+    const term = e.target.value;
+    setSearchTerm(term);
+    filterRecipes(term, selectedCategory);
   };
 
-  // Handle category selection change
   const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-    filterRecipes(searchTerm, e.target.value);
+    const category = e.target.value;
+    setSelectedCategory(category);
+    filterRecipes(searchTerm, category);
   };
 
-  // Function to filter recipes based on search term and category
   const filterRecipes = (term, category) => {
     const filtered = allRecipes.filter((recipe) => {
       const matchesSearch = recipe.title
@@ -98,24 +97,24 @@ function Browse() {
     setFilteredRecipes(filtered);
   };
 
-  // Fetch recipes when the component mounts
   useEffect(() => {
     fetchAllRecipes();
   }, []);
 
-  // Render loading state
+  useEffect(() => {
+    filterRecipes(initialSearchTerm, selectedCategory);
+  }, [allRecipes, initialSearchTerm]);
+
   if (loading) {
     return <div>Chargement...</div>;
   }
 
-  // Render error state
   if (error) {
     return <div>{error}</div>;
   }
 
   return (
     <main id={styles.browseMain}>
-      {/* Search and Filter Section */}
       <section className={styles.filterSection}>
         <img src={img1} alt="" className={styles.browseImg1} />
         <div className={styles.skew}>
@@ -146,8 +145,6 @@ function Browse() {
         </div>
         <img src={img2} alt="" className={styles.browseImg2} />
       </section>
-
-      {/* Recipes Section */}
       <section className={styles.recipesSection}>
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe) => (

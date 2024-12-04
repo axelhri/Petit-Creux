@@ -70,13 +70,13 @@
 
 #homeShare {
   background: white;
-  padding-block: 2rem;
+  padding-block-start: 2rem;
 }
 
 #homeShare h2 {
   font-family: var(--ff-poppins);
   color: var(--clr-primary-600);
-  font-size: 2em;
+  font-size: 1.8em;
   inline-size: max-content;
   margin-inline: auto;
 }
@@ -163,6 +163,11 @@
     block-size: 17rem;
     inline-size: 10rem;
     border-radius: 10px;
+  }
+
+  #homeShare {
+    background: white;
+    padding-block: 2rem;
   }
 
   .homeShareImage > img:last-of-type {
