@@ -126,15 +126,13 @@ function Navbar() {
           <div className={styles.navlinkContainer}>
             <ul>
               <li>
+                <NavLink to="/">Accueil</NavLink>
+              </li>
+              <li>
+                <a href="#homeShare">Partager</a>
+              </li>
+              <li>
                 <NavLink to="browse">Parcourir</NavLink>
-              </li>
-              <li>
-                <a href="#" onClick={handleCreateArticleClick}>
-                  Partager
-                </a>
-              </li>
-              <li>
-                <NavLink to="">Nos ustensiles</NavLink>
               </li>
               <li>
                 <NavLink to="">Nous contacter</NavLink>

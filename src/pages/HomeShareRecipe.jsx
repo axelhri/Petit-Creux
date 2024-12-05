@@ -6,7 +6,7 @@ import Carousel1 from "../images/shareImg.jpg";
 import Carousel2 from "../images/shareImg2.jpg";
 import Carousel3 from "../images/shareImg3.jpg";
 
-const CreateRecipeForm = () => {
+const ShareRecipe = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [eaters, setEaters] = useState(1);
@@ -146,15 +146,10 @@ const CreateRecipeForm = () => {
     }
   };
 
-  useEffect(() => {
-    document.body.className = styles.backgroundHomeShare;
-    return () => {
-      document.body.className = "";
-    };
-  }, []);
-
   return (
     <main id={styles.mainShare}>
+      <div className={styles.shareLine}></div>
+      <span className={styles.shareTitle}>Partagez vos délices !</span>
       <div className={styles.shareSectionContainer}>
         <section className={styles.shareCarousel}>
           <img
@@ -168,7 +163,6 @@ const CreateRecipeForm = () => {
         </section>
         <section className={styles.shareFormSection}>
           <form onSubmit={handleSubmit} id={styles.shareForm}>
-            <h2>Partagez vos délices !</h2>
             <div className={styles.formContainer}>
               <div className={styles.shareFormTopContainer}>
                 <div
@@ -275,7 +269,7 @@ const CreateRecipeForm = () => {
                     <div key={index} className={styles.ingredientsContainer}>
                       <input
                         type="text"
-                        placeholder="Nom de l'ingrédient"
+                        placeholder="Ingrédient"
                         className={styles.ingredientsName}
                         value={ingredient.name}
                         onChange={(e) =>
@@ -344,9 +338,6 @@ const CreateRecipeForm = () => {
                 <i className="fa-regular fa-circle-check"></i>Créer la recette
               </button>
             </div>
-            <div className={styles.formCircle}></div>
-            <div className={styles.formCircle2}></div>
-            <div className={styles.formCircle3}></div>
           </form>
         </section>
       </div>
@@ -354,4 +345,4 @@ const CreateRecipeForm = () => {
   );
 };
 
-export default CreateRecipeForm;
+export default ShareRecipe;

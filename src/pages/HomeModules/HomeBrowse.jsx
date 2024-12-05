@@ -70,10 +70,12 @@ function HomeBrowse() {
         <div className={styles.usersBox}>
           {users.map((user, index) => (
             <div key={index} className={styles.userQuotes}>
-              <div className={styles.userQuotesImg}>
-                <img src={user.user.imageUrl} alt="" />
-              </div>
-              <span>{user.user.name}</span>
+              <a href={`/profile/${user.user._id}`}>
+                <div className={styles.userQuotesImg}>
+                  <img src={user.user.imageUrl} alt="" />
+                </div>
+                <span className={styles.usersName}>{user.user.name}</span>
+              </a>
               <p>"{user.user.bio}"</p>
             </div>
           ))}

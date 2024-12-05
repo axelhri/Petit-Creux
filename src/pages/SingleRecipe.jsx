@@ -100,15 +100,17 @@ function SingleRecipe() {
           <header>
             <div className={styles.userCategoryBox}>
               {userData ? (
-                <div className={styles.userImgBox}>
-                  <img
-                    src={userData.user.imageUrl}
-                    alt={`${recipeData.recipe.createdBy.name}'s profile`}
-                  />
-                  <a href={`/profile/${recipeData.recipe.createdBy}`}>
+                <a href={`/profile/${recipeData.recipe.createdBy}`}>
+                  {" "}
+                  <div className={styles.userImgBox}>
+                    <img
+                      src={userData.user.imageUrl}
+                      alt={`${recipeData.recipe.createdBy.name}'s profile`}
+                    />
+
                     <p>{userData.user.name}</p>
-                  </a>
-                </div>
+                  </div>{" "}
+                </a>
               ) : (
                 <p>Utilisateur introuvable</p>
               )}

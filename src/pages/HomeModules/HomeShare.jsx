@@ -1,19 +1,24 @@
 import styles from "../../CSS/HomeModules/HomeShare.module.css";
 import img1 from "../../images/shareImg.jpg";
 import img2 from "../../images/homeShare.jpg";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-
+import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
+import HomeShareRecipe from "../HomeShareRecipe.jsx";
 
 function HomeShare() {
-  const navigate = useNavigate();
   const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const recipeSectionRef = useRef(null);
 
-  const handleGetStartedClick = (e) => {
-    e.preventDefault();
+  const handleShareClick = (event) => {
+    event.preventDefault();
     if (isAuthenticated) {
-      navigate("/share");
+      const topOffset =
+        recipeSectionRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        50;
+      window.scrollTo(0, topOffset);
     } else {
       navigate("/login");
     }
@@ -32,7 +37,7 @@ function HomeShare() {
             passionnés de cuisine. Chaque recette a une histoire, et la vôtre
             pourrait devenir la préférée de quelqu'un !
           </p>
-          <a href="/share" onClick={handleGetStartedClick}>
+          <a href="#" onClick={handleShareClick}>
             Partager une recette
           </a>
         </div>
@@ -40,6 +45,9 @@ function HomeShare() {
           <img src={img1} alt="" />
           <img src={img2} alt="" />
         </div>
+      </div>
+      <div id="HomeShareRecipe" ref={recipeSectionRef}>
+        {isAuthenticated && <HomeShareRecipe />}
       </div>
     </section>
   );
