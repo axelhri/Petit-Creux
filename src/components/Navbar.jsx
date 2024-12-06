@@ -135,7 +135,7 @@ function Navbar() {
                 <NavLink to="browse">Parcourir</NavLink>
               </li>
               <li>
-                <NavLink to="">Nous contacter</NavLink>
+                <NavLink to="">Contact</NavLink>
               </li>
             </ul>
           </div>

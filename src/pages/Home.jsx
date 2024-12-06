@@ -4,6 +4,7 @@ import styles from "../CSS/Home.module.css";
 import { AuthContext } from "../context/AuthContext"; // Import du contexte
 import HomeShare from "./HomeModules/HomeShare";
 import HomeBrowse from "./HomeModules/HomeBrowse";
+import HomeContact from "./HomeModules/HomeContact";
 
 function Home() {
   const { isAuthenticated } = useContext(AuthContext); // Utilisation du contexte
@@ -55,6 +56,7 @@ function Home() {
       <main id="homeMain">
         <HomeShare />
         <HomeBrowse />
+        <HomeContact />
       </main>
     </>
   );

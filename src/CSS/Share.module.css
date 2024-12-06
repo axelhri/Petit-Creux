@@ -58,7 +58,6 @@
 }
 
 #mainShare {
-  margin-block: 2rem;
   background: var(--clr-white);
   display: flex;
   flex-direction: column;
@@ -70,6 +69,7 @@
   margin-inline: auto;
   border-radius: 50px;
   background: var(--clr-primary-800);
+  margin-block-start: 2rem;
 }
 
 .backgroundHomeShare {
@@ -490,18 +490,6 @@
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
     max-inline-size: 100%;
-  }
-
-  @keyframes color {
-    0% {
-      background-position: 0 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0 50%;
-    }
   }
 
   .titleDescContainer input {

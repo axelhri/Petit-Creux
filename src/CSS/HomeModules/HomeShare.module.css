@@ -171,12 +171,12 @@
   }
 
   .homeShareImage > img:last-of-type {
-    margin-block-start: 1rem;
+    margin-block-start: 7rem;
     border-top-left-radius: 70px;
   }
 
   .homeShareImage > img:first-of-type {
-    margin-block-end: 1rem;
+    margin-block-end: 7rem;
     border-bottom-right-radius: 70px;
   }
 
