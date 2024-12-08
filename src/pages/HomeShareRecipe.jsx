@@ -5,6 +5,8 @@ import styles from "../CSS/Share.module.css";
 import Carousel1 from "../images/shareImg.jpg";
 import Carousel2 from "../images/shareImg2.jpg";
 import Carousel3 from "../images/shareImg3.jpg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ShareRecipe = () => {
   const [title, setTitle] = useState("");
@@ -91,12 +93,13 @@ const ShareRecipe = () => {
       );
       const recipeId = response.data.recipe._id;
 
-      alert("Recette créée avec succès !");
-      // Rediriger vers la page de la recette avec l'ID
+      toast.success("Recette créée avec succès !");
       navigate(`/recipes/${recipeId}`);
     } catch (error) {
       console.error("Erreur lors de la création de la recette :", error);
-      alert("Erreur lors de la création de la recette. Veuillez réessayer.");
+      toast.error(
+        "Erreur lors de la création de la recette. Veuillez réessayer."
+      );
     }
   };
 

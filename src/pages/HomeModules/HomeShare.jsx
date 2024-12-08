@@ -3,12 +3,12 @@ import img1 from "../../images/shareImg.jpg";
 import img2 from "../../images/homeShare.jpg";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
 import HomeShareRecipe from "../HomeShareRecipe.jsx";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function HomeShare() {
   const { isAuthenticated } = useContext(AuthContext);
-  const navigate = useNavigate();
   const recipeSectionRef = useRef(null);
 
   const handleShareClick = (event) => {
@@ -20,7 +20,7 @@ function HomeShare() {
         50;
       window.scrollTo(0, topOffset);
     } else {
-      navigate("/login");
+      toast("Veuillez vous connecter pour accéder a cette fonctionalité");
     }
   };
 

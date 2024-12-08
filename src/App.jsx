@@ -2,8 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SharedLayout from "./layouts/SharedLayout.jsx";
 import { Home, ErrorPage } from "./pages";
 import SingleError from "./components/SingleError.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import SingleRecipe from "./pages/SingleRecipe.jsx";
 import BrowseRecipes from "./pages/Browse.jsx";
@@ -18,16 +16,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        errorElement: <SingleError />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-        errorElement: <SingleError />,
-      },
-      {
-        path: "register",
-        element: <Register />,
         errorElement: <SingleError />,
       },
       {

@@ -1,30 +1,41 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../context/AuthContext"; // Import du contexte
-import axios from "axios"; // Import Axios
+import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 import styles from "../CSS/Navbar.module.css";
+import { ToastContainer } from "react-toastify";
+import LoginForm from "../pages/Login";
+import RegisterForm from "../pages/Register";
 
 function Navbar() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // Utilisation du contexte
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoginVisible, setIsLoginVisible] = useState(false); // État pour gérer le formulaire de connexion
+  const [isRegisterVisible, setIsRegisterVisible] = useState(false); // État pour gérer le formulaire de connexion
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [profileImage, setProfileImage] = useState(null); // State for storing profile image
-  const [userId, setUserId] = useState(null); // State for user ID
+  const [profileImage, setProfileImage] = useState(null);
+  const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation(); // Hook to get the current route
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    setIsAuthenticated(false); // Mise à jour de l'état d'authentification
-    navigate("/login"); // Redirection vers la page de connexion après déconnexion
+    setIsAuthenticated(false);
+    navigate("/login");
   };
 
-  // Fetch the user profile data including the profile image
+  const handleLoginToggle = () => {
+    setIsLoginVisible((prev) => !prev);
+  };
+
+  const handleRegisterToggle = () => {
+    setIsRegisterVisible((prev) => !prev);
+  };
+
   const fetchUserProfile = async (id) => {
     try {
-      const token = localStorage.getItem("token"); // Assume token is stored in localStorage
+      const token = localStorage.getItem("token");
       if (token) {
         const response = await axios.get(
           `http://localhost:5000/api/v1/auth/${id}`,
@@ -34,7 +45,6 @@ function Navbar() {
             },
           }
         );
-        // Assuming the image URL is located in response.data.user.imageUrl
         setProfileImage(response.data.user.imageUrl);
       }
     } catch (error) {
@@ -44,7 +54,6 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-
     window.addEventListener("resize", handleResize);
 
     if (isAuthenticated) {
@@ -63,7 +72,6 @@ function Navbar() {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    // Add or remove no-scroll class on body when menu is opened/closed
     if (isOpen) {
       document.body.classList.add(styles.noScroll);
     } else {
@@ -71,29 +79,38 @@ function Navbar() {
     }
 
     return () => {
-      // Clean up when the component unmounts
       document.body.classList.remove(styles.noScroll);
     };
   }, [isOpen]);
 
-  const handleCreateArticleClick = (e) => {
-    e.preventDefault();
-    if (isAuthenticated) {
-      navigate("/share"); // Si l'utilisateur est connecté, redirige vers la page de création d'article
+  useEffect(() => {
+    if (isLoginVisible) {
+      document.body.classList.add(styles.noScroll);
     } else {
-      navigate("/login"); // Sinon, redirige vers la page de connexion
+      document.body.classList.remove(styles.noScroll);
     }
-  };
 
-  // Determine the background color of the logo based on the current page
-  const logoBackgroundColor =
-    location.pathname === "/"
-      ? "var(--clr-primary-500)"
-      : location.pathname === "/share"
-      ? "var(--clr-secondary-500)"
-      : "var(--clr-primary-500)";
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [isLoginVisible]);
+
+  useEffect(() => {
+    if (isRegisterVisible) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [isRegisterVisible]);
+
   return (
     <nav id={styles.navbar}>
+      <ToastContainer position="top-center" autoClose={3000} />
+
       <div
         className={`${styles.navContainer} ${
           isOpen ? styles.active : styles.notActive
@@ -103,10 +120,9 @@ function Navbar() {
           <img
             src={logo}
             alt="logo"
-            className={`${styles.logo} 
-             
-             ${isOpen ? styles.active : styles.notActive}`}
-            style={{ backgroundColor: logoBackgroundColor }} // Dynamically set background color
+            className={`${styles.logo} ${
+              isOpen ? styles.active : styles.notActive
+            }`}
           />
           <a
             href="/"
@@ -126,20 +142,19 @@ function Navbar() {
           <div className={styles.navlinkContainer}>
             <ul>
               <li>
-                <NavLink to="/">Accueil</NavLink>
+                <a href="/">Accueil</a>
               </li>
               <li>
-                <a href="#homeShare">Partager</a>
+                <a href="#shareSectionRef">Partager</a>
               </li>
               <li>
-                <NavLink to="browse">Parcourir</NavLink>
+                <a href="/browse">Parcourir</a>
               </li>
               <li>
-                <NavLink to="">Contact</NavLink>
+                <a href="#contactSectionRef">Contact</a>
               </li>
             </ul>
           </div>
-
           <div className={styles.navBtnContainer}>
             {isAuthenticated ? (
               <>
@@ -156,17 +171,20 @@ function Navbar() {
                   </a>
                 </div>
                 <button onClick={handleLogout} className={styles.signout}>
-                  <i className="fa-solid fa-power-off"></i>
+                  Se déconnecter
                 </button>
               </>
             ) : (
               <>
-                <a href="/login" className={styles.login}>
+                <button onClick={handleLoginToggle} className={styles.login}>
                   Se connecter
-                </a>
-                <a href="/register" className={styles.signin}>
+                </button>
+                <button
+                  onClick={handleRegisterToggle}
+                  className={styles.signin}
+                >
                   Créer un compte
-                </a>
+                </button>
               </>
             )}
           </div>
@@ -194,6 +212,8 @@ function Navbar() {
           </div>
         </div>
       </div>
+      {isLoginVisible && <LoginForm onClose={handleLoginToggle} />}
+      {isRegisterVisible && <RegisterForm onClose={handleRegisterToggle} />}
     </nav>
   );
 }

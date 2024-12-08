@@ -1,4 +1,70 @@
-/* ============= NAVBAR ============= */
+:root {
+  /* primary color */
+  --clr-primary-50: #f0f8fe;
+  --clr-primary-100: #deeefb;
+  --clr-primary-200: #c4e2f9;
+  --clr-primary-300: #9bd0f5;
+  --clr-primary-400: #6cb6ee;
+  --clr-primary-500: #4a99e7;
+  --clr-primary-600: #337cdb;
+  --clr-primary-700: #2c68c9;
+  --clr-primary-800: #2955a4;
+  --clr-primary-900: #274981;
+  --clr-primary-950: #1c2e4f;
+
+  /* secondary color */
+  --clr-secondary-50: #fdf8ef;
+  --clr-secondary-100: #fbefd9;
+  --clr-secondary-200: #f6dbb2;
+  --clr-secondary-300: #f0c281;
+  --clr-secondary-400: #e9a04e;
+  --clr-secondary-500: #e68f3d;
+  --clr-secondary-600: #d56d21;
+  --clr-secondary-700: #b1531d;
+  --clr-secondary-800: #8d421f;
+  --clr-secondary-900: #72381c;
+  --clr-secondary-950: #3d1b0d;
+
+  /* third color */
+  --clr-third-50: #fcf4f4;
+  --clr-third-100: #f9e7e7;
+  --clr-third-200: #f5d3d3;
+  --clr-third-300: #eeb3b3;
+  --clr-third-400: #e59494;
+  --clr-third-500: #d36060;
+  --clr-third-600: #be4444;
+  --clr-third-700: #9f3636;
+  --clr-third-800: #843030;
+  --clr-third-900: #6f2d2d;
+  --clr-third-950: #3b1414;
+
+  /* nuance */
+  --clr-nuance-50: #f6f6f6;
+  --clr-nuance-100: #e7e7e7;
+  --clr-nuance-200: #d1d1d1;
+  --clr-nuance-300: #b0b0b0;
+  --clr-nuance-400: #888888;
+  --clr-nuance-500: #6d6d6d;
+  --clr-nuance-600: #5d5d5d;
+  --clr-nuance-700: #4f4f4f;
+  --clr-nuance-800: #454545;
+  --clr-nuance-900: #3d3d3d;
+  --clr-nuance-950: #000000;
+
+  --clr-black: #000000;
+  --clr-white: #ffffff;
+
+  /* font family */
+  --ff-button: "Outfit";
+  --ff-satisfy: "Satisfy";
+  --ff-montserrat: "Montserrat";
+  --ff-poppins: "Poppins", sans-serif;
+  --ff-karla: "Karla", sans-serif;
+
+  /* misc */
+  --transition-02: all 0.2s ease-in-out;
+  --transition-04: all 0.4s ease-in-out;
+}
 
 .logo {
   width: 40px;
@@ -31,10 +97,13 @@
   color: var(--clr-primary-500);
 }
 
-.navBtnContainer a {
+.navBtnContainer button {
   color: var(--clr-white);
   letter-spacing: 0.07rem;
   font-family: var(--ff-button);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .login {
@@ -46,32 +115,30 @@
 }
 
 #navbar {
-  block-size: 6vh;
+  block-size: 3.5rem;
 }
 
 .navContainer {
   inline-size: 100%;
   position: fixed;
+  top: 0;
   z-index: 1111;
-  block-size: 6vh;
 }
 
 .signout {
-  inline-size: 4rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background-color: rgba(255, 0, 0, 0.61);
   border: none;
   color: var(--clr-white);
   transition: var(--transition-02);
   cursor: pointer;
+  font-family: var(--ff-button);
+  letter-spacing: 0.05rem;
+  padding-inline: 1rem;
 }
 
 .signout:hover {
-  inline-size: 4rem;
-  font-size: 1.5rem;
-  background-color: rgb(255, 0, 0);
-  border: none;
-  color: var(--clr-white);
+  background-color: rgb(220, 4, 4);
 }
 
 @media screen and (max-width: 1190px) {
@@ -112,7 +179,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     transition: all 0.4s ease-in-out;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
     opacity: 0;
   }
 
@@ -121,7 +188,7 @@
     opacity: 1;
   }
 
-  .navBtnContainer a {
+  .navBtnContainer button {
     padding: 1.2rem 3.5rem;
     font-size: 1.1rem;
     text-align: center;
@@ -178,26 +245,31 @@
   }
 
   .profileSection a {
-    font-size: 2rem;
-    background-color: var(--clr-primary-500);
+    font-size: 1.5rem;
     border-radius: 10px;
+    block-size: 6rem;
+    padding: 1rem;
+    margin-inline: auto;
+    background-color: var(--clr-primary-500);
   }
 
   .profileImage {
-    block-size: 5.2rem;
+    block-size: 80px;
     aspect-ratio: 1/1;
     border-radius: 50%;
     transition: var(--transition-02);
     object-fit: cover;
-    border: 2px solid var(--clr-white);
+    outline: 2px solid var(--clr-white);
   }
 
   .signout {
     padding: 1rem;
     border-radius: 10px;
     margin-inline: auto;
-    inline-size: 100%;
-    font-size: 2.5rem;
+    font-size: 1.5em;
+    inline-size: 80%;
+    font-size: 1.5rem;
+    font-family: var(--ff-button);
   }
 
   /* ============= NAVBAR EVENTS ============= */
@@ -206,10 +278,6 @@
 
   .logoTitle.active {
     color: var(--clr-white);
-  }
-
-  .navContainer.active {
-    background-color: transparent;
   }
 
   .notActive {
@@ -248,7 +316,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    inline-size: 80%;
+    inline-size: 70%;
     overflow: hidden;
   }
 
@@ -256,7 +324,7 @@
     display: none;
   }
 
-  .navBtnContainer a {
+  .navBtnContainer button {
     padding: 1.2rem 1rem;
     inline-size: 12rem;
     text-align: center;
@@ -269,9 +337,11 @@
   .showProfile {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     transition: var(--transition-02);
     position: relative;
+    margin-block-start: 0.3rem;
+    margin-inline-end: 0.5rem;
   }
 
   .profileSection a {
@@ -279,12 +349,9 @@
   }
 
   .profileImage {
-    block-size: 3.2rem;
+    block-size: 50px;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
     transition: var(--transition-02);
     border: 2px solid var(--clr-white);
     object-fit: cover;
@@ -314,7 +381,7 @@
 
 @media screen and (min-width: 1600px) {
   .linkContainer {
-    inline-size: 64%;
+    inline-size: 60%;
   }
 }
 

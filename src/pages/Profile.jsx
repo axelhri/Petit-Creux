@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "../CSS/Profile.module.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const recipesUrl = "http://localhost:5000/api/v1/recipes/test/?createdBy=";
 
@@ -107,8 +109,9 @@ function Profile() {
       }));
       setShowUpdateForm(false); // Close the form on success
       setError(null);
+      toast.success("Profil mis à jour.");
     } catch (error) {
-      setError("Erreur lors de la mise à jour du profil.");
+      toast.error("Erreur lors de la mise à jour du profil.");
     }
   };
 

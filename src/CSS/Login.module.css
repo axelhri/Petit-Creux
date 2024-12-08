@@ -38,36 +38,30 @@
   --transition-04: all 0.4s ease-in-out;
 }
 
-.backgroundHome {
-  background: url("../images/boreal.jpg") no-repeat;
-  min-height: 100vh;
-  background-size: cover;
-  backdrop-filter: blur(10px) brightness(0.8);
-}
-
-.backgroundHomeRegister {
-  background: url("../images/nature.jpg") no-repeat;
-  min-height: 100vh;
-  background-size: cover;
-  backdrop-filter: blur(20px) brightness(0.8);
-}
-
-#loginMain {
-  min-block-size: 94vh;
-  background-color: transparent;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-}
-
 #form {
   padding: 2rem 4rem 4rem 4rem;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(20px);
+  background: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.712);
   border-radius: 20px;
-  outline: 1px solid var(--clr-nuance-300);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8000;
+  inline-size: 90%;
+}
+
+#form .closeBtn {
+  inline-size: max-content;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1000px) {
@@ -80,7 +74,7 @@
   text-align: center;
   margin-block-end: 3rem;
   letter-spacing: 0.03rem;
-  color: var(--clr-white);
+  color: var(--clr-primary-500);
 }
 
 .inputContainer {
@@ -99,7 +93,7 @@
   background: transparent;
   inline-size: 100%;
   font-size: 1.2rem;
-  color: var(--clr-white);
+  color: var(--clr-nuance-700);
 }
 
 .inputBox {
@@ -111,14 +105,14 @@
   top: 50%;
   transform: translateY(-50%);
   right: 1rem;
-  color: white;
+  color: var(--clr-primary-500);
   font-size: 1.2rem;
 }
 
 .formInput::placeholder {
   font-size: 1rem;
   letter-spacing: 0.03rem;
-  color: var(--clr-white);
+  color: var(--clr-nuance-400);
 }
 
 .submitBtn {
@@ -138,24 +132,7 @@
 }
 
 .submitBtn:hover {
-  background-color: #fff;
-  color: var(--clr-primary-500);
-}
-
-.formAlt {
-  color: var(--clr-white);
-  font-size: 1rem;
-  margin-inline: auto;
-}
-
-.formAlt a {
-  color: var(--clr-primary-300);
-  transition: var(--transition-02);
-}
-
-.formAlt a:hover {
-  color: var(--clr-white);
-  text-decoration: underline;
+  background-color: var(--clr-primary-700);
 }
 
 .userImage {
@@ -191,7 +168,7 @@
 }
 
 .uploadImage i {
-  color: var(--clr-nuance-900);
+  color: var(--clr-nuance-950);
   font-size: 1.7rem;
   position: absolute;
   bottom: 0;

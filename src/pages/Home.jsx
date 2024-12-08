@@ -1,14 +1,15 @@
-import { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useContext, useRef, useState } from "react";
 import styles from "../CSS/Home.module.css";
 import { AuthContext } from "../context/AuthContext"; // Import du contexte
 import HomeShare from "./HomeModules/HomeShare";
 import HomeBrowse from "./HomeModules/HomeBrowse";
 import HomeContact from "./HomeModules/HomeContact";
+import LoginForm from "./Login";
 
 function Home() {
   const { isAuthenticated } = useContext(AuthContext); // Utilisation du contexte
-  const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
+  const recipeSectionRef = useRef(null);
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
 
   useEffect(() => {
     document.body.className = styles.backgroundHome;
@@ -21,14 +22,31 @@ function Home() {
   const handleGetStartedClick = (e) => {
     e.preventDefault();
     if (isAuthenticated) {
-      navigate("/share"); // Si l'utilisateur est connecté, redirige vers la page de création d'article
+      const topOffset =
+        recipeSectionRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        50;
+      window.scrollTo(0, topOffset);
     } else {
-      navigate("/login"); // Sinon, redirige vers la page de connexion
+      setIsLoginVisible((prev) => !prev);
     }
   };
 
+  useEffect(() => {
+    if (isLoginVisible) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [isLoginVisible]);
+
   return (
     <>
+      {isLoginVisible && <LoginForm onClose={handleGetStartedClick} />}
       <header id={styles.header}>
         <div className={styles.headerContainer}>
           <h1 className={styles.headerTitle}>
@@ -54,9 +72,13 @@ function Home() {
         </div>
       </header>
       <main id="homeMain">
-        <HomeShare />
+        <div id="shareSectionRef" ref={recipeSectionRef}>
+          <HomeShare />
+        </div>
         <HomeBrowse />
-        <HomeContact />
+        <div id="contactSectionRef">
+          <HomeContact />
+        </div>
       </main>
     </>
   );

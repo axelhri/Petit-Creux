@@ -212,3 +212,7 @@
     color: var(--clr-primary-500);
   }
 }
+
+.noScroll {
+  overflow: hidden;
+}
