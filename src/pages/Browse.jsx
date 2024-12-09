@@ -4,6 +4,7 @@ import axios from "axios";
 import styles from "../CSS/Browse.module.css";
 import img1 from "../images/browseimg1.jpg";
 import img2 from "../images/browseimg2.jpg";
+import Loader from "./Loader.jsx";
 
 const recipesUrl = "http://localhost:5000/api/v1/recipes/all";
 const userUrl = "http://localhost:5000/api/v1/auth/";
@@ -21,6 +22,8 @@ function Browse() {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [userProfiles, setUserProfiles] = useState({});
+
+  // fetch recipes from all the users
 
   const fetchAllRecipes = async () => {
     try {
@@ -72,11 +75,15 @@ function Browse() {
     }
   };
 
+  // search input for recipes
+
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
     filterRecipes(term, selectedCategory);
   };
+
+  // select input for categories
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
@@ -106,7 +113,11 @@ function Browse() {
   }, [allRecipes, initialSearchTerm]);
 
   if (loading) {
-    return <div>Chargement...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {

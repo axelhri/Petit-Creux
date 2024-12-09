@@ -13,6 +13,7 @@ function HomeContact() {
     formmsg: "",
   });
 
+  // handle form submission
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -43,14 +44,17 @@ function HomeContact() {
     }
   }
 
+  // focus event for input fields
   const handleFocus = (fieldName) => {
     setFocusedField(fieldName);
   };
 
+  // blur event to reset focused field
   const handleBlur = () => {
     setFocusedField(null);
   };
 
+  // handle change in input fields and update the state values
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -116,7 +120,7 @@ function HomeContact() {
             onChange={handleChange}
             placeholder=" "
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email *</label>
           <i className="fa-solid fa-envelope"></i>
         </div>
         <div
@@ -137,6 +141,7 @@ function HomeContact() {
           <label htmlFor="formmsg">Message *</label>
           <i className="fa-solid fa-message"></i>
         </div>
+        <span className={styles.requiredFields}>* Champs obligatoires</span>
         <div className={styles.submitBtn}>
           <button type="submit" className={styles.contactSubmit}>
             Envoyer

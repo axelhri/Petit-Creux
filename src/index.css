@@ -22,18 +22,18 @@
   --clr-primary-900: #274981;
   --clr-primary-950: #1c2e4f;
 
-  /* secondary color */
-  --clr-secondary-50: #fdf8ef;
-  --clr-secondary-100: #fbefd9;
-  --clr-secondary-200: #f6dbb2;
-  --clr-secondary-300: #f0c281;
-  --clr-secondary-400: #e9a04e;
-  --clr-secondary-500: #e68f3d;
-  --clr-secondary-600: #d56d21;
-  --clr-secondary-700: #b1531d;
-  --clr-secondary-800: #8d421f;
-  --clr-secondary-900: #72381c;
-  --clr-secondary-950: #3d1b0d;
+  /* third color */
+  --clr-third-50: #fcf4f4;
+  --clr-third-100: #f9e7e7;
+  --clr-third-200: #f5d3d3;
+  --clr-third-300: #eeb3b3;
+  --clr-third-400: #e59494;
+  --clr-third-500: #d36060;
+  --clr-third-600: #be4444;
+  --clr-third-700: #9f3636;
+  --clr-third-800: #843030;
+  --clr-third-900: #6f2d2d;
+  --clr-third-950: #3b1414;
 
   /* nuance */
   --clr-nuance-50: #f6f6f6;
@@ -63,8 +63,6 @@
   --transition-04: all 0.4s ease-in-out;
 }
 
-/* ============= ALL ============= */
-
 html {
   scroll-behavior: smooth;
 }
@@ -93,4 +91,16 @@ a {
 
 input {
   outline: none;
+}
+
+.loaderContainer {
+  min-block-size: 100vh;
+  position: relative;
+}
+
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

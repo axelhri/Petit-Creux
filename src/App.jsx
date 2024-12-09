@@ -5,7 +5,7 @@ import SingleError from "./components/SingleError.jsx";
 import Profile from "./pages/Profile.jsx";
 import SingleRecipe from "./pages/SingleRecipe.jsx";
 import BrowseRecipes from "./pages/Browse.jsx";
-import { AuthProvider } from "./context/AuthContext"; // Import du AuthProvider
+import { AuthProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {

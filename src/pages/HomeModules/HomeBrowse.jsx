@@ -8,15 +8,17 @@ function HomeBrowse() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
+  // showcase users
+
   useEffect(() => {
-    // Liste des IDs utilisateur
     const userIds = [
       "67502d29ebba07ce1a95bdb1",
       "675052bfebba07ce1a95bf51",
       "67505427ebba07ce1a95bf6d",
     ];
 
-    // Fonction pour récupérer les données utilisateur
+    // fetch users infos
+
     const fetchUsers = async () => {
       try {
         const promises = userIds.map((id) =>
@@ -25,7 +27,7 @@ function HomeBrowse() {
 
         const responses = await Promise.all(promises);
         const fetchedUsers = responses.map((response) => response.data);
-        setUsers(fetchedUsers); // Stocke les données utilisateur dans l'état
+        setUsers(fetchedUsers);
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des utilisateurs:",
@@ -36,6 +38,8 @@ function HomeBrowse() {
 
     fetchUsers();
   }, []);
+
+  // search input value added to browse url page
 
   const handleSubmit = (e) => {
     e.preventDefault();

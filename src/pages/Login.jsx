@@ -15,6 +15,8 @@ const Login = ({ onClose }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // form submit
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -33,7 +35,6 @@ const Login = ({ onClose }) => {
     } catch (error) {
       console.error("Login error", error.response.data);
 
-      // Affichage du toast d'erreur
       if (error.response && error.response.data) {
         toast.error("Identifiants invalides");
       }

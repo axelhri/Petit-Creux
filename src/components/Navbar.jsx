@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -11,19 +11,33 @@ import RegisterForm from "../pages/Register";
 function Navbar() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoginVisible, setIsLoginVisible] = useState(false); // État pour gérer le formulaire de connexion
-  const [isRegisterVisible, setIsRegisterVisible] = useState(false); // État pour gérer le formulaire de connexion
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
+  const [isRegisterVisible, setIsRegisterVisible] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // logout
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     setIsAuthenticated(false);
-    navigate("/login");
+    navigate("/");
   };
+
+  // scroll to section
+
+  const handleSectionLink = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: sectionId } });
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView();
+    }
+  };
+
+  // login & register open/close toggle
 
   const handleLoginToggle = () => {
     setIsLoginVisible((prev) => !prev);
@@ -32,6 +46,8 @@ function Navbar() {
   const handleRegisterToggle = () => {
     setIsRegisterVisible((prev) => !prev);
   };
+
+  // fetch user infos
 
   const fetchUserProfile = async (id) => {
     try {
@@ -53,9 +69,6 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-
     if (isAuthenticated) {
       const token = localStorage.getItem("token");
       if (token) {
@@ -65,11 +78,9 @@ function Navbar() {
         fetchUserProfile(storedUserId);
       }
     }
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, [isAuthenticated]);
+
+  // disable scroll for burger menu
 
   useEffect(() => {
     if (isOpen) {
@@ -83,34 +94,9 @@ function Navbar() {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isLoginVisible) {
-      document.body.classList.add(styles.noScroll);
-    } else {
-      document.body.classList.remove(styles.noScroll);
-    }
-
-    return () => {
-      document.body.classList.remove(styles.noScroll);
-    };
-  }, [isLoginVisible]);
-
-  useEffect(() => {
-    if (isRegisterVisible) {
-      document.body.classList.add(styles.noScroll);
-    } else {
-      document.body.classList.remove(styles.noScroll);
-    }
-
-    return () => {
-      document.body.classList.remove(styles.noScroll);
-    };
-  }, [isRegisterVisible]);
-
   return (
     <nav id={styles.navbar}>
       <ToastContainer position="top-center" autoClose={3000} />
-
       <div
         className={`${styles.navContainer} ${
           isOpen ? styles.active : styles.notActive
@@ -142,22 +128,42 @@ function Navbar() {
           <div className={styles.navlinkContainer}>
             <ul>
               <li>
-                <a href="/">Accueil</a>
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (location.pathname !== "/") {
+                      navigate("/");
+                    }
+                  }}
+                >
+                  Accueil
+                </a>
               </li>
               <li>
-                <a href="#shareSectionRef">Partager</a>
+                <a
+                  onClick={() => handleSectionLink("shareSectionRef")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Partager
+                </a>
               </li>
               <li>
                 <a href="/browse">Parcourir</a>
               </li>
               <li>
-                <a href="#contactSectionRef">Contact</a>
+                <a
+                  onClick={() => handleSectionLink("contactSectionRef")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </div>
           <div className={styles.navBtnContainer}>
             {isAuthenticated ? (
-              <>
+              <div className={styles.profileLogout}>
                 <div className={styles.profileSection}>
                   <a href={`/profile/${userId}`} className={styles.showProfile}>
                     Mes recettes{" "}
@@ -171,9 +177,10 @@ function Navbar() {
                   </a>
                 </div>
                 <button onClick={handleLogout} className={styles.signout}>
-                  Se déconnecter
+                  Deconnexion{""}
+                  <i className="fa-solid fa-right-from-bracket"></i>
                 </button>
-              </>
+              </div>
             ) : (
               <>
                 <button onClick={handleLoginToggle} className={styles.login}>

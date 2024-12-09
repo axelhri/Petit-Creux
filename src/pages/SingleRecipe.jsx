@@ -7,28 +7,28 @@ const singleRecipesUrl = "http://localhost:5000/api/v1/recipes/";
 const userUrl = "http://localhost:5000/api/v1/auth/";
 
 function SingleRecipe() {
-  const { id } = useParams(); // Get the id from the route parameters
+  const { id } = useParams();
   const [recipeData, setRecipeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
-  const [eaters, setEaters] = useState(0); // Initialize to 0 and set it later
+  const [eaters, setEaters] = useState(0);
   const navigate = useNavigate();
+
+  // fetch recipe and users infos
 
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
 
       try {
-        // Fetch Recipe
         const recipeResponse = await axios.get(`${singleRecipesUrl}${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setRecipeData(recipeResponse.data);
-        setEaters(recipeResponse.data.recipe.eaters); // Set initial eaters from recipe data
+        setEaters(recipeResponse.data.recipe.eaters);
 
-        // Fetch User Profile
         const userResponse = await axios.get(
           `${userUrl}${recipeResponse.data.recipe.createdBy}`,
           {
@@ -48,15 +48,20 @@ function SingleRecipe() {
     fetchData();
   }, [id]);
 
+  // add one person for the ingredients to update the quantity
+
   const handleIncreaseEaters = () => {
     setEaters((prevEaters) => prevEaters + 1);
   };
 
+  // remove one person for the ingredients to update the quantity
+
   const handleDecreaseEaters = () => {
-    setEaters((prevEaters) => Math.max(prevEaters - 1, 1)); // Minimum of 1 eater
+    setEaters((prevEaters) => Math.max(prevEaters - 1, 1));
   };
 
-  // Handle recipe deletion
+  // delete the recipe
+
   const handleDeleteRecipe = async () => {
     const token = localStorage.getItem("token");
 
@@ -66,7 +71,7 @@ function SingleRecipe() {
           Authorization: `Bearer ${token}`,
         },
       });
-      navigate("/"); // Redirect to home or another page after deletion
+      navigate("/");
     } catch (error) {
       console.error("Error deleting recipe:", error);
     }
@@ -74,23 +79,23 @@ function SingleRecipe() {
 
   if (loading) return <p>Loading...</p>;
 
-  // Calculate adjusted ingredients
+  // rounded numbers for ingredients
+
   const adjustedIngredients = recipeData
     ? recipeData.recipe.ingredients.map((ingredient) => ({
         ...ingredient,
         quantity: Math.round(
           (ingredient.quantity * eaters) / recipeData.recipe.eaters
-        ), // Arrondir la quantité
+        ),
       }))
     : [];
 
   const formatQuantity = (quantity) => {
     return Number.isInteger(quantity)
       ? quantity.toString()
-      : quantity.toFixed(2).replace(/\.?0+$/, ""); // Remove trailing zeros and decimal point if necessary
+      : quantity.toFixed(2).replace(/\.?0+$/, "");
   };
 
-  // Check if the current user is the creator of the recipe
   const currentUserId = localStorage.getItem("userId");
 
   return (
@@ -179,7 +184,6 @@ function SingleRecipe() {
             </section>
           </div>
 
-          {/* Afficher le bouton de suppression uniquement si l'utilisateur est le créateur */}
           {currentUserId === recipeData.recipe.createdBy && (
             <div className={styles.deleteRecipe}>
               <button

@@ -10,7 +10,7 @@ function SharedLayout() {
     <div>
       <Navbar />
       {isPageLoading ? <div>Loading...</div> : <Outlet />}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

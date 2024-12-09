@@ -11,6 +11,8 @@ function HomeShare() {
   const { isAuthenticated } = useContext(AuthContext);
   const recipeSectionRef = useRef(null);
 
+  // scroll to section if connected, if not a pop up appears
+
   const handleShareClick = (event) => {
     event.preventDefault();
     if (isAuthenticated) {

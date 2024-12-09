@@ -12,59 +12,52 @@ const Register = ({ onClose }) => {
   });
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(defaultImg);
-
   const navigate = useNavigate();
   const { name, email, password } = formData;
-
-  // Gérer le changement des valeurs du texte
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Gérer le changement de l'image sélectionnée
+  // upload profile image
+
   const onImageChange = (e) => {
-    const file = e.target.files[0]; // Récupérer l'image
+    const file = e.target.files[0];
     if (file) {
-      setImage(file); // Enregistrer l'image dans l'état
-      // Prévisualisation de l'image
+      setImage(file);
       const reader = new FileReader();
       reader.onloadend = () => setPreviewImage(reader.result);
       reader.readAsDataURL(file);
     }
   };
 
-  // Gérer l'envoi du formulaire
+  // form submit
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Créer un objet FormData pour inclure les fichiers
       const data = new FormData();
       data.append("name", name);
       data.append("email", email);
       data.append("password", password);
       if (image) {
-        data.append("image", image); // Ajouter l'image au formData
+        data.append("image", image);
       }
 
-      // Envoie de la requête au backend pour enregistrer l'utilisateur avec l'image
       const res = await axios.post(
         "http://localhost:5000/api/v1/auth/register",
         data,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Important pour les fichiers
+            "Content-Type": "multipart/form-data",
           },
         }
       );
       console.log("User registered", res.data);
 
-      // Si le back-end retourne un token, on peut l'utiliser ici
       const { token, user } = res.data;
 
-      // Stocker le token dans le localStorage pour rester connecté
       localStorage.setItem("token", token);
       localStorage.setItem("userId", user._id);
 
-      // Redirection vers la page d'accueil ou une autre page sécurisée
       navigate("/");
       if (onClose) onClose();
     } catch (err) {
@@ -80,11 +73,7 @@ const Register = ({ onClose }) => {
       <h1 className={styles.formTitle}>Créer un compte</h1>
       <div className={styles.inputContainer}>
         <div className={styles.uploadImage}>
-          <img
-            src={previewImage} // Afficher l'image sélectionnée en tant que prévisualisation
-            alt="Profil"
-            className={styles.userImage}
-          />
+          <img src={previewImage} alt="Profil" className={styles.userImage} />
           <i className="fa-solid fa-camera"></i>
           <input
             type="file"

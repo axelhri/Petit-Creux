@@ -1,15 +1,19 @@
 import { useEffect, useContext, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "../CSS/Home.module.css";
-import { AuthContext } from "../context/AuthContext"; // Import du contexte
+import { AuthContext } from "../context/AuthContext";
 import HomeShare from "./HomeModules/HomeShare";
 import HomeBrowse from "./HomeModules/HomeBrowse";
 import HomeContact from "./HomeModules/HomeContact";
 import LoginForm from "./Login";
 
 function Home() {
-  const { isAuthenticated } = useContext(AuthContext); // Utilisation du contexte
+  const { isAuthenticated } = useContext(AuthContext);
   const recipeSectionRef = useRef(null);
   const [isLoginVisible, setIsLoginVisible] = useState(false);
+  const location = useLocation();
+
+  // home background
 
   useEffect(() => {
     document.body.className = styles.backgroundHome;
@@ -18,6 +22,8 @@ function Home() {
       document.body.className = "";
     };
   }, []);
+
+  // get started button either scroll to share section or open login form
 
   const handleGetStartedClick = (e) => {
     e.preventDefault();
@@ -32,17 +38,16 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    if (isLoginVisible) {
-      document.body.classList.add(styles.noScroll);
-    } else {
-      document.body.classList.remove(styles.noScroll);
-    }
+  // scroll to section from another page
 
-    return () => {
-      document.body.classList.remove(styles.noScroll);
-    };
-  }, [isLoginVisible]);
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      setTimeout(() => {
+        const section = document.getElementById(location.state.scrollTo);
+        section?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, [location.state]);
 
   return (
     <>

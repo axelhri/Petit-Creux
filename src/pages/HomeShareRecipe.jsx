@@ -19,11 +19,12 @@ const ShareRecipe = () => {
   const [image, setImage] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [imagePreview, setImagePreview] = useState(null);
-  const [isImageVisible, setIsImageVisible] = useState(true); // Visibility state
+  const [isImageVisible, setIsImageVisible] = useState(true);
   const ingredientsContainerRef = useRef(null);
   const navigate = useNavigate();
-
   const carouselImages = [Carousel1, Carousel2, Carousel3];
+
+  // ingredients
 
   const ingredientUnits = [
     "grammes",
@@ -47,19 +48,23 @@ const ShareRecipe = () => {
     "pièce",
   ];
 
+  // images slider
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsImageVisible(false); // Hide the current image
+      setIsImageVisible(false);
       setTimeout(() => {
         setCarouselIndex((prevIndex) =>
           prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
         );
-        setIsImageVisible(true); // Show the new image
-      }, 300); // Match the CSS transition duration (0.5s)
-    }, 5000); // Change image every 5 seconds
+        setIsImageVisible(true);
+      }, 300);
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    return () => clearInterval(interval);
   }, [carouselImages.length]);
+
+  // form submit
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,6 +108,8 @@ const ShareRecipe = () => {
     }
   };
 
+  // add one more ingredient
+
   const addIngredient = () => {
     setIngredients([
       ...ingredients,
@@ -123,7 +130,7 @@ const ShareRecipe = () => {
     if (field === "quantity") {
       const currentUnit = updatedIngredients[index].unit;
       if (nonDecimalUnits.includes(currentUnit)) {
-        value = Math.floor(value); // Ensure integer for non-decimal units
+        value = Math.floor(value);
       }
     }
 
@@ -187,6 +194,7 @@ const ShareRecipe = () => {
                   <input
                     type="file"
                     accept="image/*"
+                    required
                     onChange={handleImageChange}
                   />
                 </div>
@@ -215,7 +223,7 @@ const ShareRecipe = () => {
                   <button
                     onClick={() => setEaters(eaters > 1 ? eaters - 1 : 1)}
                     className={styles.eatersBtnLeft}
-                    type="button" // Prevent form submission
+                    type="button"
                   >
                     -
                   </button>
@@ -233,7 +241,7 @@ const ShareRecipe = () => {
                     </span>
                   </div>
                   <button
-                    type="button" // Prevent form submission
+                    type="button"
                     onClick={() => setEaters(eaters + 1)}
                     className={styles.eatersBtnRight}
                   >

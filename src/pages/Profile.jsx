@@ -15,7 +15,7 @@ function Profile() {
   const [error, setError] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showDeleteBox, setShowDeleteBox] = useState(false);
-  const [showUpdateForm, setShowUpdateForm] = useState(false); // État pour afficher le formulaire
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [email, setEmail] = useState("");
@@ -24,16 +24,17 @@ function Profile() {
   const navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState(null);
 
+  // change profile image
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPreviewImage(URL.createObjectURL(file)); // Génère une URL locale pour prévisualiser l'image
-      setProfileImage(file); // Met à jour l'image à envoyer au backend
+      setPreviewImage(URL.createObjectURL(file));
+      setProfileImage(file);
     }
   };
 
   useEffect(() => {
-    // Si une image de profil existe déjà, utilisez-la pour l'aperçu initial
     if (userData && userData.imageUrl) {
       setPreviewImage(userData.imageUrl);
     }
@@ -51,15 +52,17 @@ function Profile() {
     setShowDeleteBox(false);
   };
 
+  // fetch user and all their recipes
+
   const fetchUserProfileAndRecipes = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/v1/auth/${userId}`
       );
       setUserData(response.data.user);
-      setName(response.data.user.name); // Initialiser l'état avec les données récupérées
-      setBio(response.data.user.bio); // Initialiser l'état avec les données récupérées
-      setEmail(response.data.user.email); // Initialiser l'état avec les données récupérées
+      setName(response.data.user.name);
+      setBio(response.data.user.bio);
+      setEmail(response.data.user.email);
 
       const recipesResponse = await axios.get(`${recipesUrl}${userId}`);
       setUserRecipes(recipesResponse.data.recipes);
@@ -80,6 +83,8 @@ function Profile() {
       setLoading(false);
     }
   }, [userId]);
+
+  // update every profile infos
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -107,13 +112,15 @@ function Profile() {
           ? URL.createObjectURL(profileImage)
           : prev.imageUrl,
       }));
-      setShowUpdateForm(false); // Close the form on success
+      setShowUpdateForm(false);
       setError(null);
       toast.success("Profil mis à jour.");
     } catch (error) {
       toast.error("Erreur lors de la mise à jour du profil.");
     }
   };
+
+  // deactivate account forever
 
   const handleDeleteAccount = async () => {
     try {
@@ -176,7 +183,6 @@ function Profile() {
           </div>
         </div>
 
-        {/* Formulaire de mise à jour de profil */}
         {showUpdateForm && (
           <form
             id={styles.form}
