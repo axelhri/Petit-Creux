@@ -62,7 +62,7 @@ function HomeContact() {
   return (
     <section id={styles.homeContact}>
       <h5>
-        <span>Contacter-</span>nous
+        <span>Contactez-</span>nous
       </h5>
       <form className={styles.contactForm} onSubmit={handleSubmit}>
         <div className={styles.nameContainer}>

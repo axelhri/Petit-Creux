@@ -38,7 +38,7 @@
 
 .userCategoryBox p {
   font-family: var(--ff-button);
-  font-size: 1.3rem;
+  font-size: 1.3em;
   color: white;
 }
 
@@ -122,9 +122,9 @@ span {
 }
 
 .titleDescBox h1 {
-  font-size: 1.2rem;
+  font-size: 1.2em;
   color: var(--clr-third-600);
-  font-family: var(--ff-montserrat);
+  font-family: var(--ff-poppins);
 }
 
 .titleDescBox p {
@@ -141,7 +141,7 @@ span {
   display: flex;
   margin-block: 0.5rem 1rem;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.2em;
   justify-content: center;
   font-weight: 500;
 }
@@ -172,7 +172,7 @@ span {
   align-items: center;
   gap: 0.5rem;
   padding: 0 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .eatersBox p {
@@ -188,7 +188,7 @@ span {
   background: transparent;
   border: none;
   padding: 0.3rem;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 500;
 }
 
@@ -338,7 +338,7 @@ span {
   }
 
   .titleDescBox h1 {
-    font-size: 1.5rem;
+    font-size: 1.5em;
   }
 
   .ingredientList {
@@ -349,7 +349,7 @@ span {
   }
 
   .userImgBox p {
-    font-size: 1.7rem;
+    font-size: 1.7em;
     letter-spacing: 0.05rem;
   }
 

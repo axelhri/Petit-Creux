@@ -22,7 +22,7 @@ function HomeShare() {
         50;
       window.scrollTo(0, topOffset);
     } else {
-      toast("Veuillez vous connecter pour accéder a cette fonctionalité");
+      toast("Vous devez être connecté pour accéder a cette fonctionalité");
     }
   };
 

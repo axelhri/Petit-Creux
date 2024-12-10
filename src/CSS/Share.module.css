@@ -26,20 +26,20 @@
   margin-inline: auto;
   border-radius: 10px;
   position: relative;
-  font-family: var(--ff-montserrat);
+  font-family: var(--ff-karla);
   overflow: hidden;
 }
 
 #shareForm input {
   background: var(--clr-white);
-  font-family: var(--ff-montserrat);
+  font-family: var(--ff-karla);
   font-weight: 500;
 }
 
 #shareForm textarea {
   background: var(--clr-white);
-  font-size: 1rem;
-  font-family: var(--ff-montserrat);
+  font-size: 1em;
+  font-family: var(--ff-karla);
   font-weight: 500;
 }
 
@@ -53,14 +53,14 @@
 }
 
 #shareForm input::placeholder {
-  font-size: 1.1rem;
+  font-size: 1.1em;
   color: var(--clr-nuance-700);
   font-weight: 400;
   font-family: var(--ff-button);
 }
 
 #shareForm textarea::placeholder {
-  font-size: 1.1rem;
+  font-size: 1.1em;
   color: var(--clr-nuance-700);
   font-family: var(--ff-button);
   font-weight: 400;
@@ -99,7 +99,7 @@
   padding: 0.3rem;
   border: 1px solid var(--clr-nuance-950);
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 .titleDescContainer textarea {
@@ -134,12 +134,12 @@
   border-radius: 5px;
   color: var(--clr-nuance-950);
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.2em;
   cursor: pointer;
 }
 
 .postImgContainer i {
-  font-size: 5rem;
+  font-size: 5em;
   color: var(--clr-nuance-950);
   animation: cloudScale 1s linear infinite;
   transition: var(--transition-02);
@@ -153,7 +153,7 @@
 .postImgContainer p {
   text-align: center;
   font-family: var(--ff-button);
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 .noBorder {
@@ -176,7 +176,7 @@
 }
 
 .eatersBox label {
-  font-size: 1.1rem;
+  font-size: 1.1em;
   font-weight: 500;
   text-decoration: underline;
 }
@@ -188,7 +188,7 @@
 }
 
 .eatersBox input {
-  font-size: 1.1rem;
+  font-size: 1.1em;
   inline-size: 2.5rem;
   text-align: center;
   color: var(--clr-primary-500);
@@ -198,7 +198,7 @@
 
 .eatersBox button {
   background: none;
-  font-size: 2rem;
+  font-size: 2em;
   color: var(--clr-black);
   padding-inline: 0.5rem;
 }
@@ -236,7 +236,7 @@
 }
 
 .categoriesSelect {
-  font-size: 1.2rem;
+  font-size: 1.2em;
   border: none;
   border-bottom: 2px solid var(--clr-nuance-700);
   font-family: var(--ff-button);
@@ -259,7 +259,7 @@
 .ingredientsTitle {
   text-decoration: underline;
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .ingredientsContainer {
@@ -272,7 +272,7 @@
   border: none;
   border-bottom: 2px solid var(--clr-nuance-700);
   border-radius: 0;
-  font-size: 1rem;
+  font-size: 1em;
   padding: 0.5rem;
   font-weight: 500;
 }
@@ -296,7 +296,7 @@
   background: none;
   font-weight: 500;
   inline-size: 90%;
-  font-size: 1rem;
+  font-size: 1em;
   font-family: var(--ff-button);
   background: var(--clr-white);
 }
@@ -308,7 +308,7 @@
   padding: 0.5rem 1rem;
   margin-block-end: 2rem;
   color: var(--clr-white);
-  font-size: 1rem;
+  font-size: 1em;
   font-family: var(--ff-button);
   transition: var(--transition-02);
 }
@@ -322,7 +322,7 @@
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   border: none;
-  font-size: 1rem;
+  font-size: 1em;
   padding: 0.3rem;
 }
 
@@ -356,7 +356,7 @@
   border-radius: 10px;
   padding: 0.5rem 1rem;
   font-family: var(--ff-button);
-  font-size: 1rem;
+  font-size: 1em;
   color: var(--clr-white);
   display: flex;
   gap: 0.5rem;
@@ -408,7 +408,7 @@
   }
 
   .postImgContainer p {
-    font-size: 1.3rem;
+    font-size: 1.3em;
   }
 
   .shareLine {
@@ -568,7 +568,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 11;
-    font-size: 2rem;
+    font-size: 2em;
     color: var(--clr-white);
     text-align: center;
     text-shadow: #00000079 0 10px 10px;
