@@ -127,7 +127,9 @@ function Profile() {
       await axios.delete(`http://localhost:5000/api/v1/auth/${userId}`);
       localStorage.removeItem("userId");
       localStorage.removeItem("token");
+
       navigate("/");
+      window.location.reload();
     } catch (error) {
       setError("Erreur lors de la suppression du compte.");
     }

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../CSS/SingleRecipe.module.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const singleRecipesUrl = "http://localhost:5000/api/v1/recipes/";
 const userUrl = "http://localhost:5000/api/v1/auth/";
@@ -72,8 +74,11 @@ function SingleRecipe() {
         },
       });
       navigate("/");
+      toast.success("Recette supprimé avec succès");
     } catch (error) {
-      console.error("Error deleting recipe:", error);
+      toast.error(
+        "Une erreur est survenue lors de la suppression de la recette"
+      );
     }
   };
 
