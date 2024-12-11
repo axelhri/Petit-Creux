@@ -1,39 +1,19 @@
-@media screen and (max-width: 500px) {
+.backgroundHome {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
+    url(../images/pexels-anthonyshkraba-production-8902112.jpg) fixed no-repeat;
+  background-size: cover;
+}
+
+@media screen and (min-width: 800px) {
   .backgroundHome {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902112.jpg) no-repeat -8rem -4rem;
+      url(../images/pexels-anthonyshkraba-production-8902124.jpg) fixed
+        no-repeat;
+    background-size: cover;
   }
 }
 
-@media screen and (min-width: 500px) {
-  .backgroundHome {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -40rem -24rem;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .backgroundHome {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -25rem -20rem;
-  }
-}
-
-@media screen and (min-width: 1500px) {
-  .backgroundHome {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat -15rem -20rem;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .backgroundHome {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
-      url(../images/pexels-anthonyshkraba-production-8902124.jpg) no-repeat 0rem -20rem;
-  }
-}
-
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1700px) {
   .backgroundHome {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0)),
       url(../images/pexels-anthonyshkraba-production-8902124.jpg) fixed
