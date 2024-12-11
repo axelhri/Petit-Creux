@@ -135,6 +135,7 @@ function Profile() {
       );
       localStorage.removeItem("userId");
       localStorage.removeItem("token");
+
       navigate("/");
       window.location.reload();
     } catch (error) {

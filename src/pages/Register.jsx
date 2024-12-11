@@ -57,7 +57,6 @@ const Register = ({ onClose }) => {
 
       localStorage.setItem("token", token);
       localStorage.setItem("userId", user._id);
-
       window.location.reload();
       if (onClose) onClose();
     } catch (err) {

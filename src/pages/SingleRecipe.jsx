@@ -74,8 +74,11 @@ function SingleRecipe() {
         },
       });
       navigate("/");
+      toast.success("Recette supprimé avec succès");
     } catch (error) {
-      console.error("Error deleting recipe:", error);
+      toast.error(
+        "Une erreur est survenue lors de la suppression de la recette"
+      );
     }
   };
 
