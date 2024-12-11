@@ -43,7 +43,7 @@ const Register = ({ onClose }) => {
       }
 
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
+        "https://petit-creux-backend.onrender.com/api/v1/auth/register",
         data,
         {
           headers: {

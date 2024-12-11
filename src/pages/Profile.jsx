@@ -4,8 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "../CSS/Profile.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "./Loader.jsx";
 
-const recipesUrl = "http://localhost:5000/api/v1/recipes/test/?createdBy=";
+const recipesUrl =
+  "https://petit-creux-backend.onrender.com/api/v1/recipes/test/?createdBy=";
 
 function Profile() {
   const { userId } = useParams();
@@ -57,7 +59,7 @@ function Profile() {
   const fetchUserProfileAndRecipes = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/auth/${userId}`
+        `https://petit-creux-backend.onrender.com/api/v1/auth/${userId}`
       );
       setUserData(response.data.user);
       setName(response.data.user.name);
@@ -99,11 +101,15 @@ function Profile() {
     }
 
     try {
-      await axios.put(`http://localhost:5000/api/v1/auth/${userId}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.put(
+        `https://petit-creux-backend.onrender.com/api/v1/auth/${userId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setUserData((prev) => ({
         ...prev,
         name,
@@ -120,21 +126,28 @@ function Profile() {
     }
   };
 
-  // deactivate account forever
+  // delete account
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/auth/${userId}`);
+      await axios.delete(
+        `https://petit-creux-backend.onrender.com/api/v1/auth/${userId}`
+      );
       localStorage.removeItem("userId");
       localStorage.removeItem("token");
       navigate("/");
+      window.location.reload();
     } catch (error) {
       setError("Erreur lors de la suppression du compte.");
     }
   };
 
   if (loading) {
-    return <div>Chargement...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
