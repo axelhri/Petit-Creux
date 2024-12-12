@@ -80,7 +80,6 @@ const Register = ({ onClose }) => {
             id="image"
             accept="image/*"
             onChange={onImageChange}
-            required
           />
         </div>
         <div className={styles.inputBox}>
