@@ -23,7 +23,7 @@
 }
 
 #header {
-  min-block-size: 95vh;
+  block-size: calc(100vh - 3.5rem);
   display: grid;
   place-items: center;
 }

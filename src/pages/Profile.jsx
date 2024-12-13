@@ -235,7 +235,6 @@ function Profile() {
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                   onFocus={(e) => (e.target.value = "")}
-                  required
                 />
                 <i className="fa-solid fa-pen"></i>
               </div>
