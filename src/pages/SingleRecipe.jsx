@@ -11,8 +11,8 @@ const userUrl = "https://petit-creux-backend.onrender.com/api/v1/auth/";
 function SingleRecipe() {
   const { id } = useParams();
   const [recipeData, setRecipeData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [eaters, setEaters] = useState(0);
   const navigate = useNavigate();
 
@@ -20,25 +20,16 @@ function SingleRecipe() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-
       try {
-        const recipeResponse = await axios.get(`${singleRecipesUrl}${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const recipeResponse = await axios.get(`${singleRecipesUrl}${id}`);
+
         setRecipeData(recipeResponse.data);
         setEaters(recipeResponse.data.recipe.eaters);
 
         const userResponse = await axios.get(
-          `${userUrl}${recipeResponse.data.recipe.createdBy}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `${userUrl}${recipeResponse.data.recipe.createdBy}`
         );
+
         setUserData(userResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);

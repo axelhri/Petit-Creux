@@ -2,6 +2,7 @@
   max-inline-size: 90vw;
   margin-inline: auto;
   margin-block-end: 4rem;
+  min-block-size: 90vh;
 }
 
 #singleRecipeMain header {
@@ -134,7 +135,7 @@ span {
   border-left: 1px solid rgba(0, 0, 0, 0.7);
   padding-inline-start: 0.5rem;
   margin-inline-start: 1rem;
-  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .singleRecipeIng {
@@ -244,9 +245,9 @@ span {
   margin-block-end: 1rem;
 }
 
-/* min 550 px */
+/* min 700 px */
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 700px) {
   .imgDescBox {
     display: flex;
     padding: 0.5rem;
@@ -266,7 +267,6 @@ span {
     border-left: 1px solid rgba(0, 0, 0, 0.7);
     padding-inline-start: 0.5rem;
     margin-inline-start: 1rem;
-    word-break: break-all;
   }
 }
 
@@ -303,15 +303,11 @@ span {
     font-size: max-content;
     line-height: 1.5;
     border-left: 1px solid rgba(0, 0, 0, 0.7);
+    max-inline-size: 80%;
   }
 
   .ingredientList {
     max-inline-size: 50%;
-  }
-
-  .titleDescBox p {
-    max-inline-size: 80%;
-    word-wrap: break-word;
   }
 
   #singleRecipeContainer {

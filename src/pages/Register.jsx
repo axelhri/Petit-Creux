@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../CSS/Login.module.css";
-import { useNavigate } from "react-router-dom";
 import defaultImg from "../images/user.png";
 
 const Register = ({ onClose }) => {
@@ -12,7 +11,6 @@ const Register = ({ onClose }) => {
   });
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(defaultImg);
-  const navigate = useNavigate();
   const { name, email, password } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

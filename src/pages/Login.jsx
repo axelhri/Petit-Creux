@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ onClose }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { email, password } = formData;
   const { setIsAuthenticated } = useContext(AuthContext);
+  const { email, password } = formData;
   const navigate = useNavigate();
 
   const onChange = (e) =>
@@ -30,7 +30,7 @@ const Login = ({ onClose }) => {
       localStorage.setItem("userId", user.userId);
 
       setIsAuthenticated(true);
-      navigate("/");
+      window.location.reload();
       if (onClose) onClose();
     } catch (error) {
       console.error("Login error", error.response.data);
