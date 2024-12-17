@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -110,14 +110,14 @@ function Navbar() {
               isOpen ? styles.active : styles.notActive
             }`}
           />
-          <a
-            href="/"
+          <Link
+            to="/"
             className={`${styles.logoTitle} ${
               isOpen ? styles.active : styles.notActive
             }`}
           >
             Petit Creux
-          </a>
+          </Link>
         </div>
 
         <div
@@ -128,36 +128,27 @@ function Navbar() {
           <div className={styles.navlinkContainer}>
             <ul>
               <li>
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (location.pathname !== "/") {
-                      navigate("/");
-                    }
-                  }}
-                >
-                  Accueil
-                </a>
+                <Link to="/">Accueil</Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => handleSectionLink("shareSectionRef")}
                   style={{ cursor: "pointer" }}
                 >
                   Partager
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/browse">Parcourir</a>
+                <Link to="/browse">Parcourir</Link>
               </li>
               <li>
-                <a
+                <Link
+                  to=""
                   onClick={() => handleSectionLink("contactSectionRef")}
                   style={{ cursor: "pointer" }}
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -165,7 +156,10 @@ function Navbar() {
             {isAuthenticated ? (
               <div className={styles.profileLogout}>
                 <div className={styles.profileSection}>
-                  <a href={`/profile/${userId}`} className={styles.showProfile}>
+                  <Link
+                    to={`/profile/${userId}`}
+                    className={styles.showProfile}
+                  >
                     Mes recettes{" "}
                     {profileImage && (
                       <img
@@ -174,7 +168,7 @@ function Navbar() {
                         className={styles.profileImage}
                       />
                     )}
-                  </a>
+                  </Link>
                 </div>
                 <button onClick={handleLogout} className={styles.signout}>
                   Deconnexion{""}
