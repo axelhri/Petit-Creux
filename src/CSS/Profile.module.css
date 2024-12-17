@@ -390,6 +390,7 @@ article a {
   font-size: 1.2em;
   font-weight: 600;
   letter-spacing: 0.02rem;
+  word-break: break-word;
   color: var(--clr-third-600);
 }
 
