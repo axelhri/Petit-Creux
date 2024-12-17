@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../CSS/SingleRecipe.module.css";
 import Loader from "./Loader.jsx";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const singleRecipesUrl =
   "https://petit-creux-backend.onrender.com/api/v1/recipes/";

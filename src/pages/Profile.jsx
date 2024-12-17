@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Loader.jsx";
 
 const recipesUrl =
-  "https://petit-creux-backend.onrender.com/api/v1/recipes/test/?createdBy=";
+  "https://petit-creux-backend.onrender.com/api/v1/recipes/user/?createdBy=";
 
 function Profile() {
   const { userId } = useParams();
