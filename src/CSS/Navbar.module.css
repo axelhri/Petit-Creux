@@ -92,7 +92,7 @@
 
 /* max 1190px */
 
-@media screen and (max-width: 1190px) {
+@media screen and (max-width: 1200px) {
   .navContainer {
     display: flex;
     align-items: center;

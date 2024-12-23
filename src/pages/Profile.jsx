@@ -25,6 +25,8 @@ function Profile() {
   const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recipesPerPage = 5;
 
   // change profile image
 
@@ -140,6 +142,27 @@ function Profile() {
       window.location.reload();
     } catch (error) {
       setError("Erreur lors de la suppression du compte.");
+    }
+  };
+
+  // Pagination
+  const totalPages = Math.ceil(userRecipes.length / recipesPerPage);
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = userRecipes.slice(
+    indexOfFirstRecipe,
+    indexOfLastRecipe
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
@@ -350,6 +373,22 @@ function Profile() {
             <p>Aucune recette partagée par cet utilisateur.</p>
           )}
         </div>
+      )}{" "}
+      {userRecipes.length > 0 && totalPages > 1 && (
+        <section className={styles.pagination}>
+          <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <span>
+            Page {currentPage} sur {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
+        </section>
       )}
     </main>
   );

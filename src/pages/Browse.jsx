@@ -23,8 +23,8 @@ function Browse() {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [userProfiles, setUserProfiles] = useState({});
-
-  // fetch recipes from all the users
+  const [currentPage, setCurrentPage] = useState(1);
+  const recipesPerPage = 10;
 
   const fetchAllRecipes = async () => {
     try {
@@ -76,19 +76,17 @@ function Browse() {
     }
   };
 
-  // search input for recipes
-
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
+    setCurrentPage(1); // Reset to the first page
     filterRecipes(term, selectedCategory);
   };
-
-  // select input for categories
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     setSelectedCategory(category);
+    setCurrentPage(1); // Reset to the first page
     filterRecipes(searchTerm, category);
   };
 
@@ -125,6 +123,27 @@ function Browse() {
     return <div>{error}</div>;
   }
 
+  // pagination
+  const totalPages = Math.ceil(filteredRecipes.length / recipesPerPage);
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = filteredRecipes.slice(
+    indexOfFirstRecipe,
+    indexOfLastRecipe
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
   return (
     <main id={styles.browseMain}>
       <section className={styles.filterSection}>
@@ -158,8 +177,8 @@ function Browse() {
         <img src={img2} alt="" className={styles.browseImg2} />
       </section>
       <section className={styles.recipesSection}>
-        {filteredRecipes.length > 0 ? (
-          filteredRecipes.map((recipe) => (
+        {currentRecipes.length > 0 ? (
+          currentRecipes.map((recipe) => (
             <a href={`/recipes/${recipe._id}`} key={recipe._id}>
               <article
                 className={styles.recipeCard}
@@ -194,6 +213,22 @@ function Browse() {
           <p>Aucune recette trouvée.</p>
         )}
       </section>
+      {totalPages > 1 && (
+        <section className={styles.pagination}>
+          <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <span>
+            Page {currentPage} sur {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
+        </section>
+      )}
     </main>
   );
 }
